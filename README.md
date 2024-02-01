@@ -1,5 +1,9 @@
-# Noises
+<div id="header" align="center">
+  <img src="./assets/header_two.png"/>
+</div>
 
-## About project
+<br>
 
-This project is a site for listening to music.
+<div id="info" align="center">
+  <img src="./assets/main.png"/>
+</div>
