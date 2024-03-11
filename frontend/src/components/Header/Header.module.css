@@ -9,6 +9,10 @@ header {
     border: none;
 }
 
+.logo{
+    display: none;
+}
+
 .user {
     display: flex;
     align-items: center;
@@ -25,4 +29,14 @@ header {
 
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+@media screen and (max-width: 1100px) {
+    .logo{
+        display: block;
+    }
+
+    .user > p {
+        display: none;
+    }
 }

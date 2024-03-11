@@ -8,3 +8,12 @@ footer {
     color: #D9D9D9;
     text-decoration: none;
 }
+
+
+@media screen and (max-width: 1100px) {
+    footer{
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+}
