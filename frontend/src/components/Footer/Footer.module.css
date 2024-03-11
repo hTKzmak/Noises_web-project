@@ -1,0 +1,10 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.githubLink {
+    color: #D9D9D9;
+    text-decoration: none;
+}
