@@ -1,8 +1,10 @@
+import Blocks from "../components/Blocks/Blocks"
+
 function HomePage(){
     return(
-        <div>
-            <h1>Home Page</h1>
-        </div>
+        <main>
+            <Blocks/>
+        </main>
     )
 }
 
