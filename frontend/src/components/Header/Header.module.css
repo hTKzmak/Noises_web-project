@@ -32,11 +32,11 @@ header {
 }
 
 @media screen and (max-width: 1100px) {
-    .logo{
-        display: block;
-    }
-
     .user > p {
         display: none;
+    }
+    
+    .logo{
+        display: block;
     }
 }
