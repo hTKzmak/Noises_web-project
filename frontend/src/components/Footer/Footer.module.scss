@@ -2,13 +2,12 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
+    .githubLink {
+        color: #D9D9D9;
+        text-decoration: none;
+    }
 }
-
-.githubLink {
-    color: #D9D9D9;
-    text-decoration: none;
-}
-
 
 @media screen and (max-width: 1100px) {
     footer{

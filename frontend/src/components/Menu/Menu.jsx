@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import style from './Menu.module.css'
+import style from './Menu.module.scss'
 import { ReactComponent as Logo } from './media/Noises_logo.svg'
 import { ReactComponent as Home } from './media/icons/home.svg'
 import { ReactComponent as Albums } from './media/icons/albums.svg'
@@ -9,7 +9,6 @@ import { ReactComponent as Genres } from './media/icons/genres.svg'
 function Menu() {
     return (
         <div className={style.menu}>
-            <div className={style.menuDesktop}>
                 <Link to={'/'}>
                     <Logo />
                 </Link>
@@ -31,7 +30,6 @@ function Menu() {
                         </Link>
                     </ul>
                 </div>
-            </div>
 
             <div className={style.browseMusicMobile}>
                     <Link to={'/'}>

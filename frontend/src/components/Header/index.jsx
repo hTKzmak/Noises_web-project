@@ -1,4 +1,4 @@
-import style from './Header.module.css'
+import style from './Header.module.scss'
 import { ReactComponent as Search } from './media/search.svg'
 import { ReactComponent as Logo } from './media/logo.svg'
 

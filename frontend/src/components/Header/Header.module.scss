@@ -1,0 +1,47 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+    .searchBtn {
+        background: none;
+        border: none;
+    }
+    
+    .logo{
+        display: none;
+    }
+    
+    .user {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        
+        .userIcon {
+            width: 50px;
+            height: 50px;
+            border-radius: 100px;
+        
+            background-color: #fff;
+            border: 3px solid #BABABA;
+        
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 1100px) {
+    header{
+        .logo{
+            display: block;
+        }
+    
+        .user > p {
+            display: none;
+        }
+    }
+}
