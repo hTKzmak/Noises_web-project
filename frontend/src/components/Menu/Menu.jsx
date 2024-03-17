@@ -9,7 +9,7 @@ import { ReactComponent as Genres } from './media/icons/genres.svg'
 function Menu() {
     return (
         <div className={style.menu}>
-            <div className={style.menuFixed}>
+            <div className={style.menuDesktop}>
                 <Link to={'/'}>
                     <Logo />
                 </Link>
