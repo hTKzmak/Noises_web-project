@@ -1,9 +1,9 @@
-import Blocks from "../components/Blocks/Blocks"
+import BlocksList from "../components/BlocksList"
 
 function HomePage(){
     return(
         <main>
-            <Blocks/>
+            <BlocksList/>
         </main>
     )
 }
