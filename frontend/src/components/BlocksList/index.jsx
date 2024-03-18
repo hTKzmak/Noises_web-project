@@ -1,12 +1,20 @@
-import Block from "./items/Block"
+import MainBlock from "./items/MainBlock"
 import style from './BlocksList.module.scss'
+import BlockChoose from "./items/BlockChoose"
 
 
 function Blocks() {
     return (
-        <div className={style.blocksList}>
-            <h1>I am Blocks</h1>
-            <Block />
+        <div>
+            <div className="mainBlock">
+                <MainBlock />
+            </div>
+            <div className={style.blocksList}>
+                <BlockChoose/>
+                <BlockChoose/>
+                <BlockChoose/>
+                <BlockChoose/>
+            </div>
         </div>
     )
 }

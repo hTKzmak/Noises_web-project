@@ -1,0 +1,14 @@
+$block-bg: #212121;
+$block-font: #E1E1E1;
+
+.blockChooseItem {
+    height: 85px;
+    width: 85px;
+
+    background-color: $block-bg;
+
+    padding: 50px;
+    border-radius: 15px;
+
+    color: $block-font;
+}

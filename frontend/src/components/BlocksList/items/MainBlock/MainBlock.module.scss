@@ -1,0 +1,18 @@
+$block-bg: #212121;
+$block-font: #E1E1E1;
+
+.mainBlockItem{
+    height: 250px;
+    width: auto;
+    
+    background-color: $block-bg;
+    background-image: url('./images/Black-wavy-background-No-Copyright.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    padding: 30px;
+    border-radius: 15px;
+
+    color: $block-font;
+}
