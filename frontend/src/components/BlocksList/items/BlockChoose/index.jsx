@@ -1,9 +1,9 @@
 import style from './BlockChoose.module.scss'
 
-function BlockChoose({key, title, background}) {
+function BlockChoose({id, title, background}) {
 
     return (
-        <div className={style.blockItem} id={key}>
+        <div className={style.blockItem} key={id}>
             <div className={style.blockChooseItem} style={{backgroundImage: `url(${background})`}}></div>
             <p>{title}</p>
         </div>

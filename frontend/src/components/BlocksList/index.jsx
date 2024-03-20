@@ -23,7 +23,7 @@ function Blocks() {
             </div>
             <div className={style.blocksList}>
                 {blockChooseArr.map(elem =>
-                    <BlockChoose key={elem.id} title={elem.title} background={elem.background}/>
+                    <BlockChoose id={elem.id} title={elem.title} background={elem.background}/>
                 )}
             </div>
         </div>
