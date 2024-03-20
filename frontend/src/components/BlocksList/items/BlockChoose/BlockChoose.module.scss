@@ -1,14 +1,42 @@
 $block-bg: #212121;
-$block-font: #E1E1E1;
+$block-font: #e1e1e1;
 
-.blockChooseItem {
-    height: 85px;
-    width: 85px;
+.blockItem {
+    text-align: center;
 
-    background-color: $block-bg;
+    .blockChooseItem {
+        height: 85px;
+        width: 85px;
 
-    padding: 50px;
-    border-radius: 15px;
+        background-color: $block-bg;
 
-    color: $block-font;
+        padding: 50px;
+        border-radius: 15px;
+
+        color: $block-font;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    p {
+        margin-top: 10px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .blockItem {
+        .blockChooseItem {
+            height: 25px;
+            width: 25px;
+        }
+
+        p {
+            font-size: 14px;
+            max-width: 125px;
+        }
+    }
 }

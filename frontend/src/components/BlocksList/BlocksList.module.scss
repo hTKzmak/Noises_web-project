@@ -1,6 +1,8 @@
-.blocksList{
+.blocksList {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: baseline;
     margin-top: 20px;
     gap: 20px;
 }
