@@ -2,10 +2,10 @@ import MainBlock from "./items/MainBlock"
 import style from './BlocksList.module.scss'
 import BlockChoose from "./items/BlockChoose"
 
-import FavMusicBG from "./images/Fav_music.png"
-import FavAlbumsBG from "./images/Fav_albums.png"
-import FavPerformersBG from "./images/Fav_performers.png"
-import LatestMusicBG from "./images/Latest_music.png"
+import FavMusicBG from "./images/Fav_music.svg"
+import FavAlbumsBG from "./images/Fav_albums.svg"
+import FavPerformersBG from "./images/Fav_performers.svg"
+import LatestMusicBG from "./images/Latest_music.svg"
 
 function Blocks() {
 

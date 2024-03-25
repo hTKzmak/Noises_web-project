@@ -16,10 +16,19 @@ $block-font: #e1e1e1;
         color: $block-font;
 
         background-repeat: no-repeat;
-        background-position: center center;
+        background-position: -35px 35px;
         background-size: cover;
 
         cursor: pointer;
+
+        transition: 0.3s;
+    }
+
+    .blockChooseItem:hover {
+        background-color: #464646;
+
+        // background-position: -15px 20px;
+        background-position: center center;
     }
 
     p {
