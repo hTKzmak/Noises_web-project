@@ -1,8 +1,8 @@
 function AlbumsPage(){
     return(
-        <div>
+        <main>
             <h1>Albums Page</h1>
-        </div>
+        </main>
     )
 }
 

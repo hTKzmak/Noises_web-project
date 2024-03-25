@@ -1,8 +1,8 @@
 function PerformersPage(){
     return(
-        <div>
+        <main>
             <h1>Performers Page</h1>
-        </div>
+        </main>
     )
 }
 

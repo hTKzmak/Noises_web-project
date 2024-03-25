@@ -1,8 +1,8 @@
 function GenresPage(){
     return(
-        <div>
+        <main>
             <h1>Genres Page</h1>
-        </div>
+        </main>
     )
 }
 

@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import AlbumsPage from './pages/AlbumsPage'
 import PerformersPage from './pages/PerformersPage'
 import GenresPage from './pages/GenresPage'
+import NotFoundPage from './pages/NotFoundPage';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/albums' element={<AlbumsPage/>} />
           <Route path='/performers' element={<PerformersPage/>} />
           <Route path='/genres' element={<GenresPage/>} />
+          <Route path='*' element={<NotFoundPage/>} />
         </Routes>
         <Footer />
       </div>
