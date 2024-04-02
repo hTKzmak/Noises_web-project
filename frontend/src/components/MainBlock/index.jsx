@@ -4,7 +4,7 @@ import { ReactComponent as PlayBtn } from './images/play.svg'
 import { ReactComponent as PauseBtn } from './images/pause.svg'
 
 function Block() {
-    // плеер
+    // плеер (воиспроизводится ли музыка)
     const [played, setPlayed] = useState(false)
 
     // изначальное значение заднего фона (если в SS будет значение, то используем его значение чтобы после перехода неа другие страницы задний фон оставался таким же)

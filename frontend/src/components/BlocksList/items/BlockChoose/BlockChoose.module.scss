@@ -24,10 +24,28 @@ $block-font: #e1e1e1;
         transition: 0.3s;
     }
 
+    .blockChooseItem_without_animation {
+        height: 85px;
+        width: 85px;
+
+        background-color: $block-bg;
+
+        padding: 50px;
+        border-radius: 15px;
+
+        color: $block-font;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+    }
+
     .blockChooseItem:hover {
         background-color: #464646;
-
-        // background-position: -15px 20px;
         background-position: center center;
     }
 
