@@ -1,0 +1,56 @@
+%mainBlockItemStyle {
+    border-radius: 15px;
+    background-color: rgb(34, 34, 34);
+    width: auto;
+    height: 200px;
+    max-height: 200px;
+    background-size: cover;
+    cursor: pointer;
+
+    @media screen and (max-width: 600px) {
+        height: 125px;
+    }
+}
+
+.blockItem {
+    width: auto;
+    text-align: center;
+
+    .blockItemImg {
+        @extend %mainBlockItemStyle;
+
+        background-repeat: no-repeat;
+        background-position: -35px 35px;
+        background-size: cover;
+
+        transition: 0.3s;
+  
+        &:hover {
+            background-color: #464646;
+            background-position: center center;
+            
+        }
+
+        @media screen and (max-width: 600px) {
+            background-position: -20px 20px;
+        }
+    }
+
+    .blockItemImg_withoutAnim {
+        @extend %mainBlockItemStyle;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    @media screen and (max-width: 1500px) {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    @media screen and (max-width: 600px) {
+        width: 125px;
+        min-width: 125px;
+    }
+}

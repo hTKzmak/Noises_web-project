@@ -1,5 +1,5 @@
 import style from './BlocksList.module.scss'
-import BlockChoose from "./items/BlockChoose"
+import BlockItem from "./items/BlockItem"
 
 function BlocksList({data, withoutAnimation}) {
 
@@ -7,7 +7,7 @@ function BlocksList({data, withoutAnimation}) {
         <div>
             <div className={style.blocksList}>
                 {data.map(elem =>
-                    <BlockChoose id={elem.id} title={elem.title} background={elem.background} withoutAnimation={withoutAnimation}/>
+                    <BlockItem id={elem.id} title={elem.title} background={elem.background} withoutAnimation={withoutAnimation}/>
                 )}
             </div>
         </div>
