@@ -9,6 +9,8 @@ import { ReactComponent as Genres } from './media/icons/genres.svg'
 function Menu() {
     return (
         <div className={style.menu}>
+
+            <div className={style.menuDesktop}>
                 <Link to={'/'}>
                     <Logo />
                 </Link>
@@ -30,20 +32,21 @@ function Menu() {
                         </Link>
                     </ul>
                 </div>
+            </div>
 
             <div className={style.browseMusicMobile}>
-                    <Link to={'/'}>
-                        <Home/>
-                    </Link>
-                    <Link to={'/albums'}>
-                        <Albums/>
-                    </Link>
-                    <Link to={'/performers'}>
-                        <Performers/>
-                    </Link>
-                    <Link to={'/genres'}>
-                        <Genres/>
-                    </Link>
+                <Link to={'/'}>
+                    <Home />
+                </Link>
+                <Link to={'/albums'}>
+                    <Albums />
+                </Link>
+                <Link to={'/performers'}>
+                    <Performers />
+                </Link>
+                <Link to={'/genres'}>
+                    <Genres />
+                </Link>
             </div>
         </div>
     )

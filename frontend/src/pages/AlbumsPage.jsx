@@ -8,7 +8,13 @@ function AlbumsPage() {
         { id: 1, title: 'Album 1', background: bg},
         { id: 2, title: 'Album 2', background: bg},
         { id: 3, title: 'Album 3', background: bg},
-        { id: 4, title: 'Album 4', background: bg}
+        { id: 4, title: 'Album 4', background: bg},
+        { id: 5, title: 'Album 5', background: bg},
+        { id: 6, title: 'Album 6', background: bg},
+        { id: 7, title: 'Album 7', background: bg},
+        { id: 8, title: 'Album 8', background: bg},
+        { id: 9, title: 'Album 9', background: bg},
+        { id: 10, title: 'Album 10', background: bg},
     ]
 
     return (

@@ -3,10 +3,15 @@
 
     padding-top: 50px;
     padding-left: 38px;
+    padding-bottom: 60vh;
 
     background-color: #0c0c0c;
 
     z-index: 1;
+    
+    .menuDesktop{
+        position: fixed;
+    }
     
     
     .browseMusic {
@@ -49,11 +54,7 @@
         height: auto;
         padding: 15px 50px;
 
-        &>a{
-            display: none;
-        }
-
-        .browseMusic{
+        .menuDesktop{
             display: none;
         }
         
