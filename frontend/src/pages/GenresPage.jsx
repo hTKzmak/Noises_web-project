@@ -12,7 +12,7 @@ function GenresPage(){
 
     return(
         <main>
-            <h1>Genres Page</h1>
+            <h1>List of Genres</h1>
             <BlocksList data={blockChooseArr} withoutAnimation={true}/>
         </main>
     )

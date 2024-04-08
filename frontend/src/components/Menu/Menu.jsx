@@ -31,6 +31,12 @@ function Menu() {
                             <li>Genre</li>
                         </Link>
                     </ul>
+                    <h2 style={{ marginTop: '70px' }}>Test links</h2>
+                    <ul>
+                        <Link to={'/music'}>
+                            <li>Music</li>
+                        </Link>
+                    </ul>
                 </div>
             </div>
 

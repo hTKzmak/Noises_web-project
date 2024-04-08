@@ -16,7 +16,7 @@ function PerformersPage(){
 
     return(
         <main>
-            <h1>Performers Page</h1>
+            <h1>List of Performers</h1>
             <BlocksList data={blockChooseArr} withoutAnimation={true}/>
         </main>
     )

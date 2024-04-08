@@ -19,7 +19,7 @@ function AlbumsPage() {
 
     return (
         <main>
-            <h1>Albums page</h1>
+            <h1>List of  Albums</h1>
             <BlocksList data={blockChooseArr} withoutAnimation={true}/>
         </main>
     )
