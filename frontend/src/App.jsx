@@ -11,6 +11,8 @@ import PerformersPage from './pages/PerformersPage'
 import GenresPage from './pages/GenresPage'
 import NotFoundPage from './pages/NotFoundPage';
 import MusicPage from './pages/MusicPage';
+import RegistrationPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path='/performers' element={<PerformersPage/>} />
           <Route path='/genres' element={<GenresPage/>} />
           <Route path='/music' element={<MusicPage/>} />
+          <Route path='/registration' element={<RegistrationPage/>} />
+          <Route path='/login' element={<LoginPage/>} />
           <Route path='*' element={<NotFoundPage/>} />
         </Routes>
         <Footer />

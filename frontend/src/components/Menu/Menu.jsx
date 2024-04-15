@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import style from './Menu.module.scss'
-import { ReactComponent as Logo } from './media/Noises_logo.svg'
+import { ReactComponent as Logo } from '../../assets/logo/Noises_logo.svg'
 import { ReactComponent as Home } from './media/icons/home.svg'
 import { ReactComponent as Albums } from './media/icons/albums.svg'
 import { ReactComponent as Performers } from './media/icons/performers.svg'

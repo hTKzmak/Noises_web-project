@@ -1,0 +1,66 @@
+.authPage {
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    .backLink {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        position: relative;
+        top: 5px;
+        right: 80px;
+
+        @media screen and (max-width: 600px) {
+            right: 30px;
+        }
+    }
+
+    .authWindow {
+        background-color: #38383887;
+        padding: 15px 100px 47px;
+        border-radius: 15px;
+        width: 300px;
+
+        .authHeader {
+            text-align: center;
+
+            .navigation {
+                display: flex;
+                justify-content: space-around;
+
+                margin-top: 30px;
+
+                .activeLink {
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+                .notActiveLink {
+                    color: #888888;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            padding: 15px 50px 47px;
+            border-radius: 15px;
+            width: 100vw;
+        }
+    }
+
+    form {
+        display: grid;
+        margin-top: 30px;
+        gap: 40px;
+    }
+}
