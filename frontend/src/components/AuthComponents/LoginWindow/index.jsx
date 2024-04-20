@@ -1,6 +1,6 @@
 import { ReactComponent as Logo } from '../../../assets/logo/Noises_logo.svg'
 import { ReactComponent as Arrow } from './icons/arrow.svg'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import style from '../AuthStyles.module.scss'
 import InputElem from '../../UI/InputElem'
 import ButtonElem from '../../UI/ButtonElem'
@@ -18,8 +18,12 @@ function LoginWindow() {
                 <div className={style.authHeader}>
                     <Logo />
                     <div className={style.navigation}>
-                        <a href="/login" className={style.activeLink}>Sign in</a>
-                        <a href="/registration" className={style.notActiveLink}>Sign up</a>
+                        <Link to={'/login'} className={style.activeLink}>
+                            Sign in
+                        </Link>
+                        <Link to={'/registration'} className={style.notActiveLink}>
+                            Sign up
+                        </Link>
                     </div>
                 </div>
                 <div className="authMain">

@@ -1,4 +1,5 @@
 import BlocksList from "../components/BlocksList"
+import PreviousButton from "../components/UI/PreviousButton"
 
 function AlbumsPage() {
 
@@ -19,7 +20,10 @@ function AlbumsPage() {
 
     return (
         <main>
-            <h1>List of  Albums</h1>
+            <div className="title">
+                <PreviousButton />
+                <h1>List of  Albums</h1>
+            </div>
             <BlocksList data={blockChooseArr} withoutAnimation={true}/>
         </main>
     )

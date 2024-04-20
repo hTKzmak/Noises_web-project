@@ -39,6 +39,10 @@
 
                 margin-top: 30px;
 
+                a{
+                    text-decoration: none;
+                }
+
                 .activeLink {
                     color: #fff;
                     text-decoration: none;
@@ -54,7 +58,8 @@
         @media screen and (max-width: 600px) {
             padding: 15px 50px 47px;
             border-radius: 15px;
-            width: 100vw;
+            // width: 100vw;
+            width: 70vw;
         }
     }
 

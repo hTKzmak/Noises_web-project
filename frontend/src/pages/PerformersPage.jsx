@@ -1,4 +1,5 @@
 import BlocksList from "../components/BlocksList"
+import PreviousButton from "../components/UI/PreviousButton"
 
 function PerformersPage(){
 
@@ -16,7 +17,10 @@ function PerformersPage(){
 
     return(
         <main>
-            <h1>List of Performers</h1>
+            <div className="title">
+                <PreviousButton />
+                <h1>List of Performers</h1>
+            </div>
             <BlocksList data={blockChooseArr} withoutAnimation={true}/>
         </main>
     )
