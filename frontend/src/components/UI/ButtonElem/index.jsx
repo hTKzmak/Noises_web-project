@@ -1,8 +1,8 @@
 import style from './ButtonElem.module.scss'
 
-function ButtonElem({title, onclick}){
+function ButtonElem({title, type, onclick}){
     return(
-        <button onClick={onclick} className={style.buttonElem}>{title}</button>
+        <button onClick={onclick} type={type} className={style.buttonElem}>{title}</button>
     )
 }
 

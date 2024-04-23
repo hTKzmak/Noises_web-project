@@ -4,10 +4,44 @@ import { Link, useNavigate } from "react-router-dom"
 import style from '../AuthStyles.module.scss'
 import InputElem from '../../UI/InputElem'
 import ButtonElem from '../../UI/ButtonElem'
+import { useState } from 'react'
 
 function LoginWindow() {
 
     const navigate = useNavigate();
+
+    const [values, setValues] = useState({
+        email: "",
+        password: ""
+    });
+
+    // нужен для нажатия на кнопку submit, чтобы подтвердить свои данные
+    const [submitted, setSubmitted] = useState(false);
+
+    // подтверждение своих данных (не обязателен)
+    // const [valid, setValid] = useState(false);
+
+    // фунция по подтверждению данных
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (values.email && values.password) {
+            navigate('/')
+        }
+        setSubmitted(true);
+    };
+
+    // хз
+    const handleInputChange = (event) => {
+        event.preventDefault();
+
+        const { name, value } = event.target;
+        setValues((values) => ({
+            ...values,
+            [name]: value
+        }));
+    };
+
+
 
     return (
         <div className={style.authPage}>
@@ -27,10 +61,21 @@ function LoginWindow() {
                     </div>
                 </div>
                 <div className="authMain">
-                    <form>
-                        <InputElem type='text' placeholder='Name' />
-                        <InputElem type='password' placeholder='Password' />
-                        <ButtonElem title="Sign up" onclick={() => alert('Типа вошёл (◕ヮ◕)')} />
+                    <form onSubmit={handleSubmit}>
+                        <InputElem type='email' placeholder='Email' name='email' value={values.email} onChange={handleInputChange} />
+
+                        {submitted && !values.email && (
+                            <span>Введите вашу почту</span>
+                        )}
+
+
+                        <InputElem type='password' placeholder='Password' name="password" value={values.password} onChange={handleInputChange} />
+
+                        {submitted && !values.password && (
+                            <span>Введите ваш пароль</span>
+                        )}
+
+                        <ButtonElem title="Sign up" type='submit'/>
                     </form>
                 </div>
             </div>
