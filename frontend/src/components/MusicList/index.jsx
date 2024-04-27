@@ -8,7 +8,7 @@ function MusicList() {
     return (
         <div>
             <div className={style.musicBigBlock}>
-                <div className="btn">
+                <div className={style.btn}>
                     <PreviousButton />
                 </div>
                 Album name
