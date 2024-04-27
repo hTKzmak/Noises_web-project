@@ -6,13 +6,16 @@ $block-font: #e1e1e1;
     justify-content: center;
     align-items: center;
 
+    position: relative;
+
     font-size: 40px;
 
     height: 250px;
     width: auto;
 
     background-color: $block-bg;
-    background-image: radial-gradient(circle, rgba(0,0,0,0.4) 50%, rgba(232,232,232,0) 100%), url('https://images.unsplash.com/photo-1712531830128-5c5bae8f1e2c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.4) 50%, rgba(232, 232, 232, 0) 100%),
+        url("https://images.unsplash.com/photo-1712531830128-5c5bae8f1e2c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -27,9 +30,16 @@ $block-font: #e1e1e1;
         height: 160px;
         padding: 10px;
     }
+
+    .btn {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+    }
 }
 
-
-.blocksList{
+.blocksList {
     margin-top: 66px;
+    display: grid;
+    gap: 30px;
 }

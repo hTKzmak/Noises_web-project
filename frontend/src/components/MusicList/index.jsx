@@ -1,15 +1,22 @@
-import PreviousButton from '../UI/PreviousButton'
+// import PreviousButton from '../UI/PreviousButton'
 import style from './MusicList.module.scss'
 import MusicItem from './items/MusicItem'
+import { songsdata } from '../PlayerApp/audios.js';
+import PreviousButton from '../UI/PreviousButton/index.jsx';
 
 function MusicList() {
     return (
         <div>
             <div className={style.musicBigBlock}>
+                <div className="btn">
+                    <PreviousButton />
+                </div>
                 Album name
             </div>
             <div className={style.blocksList}>
-                <MusicItem/>
+                {songsdata.map(elem =>
+                    <MusicItem title={elem.title} performer={elem.performer} />
+                )}
             </div>
         </div>
     )

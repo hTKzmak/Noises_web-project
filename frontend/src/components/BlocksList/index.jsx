@@ -7,7 +7,7 @@ function BlocksList({data, withoutAnimation}) {
         <div>
             <div className={style.blocksList}>
                 {data.map(elem =>
-                    <BlockItem id={elem.id} title={elem.title} background={elem.background} withoutAnimation={withoutAnimation}/>
+                    <BlockItem id={elem.id} title={elem.title} background={elem.background} href={elem.href} withoutAnimation={withoutAnimation}/>
                 )}
             </div>
         </div>
