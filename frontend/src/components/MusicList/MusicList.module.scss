@@ -35,6 +35,11 @@ $block-font: #e1e1e1;
         position: absolute;
         top: 30px;
         left: 30px;
+
+        @media screen and (max-width: 1100px) {
+            top: 15px;
+            left: 15px;
+        }
     }
 }
 

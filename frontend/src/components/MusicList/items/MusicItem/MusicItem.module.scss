@@ -22,6 +22,15 @@
             background-size: cover;
 
             border-radius: 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .btn>svg{
+                width: 30px;
+                cursor: pointer;
+            }
         }
 
         .musicName {
