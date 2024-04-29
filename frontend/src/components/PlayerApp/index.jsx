@@ -21,6 +21,9 @@ function PlayerApp() {
   // для изменения громкости
   const [volume, setVolume] = useState(1);
 
+  // для отображения мобильной версии плеера
+  const [mobilePlayer, setMobilePlayer] = useState(true)
+
 
   // useEffect используется для отслеживания булевого значения isplaying (для воспроизведения музыки)
   useEffect(() => {
@@ -43,7 +46,7 @@ function PlayerApp() {
 
     // заменяем значение currentSong на тот-же currentSong, но с инфой о прогрессе и длине текущей музыки 
     setCurrentSong({ ...currentSong, "progress": currentTime / duration * 100, "length": duration })
-    localStorage.setItem('currentSong', JSON.stringify({currentSong}))
+    localStorage.setItem('currentSong', JSON.stringify({ currentSong }))
 
     // изменяем громкость музыки
     audioElem.current.volume = volume
@@ -52,9 +55,10 @@ function PlayerApp() {
   let getMusicData = localStorage.getItem('currentSong')
 
   return (
-    <div className="PlayerApp" style={{display: !getMusicData ? 'none' : 'flex'}}>
+    // <div className="PlayerApp" style={{display: !getMusicData ? 'none' : 'flex'}}>
+    <div className="PlayerApp">
       <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
-      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} />
+      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} mobilePlayer={mobilePlayer} setMobilePlayer={setMobilePlayer}/>
     </div>
   );
 }

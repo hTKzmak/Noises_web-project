@@ -7,8 +7,11 @@ import { ReactComponent as Play } from './assets/Play.svg'
 import { ReactComponent as Pause } from './assets/Pause.svg'
 import { ReactComponent as Next } from './assets/Next.svg'
 import { ReactComponent as Previous } from './assets/Previous.svg'
+import { ReactComponent as AddMusic } from './assets/AddMusic.svg'
+// import { ReactComponent as AddedMusic } from './assets/AddedMusic.svg'
+import { ReactComponent as Close } from './assets/Close.svg'
 
-function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume }) {
+function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume, mobilePlayer, setMobilePlayer }) {
 
     const clickRef = useRef();
 
@@ -61,9 +64,18 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
 
     }
 
+    // если размер окна браузера меньше 1100, то громкость музыки будет на максимум (сделано это для мобильных устройств)
+    if(window.innerWidth <= 1100){
+        setVolume(1)
+    }
+
+    const closePlayer = () => {
+        setIsPlaying(false)
+        setMobilePlayer(false)
+    }
 
     return (
-        <div className="player">
+        <div className="player" style={{display: mobilePlayer === true ? 'flex' : 'none'}}>
             <div className="player_container">
                 <div className="controls">
                     <Previous className='btn_action' onClick={skipBack} />
@@ -82,6 +94,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
                             <h3>{currentSong.title}</h3>
                             <p>{currentSong.performer}</p>
                         </div>
+                        <button className='closeBtn' onClick={() => closePlayer()}><Close /></button>
                     </div>
                     <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
                         <div className="seek_bar" style={{ width: `${currentSong.progress + "%"}` }}></div>
@@ -90,6 +103,8 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
                 <div className="settings">
 
                     <a href={currentSong.url} download><Download /></a>
+
+                    <AddMusic />
 
                     <div id="music">
                         {volume === '0' ? (
@@ -114,13 +129,17 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
                 </div>
 
                 <div className="controls_mobile">
-                <Previous className='btn_action' onClick={skipBack} />
+                    <Previous className='btn_action' onClick={skipBack} />
                     {!isPlaying ? (
                         <Play className='btn_action pp' onClick={PlayPause} />
                     ) : (
                         <Pause className='btn_action pp' onClick={PlayPause} />
                     )}
                     <Next className='btn_action' onClick={skipAhead} />
+                </div>
+                <div className="settings_mobile">
+                    <a href={currentSong.url} download><Download /></a>
+                    <AddMusic />
                 </div>
 
             </div>
