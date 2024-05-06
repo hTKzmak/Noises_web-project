@@ -16,27 +16,38 @@ import LoginPage from './pages/LoginPage';
 import PlayerApp from './components/PlayerApp';
 
 
+import { Context } from './context/Context';
+import { useState } from 'react';
+
 function App() {
+  // для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // для отображения мобильной версии плеера
+  const [showPlayer, setShowPlayer] = useState(false)
+
 
   return (
-    <div className="App">
-      <Menu />
-      <div className="container">
-        <Header />
-        <PlayerApp />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/albums' element={<AlbumsPage />} />
-          <Route path='/performers' element={<PerformersPage />} />
-          <Route path='/genres' element={<GenresPage />} />
-          <Route path='/music' element={<MusicPage />} />
-          <Route path='/registration' element={<RegistrationPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
+    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying }}>
+      <div className="App">
+        <Menu />
+        <div className="container">
+          <Header />
+          <PlayerApp />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/albums' element={<AlbumsPage />} />
+            <Route path='/performers' element={<PerformersPage />} />
+            <Route path='/genres' element={<GenresPage />} />
+            <Route path='/music' element={<MusicPage />} />
+            <Route path='/registration' element={<RegistrationPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Routes>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </Context.Provider>
   );
 }
 

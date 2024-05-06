@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Player from './Player.jsx';
+import { Context } from '../../context/Context.js';
 
 // импорт всей музыки
 import { songsdata } from './audios.js';
@@ -9,8 +10,8 @@ function PlayerApp() {
   // обозначаем данные songsdata в songs (то есть, берём все песни из songsdata и добавляем его в songs)
   const [songs, setSongs] = useState(songsdata);
 
-  // для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
-  const [isPlaying, setIsPlaying] = useState(false);
+  // // для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
+  // const [isPlaying, setIsPlaying] = useState(false);
 
   // текущая музыка, которая должна играться (отсюда мы получаем инфу о музыке: файл, название, исполнитель, и т.д.)
   const [currentSong, setCurrentSong] = useState(songsdata[1]);
@@ -21,8 +22,12 @@ function PlayerApp() {
   // для изменения громкости
   const [volume, setVolume] = useState(1);
 
-  // для отображения мобильной версии плеера
-  const [mobilePlayer, setMobilePlayer] = useState(true)
+  // // для отображения мобильной версии плеера
+  // const [showPlayer, setShowPlayer] = useState(true)
+  
+
+  // для отображения мобильной версии плеера и для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
+  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying } = useContext(Context)
 
 
   // useEffect используется для отслеживания булевого значения isplaying (для воспроизведения музыки)
@@ -52,13 +57,12 @@ function PlayerApp() {
     audioElem.current.volume = volume
   }
 
-  let getMusicData = localStorage.getItem('currentSong')
+  // let getMusicData = localStorage.getItem('currentSong')
 
   return (
-    // <div className="PlayerApp" style={{display: !getMusicData ? 'none' : 'flex'}}>
     <div className="PlayerApp">
       <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
-      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} mobilePlayer={mobilePlayer} setMobilePlayer={setMobilePlayer}/>
+      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
     </div>
   );
 }

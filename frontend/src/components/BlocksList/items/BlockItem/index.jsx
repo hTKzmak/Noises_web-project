@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function BlockItem({ id, title, background, withoutAnimation, href }) {
     return (
-        <div className={style.blockItem} key={id}>
+        <div className={style.blockItem} id={id}>
             <Link to={href}>
                 <div className={withoutAnimation === true ? style.blockItemImg_withoutAnim : style.blockItemImg} style={{ backgroundImage: `url(${background})` }}></div>
                 <p>{title}</p>

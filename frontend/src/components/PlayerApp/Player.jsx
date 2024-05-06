@@ -11,7 +11,7 @@ import { ReactComponent as AddMusic } from './assets/AddMusic.svg'
 // import { ReactComponent as AddedMusic } from './assets/AddedMusic.svg'
 import { ReactComponent as Close } from './assets/Close.svg'
 
-function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume, mobilePlayer, setMobilePlayer }) {
+function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume, showPlayer, setShowPlayer }) {
 
     const clickRef = useRef();
 
@@ -71,11 +71,11 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
 
     const closePlayer = () => {
         setIsPlaying(false)
-        setMobilePlayer(false)
+        setShowPlayer(false)
     }
 
     return (
-        <div className="player" style={{display: mobilePlayer === true ? 'flex' : 'none'}}>
+        <div className="player" style={{display: showPlayer === true ? 'flex' : 'none'}}>
             <div className="player_container">
                 <div className="controls">
                     <Previous className='btn_action' onClick={skipBack} />

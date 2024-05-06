@@ -15,7 +15,7 @@ function MusicList() {
             </div>
             <div className={style.blocksList}>
                 {songsdata.map(elem =>
-                    <MusicItem title={elem.title} performer={elem.performer} />
+                    <MusicItem key={elem.id} title={elem.title} performer={elem.performer} url={elem.url}/>
                 )}
             </div>
         </div>

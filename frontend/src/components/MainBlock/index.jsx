@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import style from './MainBlock.module.scss'
 import { ReactComponent as Play } from './images/play.svg'
 import { ReactComponent as Pause } from './images/pause.svg'
+import { Context } from '../../context/Context'
 
-function Block() {
+function MainBlock() {
     // плеер (воиспроизводится ли музыка)
     const [played, setPlayed] = useState(false)
 
@@ -13,6 +14,10 @@ function Block() {
     // данные о пользователе с LocalStorage
     let localStorageData = localStorage.getItem('userData')
     let JSONData = JSON.parse(localStorageData)
+
+
+    const { showPlayer, setShowPlayer, isPlaying, setIsPlaying } = useContext(Context)
+
 
     // функция по изменению заднего фона
     function randomBackground() {
@@ -33,17 +38,34 @@ function Block() {
         randomBackground()
     })
 
+    // функция для воспроизведения музыки из основного блока. Функция будет воспроизводить рандомную музыку.
+    function startPlay() {
+        setPlayed(!played)
+        setIsPlaying(!isPlaying)
+        setShowPlayer(true)
+
+        if(played === false){
+            setPlayed(true)
+            setIsPlaying(true)
+        }
+        else if(played === true){
+            setPlayed(false)
+            setIsPlaying(false)
+        }
+
+    }
+
     return (
         <div className={style.mainBlockItem} style={{ backgroundImage: `url(${background})` }}>
             <div className="mainBlockItem_title">
                 <h1>Welcome to Noises</h1>
                 <p>{!localStorageData ? 'Music for new user' : `Music for you, ${JSONData.name}`}</p>
             </div>
-            <div className={style.playButton} onClick={() => setPlayed(!played)}>
+            <div className={style.playButton} onClick={() => startPlay()}>
                 {played ? <Pause /> : <Play />}
             </div>
         </div>
     )
 }
 
-export default Block
+export default MainBlock
