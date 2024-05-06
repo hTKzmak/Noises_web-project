@@ -26,9 +26,12 @@ function App() {
   // для отображения мобильной версии плеера
   const [showPlayer, setShowPlayer] = useState(false)
 
+  // для отображения кнопки для плеера (воиспроизводится ли музыка)
+  const [played, setPlayed] = useState(false)
+
 
   return (
-    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying }}>
+    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed }}>
       <div className="App">
         <Menu />
         <div className="container">

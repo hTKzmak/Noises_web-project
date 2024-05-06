@@ -6,7 +6,7 @@ import { Context } from '../../context/Context'
 
 function MainBlock() {
     // плеер (воиспроизводится ли музыка)
-    const [played, setPlayed] = useState(false)
+    // const [played, setPlayed] = useState(false)
 
     // изначальное значение заднего фона (если в SS будет значение, то используем его значение чтобы после перехода неа другие страницы задний фон оставался таким же)
     const [background, setBackground] = useState(sessionStorage.getItem('background') == null ? 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2s2MThqOHR1dDVzYWIwc2J4bDdhYWRrMWs5d3V0bzd0eXBvc3d1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Sdlh2SCTiASAgtwyyU/giphy.gif' : sessionStorage.getItem('background'))
@@ -16,7 +16,7 @@ function MainBlock() {
     let JSONData = JSON.parse(localStorageData)
 
 
-    const { showPlayer, setShowPlayer, isPlaying, setIsPlaying } = useContext(Context)
+    const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed } = useContext(Context)
 
 
     // функция по изменению заднего фона

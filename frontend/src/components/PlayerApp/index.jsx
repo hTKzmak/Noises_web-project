@@ -27,7 +27,7 @@ function PlayerApp() {
   
 
   // для отображения мобильной версии плеера и для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
-  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying } = useContext(Context)
+  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed } = useContext(Context)
 
 
   // useEffect используется для отслеживания булевого значения isplaying (для воспроизведения музыки)
@@ -62,7 +62,7 @@ function PlayerApp() {
   return (
     <div className="PlayerApp">
       <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
-      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
+      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer} played={played} setPlayed={setPlayed} />
     </div>
   );
 }

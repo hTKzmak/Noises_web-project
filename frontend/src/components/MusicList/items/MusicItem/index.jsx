@@ -4,7 +4,7 @@ import { ReactComponent as Pause } from '../../../../assets/icons/pause.svg'
 
 import { ReactComponent as AddMusic } from '../../assets/heart.svg'
 
-function MusicItem({ key, title, performer, url }) {
+function MusicItem({ key, title, performer }) {
     return (
         <div className={style.musicItem} id={key}>
             <div className={style.musicMainInfo}>
