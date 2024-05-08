@@ -6,6 +6,10 @@ import { Context } from '../../context/Context.js';
 import { songsdata } from './audios.js';
 
 function PlayerApp() {
+  // для отображения мобильной версии плеера и для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
+
+  // UseContext нужен для работы с плеером :P
+  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed, choosenSong } = useContext(Context)
 
   // обозначаем данные songsdata в songs (то есть, берём все песни из songsdata и добавляем его в songs)
   const [songs, setSongs] = useState(songsdata);
@@ -26,8 +30,6 @@ function PlayerApp() {
   // const [showPlayer, setShowPlayer] = useState(true)
   
 
-  // для отображения мобильной версии плеера и для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
-  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed } = useContext(Context)
 
 
   // useEffect используется для отслеживания булевого значения isplaying (для воспроизведения музыки)
@@ -51,7 +53,7 @@ function PlayerApp() {
 
     // заменяем значение currentSong на тот-же currentSong, но с инфой о прогрессе и длине текущей музыки 
     setCurrentSong({ ...currentSong, "progress": currentTime / duration * 100, "length": duration })
-    localStorage.setItem('currentSong', JSON.stringify({ currentSong }))
+    // localStorage.setItem('currentSong', JSON.stringify({ currentSong }))
 
     // изменяем громкость музыки
     audioElem.current.volume = volume

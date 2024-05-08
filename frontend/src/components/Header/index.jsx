@@ -11,9 +11,11 @@ function Header() {
 
     return (
         <header>
-            <div className="search">
-                <button className={style.searchBtn}><Search /></button>
-            </div>
+            <Link to={'/search'}>
+                <div className="search">
+                    <button className={style.searchBtn}><Search /></button>
+                </div>
+            </Link>
             <div className={style.logo}>
                 <Logo />
             </div>

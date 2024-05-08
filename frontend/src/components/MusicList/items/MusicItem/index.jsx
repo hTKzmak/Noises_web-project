@@ -34,6 +34,7 @@ function MusicItem({ key, id, title, performer }) {
                 setIsPlaying(false)
             }
         }
+
     }
 
 

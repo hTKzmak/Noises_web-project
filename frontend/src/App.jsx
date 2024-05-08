@@ -18,6 +18,7 @@ import PlayerApp from './components/PlayerApp';
 
 import { Context } from './context/Context';
 import { useState } from 'react';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   // для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
@@ -28,7 +29,6 @@ function App() {
 
   // для отображения кнопки для плеера (воиспроизводится ли музыка)
   const [played, setPlayed] = useState(false)
-
 
   return (
     <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed }}>
@@ -45,6 +45,7 @@ function App() {
             <Route path='/music' element={<MusicPage />} />
             <Route path='/registration' element={<RegistrationPage />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/search' element={<SearchPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />
