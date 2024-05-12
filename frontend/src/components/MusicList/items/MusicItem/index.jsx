@@ -10,7 +10,7 @@ import { songsdata } from '../../../PlayerApp/audios.js';
 
 function MusicItem({ key, id, title, performer }) {
 
-    const { setShowPlayer, isPlaying, setIsPlaying } = useContext(Context)
+    const { setShowPlayer, isPlaying, setIsPlaying, setChoosenSong } = useContext(Context)
 
     // нужны для изменения кнопки у определённой музыки
     let [buttonChanger, setButtonChanger] = useState(false)
@@ -35,6 +35,7 @@ function MusicItem({ key, id, title, performer }) {
             }
         }
 
+        setChoosenSong(data)
     }
 
 

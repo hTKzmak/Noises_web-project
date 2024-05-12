@@ -18,7 +18,7 @@ function PlayerApp() {
   // const [isPlaying, setIsPlaying] = useState(false);
 
   // текущая музыка, которая должна играться (отсюда мы получаем инфу о музыке: файл, название, исполнитель, и т.д.)
-  const [currentSong, setCurrentSong] = useState(songsdata[1]);
+  const [currentSong, setCurrentSong] = useState(choosenSong);
 
   // так как реакт не знает что именно проигрывать, то используем useref 
   const audioElem = useRef();
@@ -28,7 +28,10 @@ function PlayerApp() {
 
   // // для отображения мобильной версии плеера
   // const [showPlayer, setShowPlayer] = useState(true)
-  
+
+  useEffect(() => {
+    setCurrentSong(choosenSong);
+  }, [choosenSong]);
 
 
 
@@ -57,6 +60,10 @@ function PlayerApp() {
 
     // изменяем громкость музыки
     audioElem.current.volume = volume
+
+    // console.log(Object.keys(choosenSong).length === 0)
+    console.log(currentSong)
+    console.log(choosenSong)
   }
 
   // let getMusicData = localStorage.getItem('currentSong')

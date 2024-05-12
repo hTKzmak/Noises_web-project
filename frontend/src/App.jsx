@@ -30,8 +30,10 @@ function App() {
   // для отображения кнопки для плеера (воиспроизводится ли музыка)
   const [played, setPlayed] = useState(false)
 
+  const [choosenSong, setChoosenSong] = useState({})
+
   return (
-    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed }}>
+    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed, choosenSong, setChoosenSong }}>
       <div className="App">
         <Menu />
         <div className="container">
