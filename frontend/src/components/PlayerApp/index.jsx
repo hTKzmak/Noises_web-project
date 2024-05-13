@@ -60,10 +60,6 @@ function PlayerApp() {
 
     // изменяем громкость музыки
     audioElem.current.volume = volume
-
-    // console.log(Object.keys(choosenSong).length === 0)
-    console.log(currentSong)
-    console.log(choosenSong)
   }
 
   // let getMusicData = localStorage.getItem('currentSong')

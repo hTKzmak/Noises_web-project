@@ -27,7 +27,7 @@ function App() {
   // для отображения мобильной версии плеера
   const [showPlayer, setShowPlayer] = useState(false)
 
-  // для отображения кнопки для плеера (воиспроизводится ли музыка)
+  // для отображения кнопки для плеера (воиспроизводится ли музыка) (используется для MainBlock)
   const [played, setPlayed] = useState(false)
 
   const [choosenSong, setChoosenSong] = useState({})

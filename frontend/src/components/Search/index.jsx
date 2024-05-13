@@ -34,13 +34,13 @@ function Search() {
                     {searchData.length === 0 ?
 
                         songsdata.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} />
+                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover}/>
                         )
 
                         :
 
                         searchData.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} />
+                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover}/>
                         )
                     }
                 </div>

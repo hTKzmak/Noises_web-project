@@ -16,7 +16,7 @@ function MainBlock() {
     let JSONData = JSON.parse(localStorageData)
 
 
-    const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed } = useContext(Context)
+    const { setShowPlayer, isPlaying, setIsPlaying, played, setPlayed, setChoosenSong } = useContext(Context)
 
 
     // функция по изменению заднего фона
@@ -44,15 +44,23 @@ function MainBlock() {
         setIsPlaying(!isPlaying)
         setShowPlayer(true)
 
-        if(played === false){
+        if (played === false) {
             setPlayed(true)
             setIsPlaying(true)
         }
-        else if(played === true){
+        else if (played === true) {
             setPlayed(false)
             setIsPlaying(false)
         }
 
+        setChoosenSong(
+            {
+                "id": 1,
+                "title": "Keep Going",
+                "performer": "Swørn",
+                "url": "https://mp3.chillhop.com/serve.php/?mp3=9222"
+            }
+        )
     }
 
     return (

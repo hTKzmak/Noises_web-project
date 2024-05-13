@@ -8,9 +8,9 @@ import { Context } from '../../../../context/Context'
 
 import { songsdata } from '../../../PlayerApp/audios.js';
 
-function MusicItem({ key, id, title, performer }) {
+function MusicItem({ key, id, title, performer, img }) {
 
-    const { setShowPlayer, isPlaying, setIsPlaying, setChoosenSong } = useContext(Context)
+    const { setShowPlayer, isPlaying, setIsPlaying, setChoosenSong, setPlayed } = useContext(Context)
 
     // нужны для изменения кнопки у определённой музыки
     let [buttonChanger, setButtonChanger] = useState(false)
@@ -20,10 +20,12 @@ function MusicItem({ key, id, title, performer }) {
     // нужно сделать следующее: передать url определённой музыки, чтобы она его воспроизводила. Передать список музыки, которые находятся на странице/плейлисте. Изменение кнопки на false, если был выбрана другая музыка
     function startPlay(musicId) {
         let data = songsdata.find(elem => elem.id === musicId)
+
         if (data.id === musicId) {
             setIsPlaying(!isPlaying)
             setShowPlayer(true)
             setButtonChanger(!buttonChanger)
+            setPlayed(false)
             
             if (buttonChanger === false) {
                 setButtonChanger(true)
@@ -34,7 +36,6 @@ function MusicItem({ key, id, title, performer }) {
                 setIsPlaying(false)
             }
         }
-
         setChoosenSong(data)
     }
 
@@ -42,7 +43,7 @@ function MusicItem({ key, id, title, performer }) {
     return (
         <div className={style.musicItem} id={key}>
             <div className={style.musicMainInfo}>
-                <div className={style.musicImg} style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1700464109443-306802c3febe?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' }}>
+                <div className={style.musicImg} style={{backgroundImage:  `url(${img})`}}>
                     <div className={style.btn} onClick={() => startPlay(id)}>
                         {buttonChanger ? <Pause /> : <Play />}
                     </div>
