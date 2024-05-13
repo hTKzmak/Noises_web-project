@@ -1,8 +1,7 @@
 import style from './MusicItem.module.scss'
-import { ReactComponent as Play } from '../../../../assets/icons/play.svg'
-import { ReactComponent as Pause } from '../../../../assets/icons/pause.svg'
 
 import { ReactComponent as AddMusic } from '../../assets/heart.svg'
+import { ReactComponent as AddedMusic } from '../../assets/heart_full.svg'
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
 
@@ -12,49 +11,39 @@ function MusicItem({ key, id, title, performer, img }) {
 
     const { setShowPlayer, isPlaying, setIsPlaying, setChoosenSong, setPlayed } = useContext(Context)
 
-    // нужны для изменения кнопки у определённой музыки
-    let [buttonChanger, setButtonChanger] = useState(false)
+    // нужен для добавления любимой музыки
+    let [addedFavor, setAddedFavor] = useState(false)
 
-    // функция на воспроизведение музыки и изменение кнопки у определённой музыки (это достигается с помощью buttonChanger и setButtonChanger)
-
-    // нужно сделать следующее: передать url определённой музыки, чтобы она его воспроизводила. Передать список музыки, которые находятся на странице/плейлисте. Изменение кнопки на false, если был выбрана другая музыка
+    // функция на воспроизведение музыки
     function startPlay(musicId) {
         let data = songsdata.find(elem => elem.id === musicId)
 
         if (data.id === musicId) {
-            setIsPlaying(!isPlaying)
+            // setIsPlaying(!isPlaying)
+            setIsPlaying(false)
             setShowPlayer(true)
-            setButtonChanger(!buttonChanger)
             setPlayed(false)
-            
-            if (buttonChanger === false) {
-                setButtonChanger(true)
-                setIsPlaying(true)
-            }
-            else if (buttonChanger === true) {
-                setButtonChanger(false)
-                setIsPlaying(false)
-            }
         }
+
         setChoosenSong(data)
+    }
+
+    function addFavorMusic(){
+        setAddedFavor(!addedFavor)
     }
 
 
     return (
         <div className={style.musicItem} id={key}>
-            <div className={style.musicMainInfo}>
-                <div className={style.musicImg} style={{backgroundImage:  `url(${img})`}}>
-                    <div className={style.btn} onClick={() => startPlay(id)}>
-                        {buttonChanger ? <Pause /> : <Play />}
-                    </div>
-                </div>
+            <div className={style.musicMainInfo} onClick={() => startPlay(id)}>
+                <div className={style.musicImg} style={{backgroundImage:  `url(${img})`}}></div>
                 <div className={style.musicName}>
                     <h3>{title}</h3>
                     <p>{performer}</p>
                 </div>
             </div>
-            <div className={style.musicOtherInfo}>
-                <AddMusic />
+            <div className={style.musicOtherInfo} onClick={() => addFavorMusic()}>
+                {!addedFavor ? <AddMusic /> : <AddedMusic />}
             </div>
         </div>
     )

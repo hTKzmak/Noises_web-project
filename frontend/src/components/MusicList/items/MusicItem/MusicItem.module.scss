@@ -8,10 +8,15 @@
 
     width: auto;
 
+    cursor: pointer;
+
+    transition: 0.3s;
+
     .musicMainInfo {
         display: flex;
         gap: 10px;
         align-items: center;
+        width: 100%;
 
         .musicImg {
             width: 60px;
@@ -22,21 +27,8 @@
             background-size: cover;
 
             border-radius: 15px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .btn > svg {
-                display: none;
-
-                @media screen and (max-width: 1100px) {
-                    display: flex;
-                    width: 30px;
-                    cursor: pointer;
-                }
-            }
         }
+        
         .musicImg:hover {
             width: 60px;
             height: 60px;
@@ -84,11 +76,19 @@
                 }
             }
         }
+
+    }
+
+    &:hover{
+        background-color: #3B3B3B;
     }
 
     .musicOtherInfo {
         display: flex;
         align-items: center;
+        width: 50px;
+        justify-content: center;
+        cursor: pointer;
 
         .musicLength {
             font-size: 15px;

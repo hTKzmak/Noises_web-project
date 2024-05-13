@@ -7,8 +7,8 @@ import { ReactComponent as Play } from './assets/Play.svg'
 import { ReactComponent as Pause } from './assets/Pause.svg'
 import { ReactComponent as Next } from './assets/Next.svg'
 import { ReactComponent as Previous } from './assets/Previous.svg'
-import { ReactComponent as AddMusic } from './assets/AddMusic.svg'
-// import { ReactComponent as AddedMusic } from './assets/AddedMusic.svg'
+import { ReactComponent as Playlist } from './assets/Playlist.svg'
+
 import { ReactComponent as Close } from './assets/Close.svg'
 
 function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume, showPlayer, setShowPlayer, played, setPlayed }) {
@@ -108,7 +108,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
 
                     <a href={currentSong.url} download><Download /></a>
 
-                    <AddMusic />
+                    <Playlist />
 
                     <div id="music">
                         {volume === '0' ? (
@@ -143,7 +143,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
                 </div>
                 <div className="settings_mobile">
                     <a href={currentSong.url} download><Download /></a>
-                    <AddMusic />
+                    <Playlist />
                 </div>
 
             </div>
