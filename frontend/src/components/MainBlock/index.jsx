@@ -13,7 +13,7 @@ function MainBlock() {
     let JSONData = JSON.parse(localStorageData)
 
 
-    const { setShowPlayer, setIsPlaying, setChoosenSong } = useContext(Context)
+    const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
 
 
     // функция по изменению заднего фона
@@ -39,9 +39,19 @@ function MainBlock() {
     function startPlay() {
         setIsPlaying(false)
         setShowPlayer(true)
-        
+    
         // рандомайзер воспроизведения музыки
-        setChoosenSong(songsdata[Math.floor(Math.random() * songsdata.length)])
+        const randomSong = songsdata[Math.floor(Math.random() * songsdata.length)];
+        setChoosenSong(randomSong);
+    
+        // добавление выбранной музыки в массив latest music
+        if (!latestMusic.find(elem => elem.id === randomSong.id)) {
+            setLatestMusic(prevState => [...prevState, randomSong]);
+            console.log(latestMusic)
+        }
+    
+        // но почему-то когда появляется первая песня, то она пока не добавляется, а появляется пустой массив
+
     }
 
     return (
@@ -51,7 +61,7 @@ function MainBlock() {
                 <p>{!localStorageData ? 'Music for new user' : `Music for you, ${JSONData.name}`}</p>
             </div>
             <div className={style.playButton} onClick={() => startPlay()}>
-                <Randomizer/>
+                <Randomizer />
             </div>
         </div>
     )

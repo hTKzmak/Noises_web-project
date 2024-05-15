@@ -9,7 +9,7 @@ import { songsdata } from '../../../PlayerApp/audios.js';
 
 function MusicItem({ key, id, title, performer, img }) {
 
-    const { setShowPlayer, setIsPlaying, setChoosenSong } = useContext(Context)
+    const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
 
     // нужен для добавления любимой музыки
     let [addedFavor, setAddedFavor] = useState(false)
@@ -22,6 +22,11 @@ function MusicItem({ key, id, title, performer, img }) {
             setIsPlaying(false)
             setShowPlayer(true)
         }
+
+        if (!latestMusic.find(elem => elem.id === musicId)) {
+            setLatestMusic(prevState => [...prevState, data]);
+        }
+        console.log(latestMusic)
 
         setChoosenSong(data)
     }

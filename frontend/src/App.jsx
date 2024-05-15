@@ -29,9 +29,14 @@ function App() {
 
   // для воспроизведения выбранной нами музыки
   const [choosenSong, setChoosenSong] = useState({})
+  
+  // для воспроизведения выбранной нами музыки
+  const [latestMusic, setLatestMusic] = useState([])
+
+  // localStorage.setItem('Basket', JSON.stringify( item ));
 
   return (
-    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong, setChoosenSong }}>
+    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong, setChoosenSong, latestMusic, setLatestMusic }}>
       <div className="App">
         <Menu />
         <div className="container">
