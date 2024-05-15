@@ -11,14 +11,13 @@ import { ReactComponent as Playlist } from './assets/Playlist.svg'
 
 import { ReactComponent as Close } from './assets/Close.svg'
 
-function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume, showPlayer, setShowPlayer, played, setPlayed }) {
+function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSong, songs, volume, setVolume, showPlayer, setShowPlayer }) {
 
     const clickRef = useRef();
 
     // ф-ия по проигрыванию и остановки музыки
     const PlayPause = () => {
         setIsPlaying(!isPlaying)
-        setPlayed(!played)
     }
 
     // ф-ия по перемотке музыки, нажимая на ползунок плеера
@@ -45,7 +44,6 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
         else {
             setCurrentSong(songs[index - 1])
             setIsPlaying(false)
-            setPlayed(false)
         }
 
     }
@@ -62,7 +60,6 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
         else {
             setCurrentSong(songs[index + 1])
             setIsPlaying(false)
-            setPlayed(false)
         }
 
     }
@@ -75,7 +72,6 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
     const closePlayer = () => {
         setIsPlaying(false)
         setShowPlayer(false)
-        setPlayed(false)
     }
 
     return (

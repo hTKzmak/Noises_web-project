@@ -58,3 +58,43 @@
         min-width: 125px;
     }
 }
+
+// .blockGenre {
+//     width: auto;
+//     text-align: center;
+
+//     position: relative;
+
+//     a {
+
+//         font-size: 20px;
+        
+//         text-decoration: none;
+//         color: #d9d9d9;
+
+//         p {
+//             position: absolute;
+//             top: 35%;
+//             left: 0;
+//             right: 0;
+//         }
+//     }
+
+//     .blockItemImg_withoutAnim {
+//         @extend %mainBlockItemStyle;
+
+//         background-repeat: no-repeat;
+//         background-position: center center;
+//         background-size: cover;
+//     }
+
+//     @media screen and (max-width: 1500px) {
+//         width: 200px;
+//         min-width: 200px;
+//     }
+
+//     @media screen and (max-width: 600px) {
+//         width: 125px;
+//         min-width: 125px;
+//     }
+// }

@@ -1,13 +1,10 @@
 import { useContext, useState } from 'react'
 import style from './MainBlock.module.scss'
-import { ReactComponent as Play } from './images/play.svg'
-import { ReactComponent as Pause } from './images/pause.svg'
+import { ReactComponent as Randomizer } from './images/randomizer.svg'
 import { Context } from '../../context/Context'
+import { songsdata } from '../PlayerApp/audios.js';
 
 function MainBlock() {
-    // плеер (воиспроизводится ли музыка)
-    // const [played, setPlayed] = useState(false)
-
     // изначальное значение заднего фона (если в SS будет значение, то используем его значение чтобы после перехода неа другие страницы задний фон оставался таким же)
     const [background, setBackground] = useState(sessionStorage.getItem('background') == null ? 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2s2MThqOHR1dDVzYWIwc2J4bDdhYWRrMWs5d3V0bzd0eXBvc3d1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Sdlh2SCTiASAgtwyyU/giphy.gif' : sessionStorage.getItem('background'))
 
@@ -16,7 +13,7 @@ function MainBlock() {
     let JSONData = JSON.parse(localStorageData)
 
 
-    const { setShowPlayer, isPlaying, setIsPlaying, played, setPlayed, setChoosenSong } = useContext(Context)
+    const { setShowPlayer, setIsPlaying, setChoosenSong } = useContext(Context)
 
 
     // функция по изменению заднего фона
@@ -40,27 +37,11 @@ function MainBlock() {
 
     // функция для воспроизведения музыки из основного блока. Функция будет воспроизводить рандомную музыку.
     function startPlay() {
-        setPlayed(!played)
-        setIsPlaying(!isPlaying)
+        setIsPlaying(false)
         setShowPlayer(true)
-
-        if (played === false) {
-            setPlayed(true)
-            setIsPlaying(true)
-        }
-        else if (played === true) {
-            setPlayed(false)
-            setIsPlaying(false)
-        }
-
-        setChoosenSong(
-            {
-                "id": 1,
-                "title": "Keep Going",
-                "performer": "Swørn",
-                "url": "https://mp3.chillhop.com/serve.php/?mp3=9222"
-            }
-        )
+        
+        // рандомайзер воспроизведения музыки
+        setChoosenSong(songsdata[Math.floor(Math.random() * songsdata.length)])
     }
 
     return (
@@ -70,7 +51,7 @@ function MainBlock() {
                 <p>{!localStorageData ? 'Music for new user' : `Music for you, ${JSONData.name}`}</p>
             </div>
             <div className={style.playButton} onClick={() => startPlay()}>
-                {played ? <Pause /> : <Play />}
+                <Randomizer/>
             </div>
         </div>
     )

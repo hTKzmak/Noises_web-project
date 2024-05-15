@@ -9,7 +9,7 @@ function PlayerApp() {
   // для отображения мобильной версии плеера и для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
 
   // UseContext нужен для работы с плеером :P
-  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, played, setPlayed, choosenSong } = useContext(Context)
+  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong } = useContext(Context)
 
   // обозначаем данные songsdata в songs (то есть, берём все песни из songsdata и добавляем его в songs)
   const [songs, setSongs] = useState(songsdata);
@@ -67,7 +67,7 @@ function PlayerApp() {
   return (
     <div className="PlayerApp">
       <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
-      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer} played={played} setPlayed={setPlayed} />
+      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
     </div>
   );
 }
