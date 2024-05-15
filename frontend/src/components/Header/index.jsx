@@ -16,9 +16,11 @@ function Header() {
                     <button className={style.searchBtn}><Search /></button>
                 </div>
             </Link>
-            <div className={style.logo}>
-                <Logo />
-            </div>
+            <Link to={'/'}>
+                <div className={style.logo}>
+                    <Logo />
+                </div>
+            </Link>
             {!localStorageData ? (
                 <Link to={'/login'}>
                     <div className={style.user}>
