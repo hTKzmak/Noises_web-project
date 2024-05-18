@@ -9,10 +9,10 @@ import LatestMusicBG from '../assets/images/Latest_music.svg'
 function HomePage() {
 
     let blockChooseArr = [
-        { id: 1, title: 'Favorite music', background: FavMusicBG, href: '/music' },
+        { id: 1, title: 'Favorite music', background: FavMusicBG, href: '/favorite_music' },
         { id: 2, title: 'Favorite albums', background: FavAlbumsBG, href: '/albums' },
         { id: 3, title: 'Favorite performers', background: FavPerformersBG, href: '/performers' },
-        { id: 4, title: 'Latest music', background: LatestMusicBG, href: '/genres' }
+        { id: 4, title: 'Latest music', background: LatestMusicBG, href: '/latest_music' }
     ]
 
     return (
