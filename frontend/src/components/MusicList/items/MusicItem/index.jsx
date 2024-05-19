@@ -1,7 +1,7 @@
 import style from './MusicItem.module.scss'
 
-import { ReactComponent as AddMusic } from '../../assets/heart.svg'
-import { ReactComponent as AddedMusic } from '../../assets/heart_full.svg'
+import { ReactComponent as AddMusic } from '../../../../assets/icons/heart.svg'
+import { ReactComponent as AddedMusic } from '../../../../assets/icons/heart_full.svg'
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
 

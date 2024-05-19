@@ -2,7 +2,7 @@ import BlocksList from "../components/BlocksList"
 import PreviousButton from "../components/UI/PreviousButton"
 import bg from '../assets/images/undefined.png'
 
-function GenresPage() {
+function GenresPage({genresStyle}) {
 
     let blockChooseArr = [
         { id: 1, title: 'Genre 1', background: bg, href: '/music' },
@@ -16,7 +16,7 @@ function GenresPage() {
                 <PreviousButton />
                 <h1>List of Genres</h1>
             </div>
-            <BlocksList data={blockChooseArr} withoutAnimation={true} />
+            <BlocksList data={blockChooseArr} withoutAnimation={true} genresStyle={genresStyle}/>
         </main>
     )
 }
