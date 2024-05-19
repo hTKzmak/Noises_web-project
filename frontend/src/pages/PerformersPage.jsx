@@ -2,7 +2,7 @@ import BlocksList from "../components/BlocksList"
 import PreviousButton from "../components/UI/PreviousButton"
 import bg from '../assets/images/undefined.png'
 
-function PerformersPage({title}){
+function PerformersPage({title, showHeart}){
 
     let blockChooseArr = [
         { id: 1, title: 'Performer 1', background: bg, href: '/music'},
@@ -21,7 +21,7 @@ function PerformersPage({title}){
                 {/* <h1>List of Performers</h1> */}
                 <h1>{title}</h1>
             </div>
-            <BlocksList data={blockChooseArr} withoutAnimation={true}/>
+            <BlocksList data={blockChooseArr} withoutAnimation={true} showHeart={showHeart}/>
         </main>
     )
 }
