@@ -39,7 +39,7 @@ function Header() {
                     </div>
 
                     {showWindow &&
-                        <div className={style.window}>
+                        <div className={style.window} onMouseLeave={() => setShowWindow(false)}>
                             <ul>
                                 <Link to={'/'}>
                                     <li onClick={() => setShowWindow(false)}>Playlists</li>
