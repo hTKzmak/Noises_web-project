@@ -44,6 +44,8 @@ function App() {
   let sessionStorageData = sessionStorage.getItem('latestMusic')
   let JSONLatestMusicData = JSON.parse(sessionStorageData)
 
+
+  // всю эту кашу надо сократить. Надо использовать один компонент для показа исполнителей, альбомов, жанров и плейлистов. 
   return (
     <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong, setChoosenSong, latestMusic, setLatestMusic }}>
       <div className="App">
