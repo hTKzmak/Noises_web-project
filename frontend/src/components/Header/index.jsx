@@ -1,12 +1,15 @@
 import style from './Header.module.scss'
-import { ReactComponent as Search } from './media/search.svg'
-import { ReactComponent as Logo } from './media/logo.svg'
+import { ReactComponent as Search } from './assets/search.svg'
+import { ReactComponent as Logo } from './assets/logo.svg'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 function Header() {
 
     let localStorageData = localStorage.getItem('userData')
     let JSONData = JSON.parse(localStorageData)
+
+    let [showWindow, setShowWindow] = useState(false)
 
 
     return (
@@ -29,12 +32,28 @@ function Header() {
                     </div>
                 </Link>
             ) : (
-                // <Link to={'/login'}>
                 <div className={style.user}>
-                    <div className={style.userIcon} style={{ backgroundImage: `url(${JSONData.img})` }}></div>
-                    <p>{JSONData.name}</p>
+                    <div className={style.userInfo} onClick={() => setShowWindow(!showWindow)}>
+                        <div className={style.userIcon} style={{ backgroundImage: `url(${JSONData.img})` }}></div>
+                        <p>{JSONData.name}</p>
+                    </div>
+
+                    {showWindow &&
+                        <div className={style.window}>
+                            <ul>
+                                <Link to={'/'}>
+                                    <li onClick={() => setShowWindow(false)}>Playlists</li>
+                                </Link>
+                                <Link to={'/settings'}>
+                                    <li onClick={() => setShowWindow(false)}>Settings</li>
+                                </Link>
+                                <li onClick={() => setShowWindow(false)} id={style.warning}>
+                                    Log out
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 </div>
-                // </Link>
             )}
         </header>
     )

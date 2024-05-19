@@ -22,6 +22,7 @@ import SearchPage from './pages/SearchPage';
 
 import FavoriteBGImage from './assets/images/Favorite.png'
 import LatestBGImage from './assets/images/Latest.png'
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
   // для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
@@ -66,6 +67,8 @@ function App() {
             <Route path='/registration' element={<RegistrationPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/search' element={<SearchPage />} />
+
+            <Route path='/settings' element={<SettingsPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />
