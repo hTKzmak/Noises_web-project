@@ -56,7 +56,7 @@ function App() {
             <Route path='/performers' element={<PerformersPage title="List of performers" showHeart={true}/>} />
             <Route path='/genres' element={<GenresPage genresStyle={true}/>} />
 
-            <Route path='/music' element={<MusicPage title="Some music" image={'https://images.unsplash.com/photo-1567360425618-1594206637d2?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}/>} />
+            <Route path='/music' element={<MusicPage title="Some music" image={'https://images.unsplash.com/photo-1634705146926-b8fbca28f431?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}/>} />
             
             <Route path='/favorite_music' element={<MusicPage title="Favorite music" image={FavoriteBGImage}/>} />
             <Route path='/favorite_albums' element={<AlbumsPage title="Favorite albums"/>} />
