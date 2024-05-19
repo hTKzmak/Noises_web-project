@@ -36,8 +36,10 @@ function App() {
   // для воспроизведения выбранной нами музыки
   const [latestMusic, setLatestMusic] = useState([])
 
+  // Создаём SS для хранений музыки, которые выбирал пользователь
   sessionStorage.setItem('latestMusic', JSON.stringify(latestMusic));
 
+  // получаем данные с SS о музыках, которые выбирал пользователь
   let sessionStorageData = sessionStorage.getItem('latestMusic')
   let JSONLatestMusicData = JSON.parse(sessionStorageData)
 
@@ -50,12 +52,17 @@ function App() {
           <PlayerApp />
           <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/albums' element={<AlbumsPage />} />
-            <Route path='/performers' element={<PerformersPage />} />
+            <Route path='/albums' element={<AlbumsPage title="List of albums"/>} />
+            <Route path='/performers' element={<PerformersPage title="List of performers"/>} />
             <Route path='/genres' element={<GenresPage />} />
+
             <Route path='/music' element={<MusicPage title="Some music" image={'https://images.unsplash.com/photo-1567360425618-1594206637d2?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}/>} />
-            <Route path='/favorite_music' element={<MusicPage title="Some music" image={FavoriteBGImage}/>} />
+            
+            <Route path='/favorite_music' element={<MusicPage title="Favorite music" image={FavoriteBGImage}/>} />
+            <Route path='/favorite_albums' element={<AlbumsPage title="Favorite albums"/>} />
+            <Route path='/favorite_performers' element={<PerformersPage title="Favorite performers"/>} />
             <Route path='/latest_music' element={<MusicPage title="Latest music" data={JSONLatestMusicData} image={LatestBGImage}/>} />
+            
             <Route path='/registration' element={<RegistrationPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/search' element={<SearchPage />} />

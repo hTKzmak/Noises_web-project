@@ -10,7 +10,7 @@ function MusicList({ title, data, image }) {
 
     return (
         <div>
-            <div className={style.musicBigBlock} style={{backgroundImage: `url(${image})`}}>
+            <div className={style.musicBigBlock} style={{ backgroundImage: `url(${image})` }}>
                 <div className={style.btn}>
                     <PreviousButton />
                 </div>
@@ -21,7 +21,7 @@ function MusicList({ title, data, image }) {
                     songsdata.map(elem =>
                         <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
                     )
-                    
+
                     :
 
                     data.map(elem =>

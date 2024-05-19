@@ -10,8 +10,8 @@ function HomePage() {
 
     let blockChooseArr = [
         { id: 1, title: 'Favorite music', background: FavMusicBG, href: '/favorite_music' },
-        { id: 2, title: 'Favorite albums', background: FavAlbumsBG, href: '/albums' },
-        { id: 3, title: 'Favorite performers', background: FavPerformersBG, href: '/performers' },
+        { id: 2, title: 'Favorite albums', background: FavAlbumsBG, href: '/favorite_albums' },
+        { id: 3, title: 'Favorite performers', background: FavPerformersBG, href: '/favorite_performers' },
         { id: 4, title: 'Latest music', background: LatestMusicBG, href: '/latest_music' }
     ]
 

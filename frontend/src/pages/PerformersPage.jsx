@@ -2,7 +2,7 @@ import BlocksList from "../components/BlocksList"
 import PreviousButton from "../components/UI/PreviousButton"
 import bg from '../assets/images/undefined.png'
 
-function PerformersPage(){
+function PerformersPage({title}){
 
     let blockChooseArr = [
         { id: 1, title: 'Performer 1', background: bg, href: '/music'},
@@ -18,7 +18,8 @@ function PerformersPage(){
         <main>
             <div className="title">
                 <PreviousButton />
-                <h1>List of Performers</h1>
+                {/* <h1>List of Performers</h1> */}
+                <h1>{title}</h1>
             </div>
             <BlocksList data={blockChooseArr} withoutAnimation={true}/>
         </main>
