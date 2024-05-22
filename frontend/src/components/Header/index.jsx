@@ -27,8 +27,10 @@ function Header() {
             {!localStorageData ? (
                 <Link to={'/login'}>
                     <div className={style.user}>
-                        <div className={style.userIcon} style={{ backgroundImage: `url('https://ace.edu/wp-content/uploads/2022/02/user-thumbnail-icon.png')` }}></div>
-                        <p>User Name</p>
+                        <div className={style.userInfo}>
+                            <div className={style.userIcon} style={{ backgroundImage: `url('https://ace.edu/wp-content/uploads/2022/02/user-thumbnail-icon.png')` }}></div>
+                            <p>User Name</p>
+                        </div>
                     </div>
                 </Link>
             ) : (
@@ -47,8 +49,8 @@ function Header() {
                                 <Link to={'/settings'}>
                                     <li onClick={() => setShowWindow(false)}>Settings</li>
                                 </Link>
-                                <li onClick={() => setShowWindow(false)} id={style.warning}>
-                                    Log out
+                                <li onClick={() => setShowWindow(false)}>
+                                    <a href="/" id="warning" onClick={() => localStorage.clear()}>Log out</a>
                                 </li>
                             </ul>
                         </div>

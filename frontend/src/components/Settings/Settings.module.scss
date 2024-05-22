@@ -1,0 +1,24 @@
+nav{
+
+    margin-top: 50px;
+
+    ul{
+        display: grid;
+        gap: 60px;
+        li{
+            list-style-type: none;
+
+            a{
+                color: #7A7A7A;
+                font-size: 25px;
+                text-decoration: none;
+                transition: 0.3s;
+
+                &:hover{
+                    color: #FFF;
+                }
+
+            }
+        }
+    }
+}
