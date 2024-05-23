@@ -1,24 +1,30 @@
-nav{
-
+nav {
     margin-top: 50px;
 
-    ul{
+    ul {
         display: grid;
         gap: 60px;
-        li{
+        li {
             list-style-type: none;
 
-            a{
-                color: #7A7A7A;
+            a {
+                color: #7a7a7a;
                 font-size: 25px;
                 text-decoration: none;
                 transition: 0.3s;
 
-                &:hover{
-                    color: #FFF;
+                &:hover {
+                    color: #fff;
                 }
 
+                @media screen and (max-width: 600px) {
+                    font-size: 20px;
+                }
             }
+        }
+        
+        @media screen and (max-width: 600px) {
+            padding: 0;
         }
     }
 }
