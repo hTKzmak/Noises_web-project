@@ -7,6 +7,11 @@ function Settings() {
 
     let [showWindow, setShowWindow] = useState(false)
 
+    function deleteAccountFunc(){
+        localStorage.clear()
+        window.location.assign('/')
+    }
+
     return (
         <div>
             <nav>
@@ -20,8 +25,8 @@ function Settings() {
                     <li>
                         <a id="warning" href='/' onClick={() => localStorage.clear()}>Log out</a>
                     </li>
-                    <li>
-                        <a id="warning" onClick={() => setShowWindow(!showWindow)}>Delete account</a>
+                    <li id="warning" onClick={() => setShowWindow(!showWindow)}>
+                        Delete account
                     </li>
                 </ul>
             </nav>
@@ -33,7 +38,7 @@ function Settings() {
                         <p>If you delete, you will never restore your account</p>
 
                         <div className={style.modalWindow_btn}>
-                            <ButtonElem title={'Delete'} warning={true} />
+                            <ButtonElem title={'Delete'} warning={true} onclick={() => deleteAccountFunc()}/>
                             <ButtonElem title={'Come back'} onclick={() => setShowWindow(!showWindow)}/>
                         </div>
                     </div>

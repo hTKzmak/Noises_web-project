@@ -4,23 +4,22 @@ nav {
     ul {
         display: grid;
         gap: 60px;
-        li {
+        
+        li, a {
             list-style-type: none;
 
-            a {
-                color: #7a7a7a;
-                font-size: 25px;
-                text-decoration: none;
-                transition: 0.3s;
-                cursor: pointer;
+            color: #7a7a7a;
+            font-size: 25px;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
 
-                &:hover {
-                    color: #fff;
-                }
+            &:hover {
+                color: #fff;
+            }
 
-                @media screen and (max-width: 600px) {
-                    font-size: 20px;
-                }
+            @media screen and (max-width: 600px) {
+                font-size: 20px;
             }
         }
         
