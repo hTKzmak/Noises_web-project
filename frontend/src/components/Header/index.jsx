@@ -43,6 +43,9 @@ function Header() {
                     {showWindow &&
                         <div className={style.window} onMouseLeave={() => setShowWindow(false)}>
                             <ul>
+                                <Link to={'/404'}>
+                                    <li onClick={() => setShowWindow(false)}>Upload music</li>
+                                </Link>
                                 <Link to={'/playlists'}>
                                     <li onClick={() => setShowWindow(false)}>Playlists</li>
                                 </Link>
