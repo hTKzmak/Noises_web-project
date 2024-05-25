@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Music</title>
+</head>
+<body>
+    <h1>Upload Music</h1>
+    <form action="http://localhost:8080/upload" method="post" enctype="multipart/form-data">
+        <label for="musicName">Music Name:</label><br>
+        <input type="text" id="musicName" name="musicName" required><br><br>
+        <label for="releaseDate">Release Date: Если пустое то будет сегодня</label><br>
+        <input type="date" id="releaseDate" name="releaseDate" ><br><br>
+        <label for="file1">File 1:</label><br>
+        <input type="file" id="file1" name="files" accept=".mp3, .wav" required><br><br>
+        <label for="file2">File 2: Если пустое то будет стандартная картинка</label><br>
+        <input type="file" id="file2" name="files" accept=".jpg, .png, .gif"><br><br>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
