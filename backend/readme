@@ -1,0 +1,25 @@
+Скачать golang  https://go.dev/dl/
+
+git clone
+
+go mod tidy
+
+Запусть бд postgre удобным способом
+База в db/dbdb.sql
+В бд поменять Default на путь до дефолтной картинки
+
+Поменять пути в handlers/upload.go
+40 и 41 строчка
+
+	destination1 := "Свой путь к музыке"
+	destination2 := "Свой путь к картинкам"
+
+
+Скачать postman https://www.postman.com/downloads/
+Открывай файл Noises.postman_collection.json в postman
+
+Докачать все библиоткеки при надобности
+
+go run /main.go
+
+взаимодействовать через postman или через localhost:8080
