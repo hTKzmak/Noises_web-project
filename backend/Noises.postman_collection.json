@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "13842b77-c41d-4b08-b830-7bc63eb5a1f7",
+		"name": "Noises",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30118804"
+	},
+	"item": [
+		{
+			"name": "Login token",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login PERF",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login PERF2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"perf2@perf2.com\",\r\n    \"password\": \"perf2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "modderation",
+			"item": [
+				{
+					"name": "Music_access",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/moderation/pending_tracks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"moderation",
+								"pending_tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eee music xorosho",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/moderation/approve/{id}?Content-Type=application/json&Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"moderation",
+								"approve",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fuu music ploho",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/moderation/delete/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"moderation",
+								"delete",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "faborite",
+			"item": [
+				{
+					"name": "add_favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/favorites/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"favorites",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_favorite",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/favorites/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"favorites",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_favorite",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/favorites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"example_user\",\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stream",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTY1OTkwOTZ9.p_5i2rQhRc8J4HFbrlhMk-PJJ3sIsw3pFclO5tvlIOM"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/stream/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stream",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTY2Nzg5ODh9.dJacC98HAj8hmgEB3DGHU6XNxnFQzB1l4B7bPsEFBYc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/delete?id=6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_playlist",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/playlist/1/music/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"playlist",
+						"1",
+						"music",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTY2Nzg5ODh9.dJacC98HAj8hmgEB3DGHU6XNxnFQzB1l4B7bPsEFBYc"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "musicName",
+							"value": "perf",
+							"type": "text"
+						},
+						{
+							"key": "releaseDate",
+							"value": "2023-05-01",
+							"type": "text"
+						},
+						{
+							"key": "files",
+							"type": "file",
+							"src": "/D:/downloads/Michael_Beat_-_Kiss_Me_Goodbye_68758544.mp3"
+						},
+						{
+							"key": "files",
+							"type": "file",
+							"src": "/D:/downloads/загруженное.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_playlist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"My Playlist\",\r\n  \"description\": \"My favorite songs\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/create_playlist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create_playlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_music_to_playlist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/add_music_to_playlist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add_music_to_playlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "playlist",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/search?q=я русский",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "я русский"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

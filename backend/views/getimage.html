@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Fetcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch Image by Category and ID</h1>
+    <form id="imageForm">
+        <label for="category">Category:</label><br>
+        <input type="text" id="category" name="category" placeholder="Enter category (music, user, performer)" required><br>
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" placeholder="Enter image ID" required><br>
+        <button type="submit">Fetch Image</button>
+    </form>
+    <div id="imageContainer"></div>
+
+    <script>
+        document.getElementById('imageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const category = document.getElementById('category').value;
+            const id = document.getElementById('id').value;
+            const imageUrl = `http://localhost:8080/image/${category}/${id}`;
+
+            fetch(imageUrl)
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob();
+                    } else {
+                        throw new Error('Image not found');
+                    }
+                })
+                .then(blob => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = URL.createObjectURL(blob);
+                    const imageContainer = document.getElementById('imageContainer');
+                    imageContainer.innerHTML = '';
+                    imageContainer.appendChild(imgElement);
+                })
+                .catch(error => {
+                    const imageContainer = document.getElementById('imageContainer');
+                    imageContainer.innerHTML = `<p style="color:red;">${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
