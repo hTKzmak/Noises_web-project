@@ -70,26 +70,20 @@ function RegisterWindow() {
                 <div className="authMain">
                     <form onSubmit={handleSubmit}>
 
-                        <InputElem type='text' placeholder='Name' name='name' value={values.name} onChange={handleInputChange} />
+                        <InputElem type='text' placeholder='Name' name='name' value={values.name} onChange={handleInputChange} maxLength={20}/>
 
                         {submitted && !values.name && (
-                            <span>Введите ваше имя</span>
-                        )}
-                        {submitted && values.name.length > 10 && (
-                            <span>Ваше имя должно быть меньше 10 символов</span>
+                            <span>Write your name</span>
                         )}
 
                         <InputElem type='email' placeholder='Email' name="email" value={values.email} onChange={handleInputChange} />
                         {submitted && !values.email && (
-                            <span>Введите вашу почту</span>
+                            <span>Write your email</span>
                         )}
 
                         <InputElem type='password' placeholder='Password' name="password" value={values.password} onChange={handleInputChange} />
                         {submitted && !values.password && (
-                            <span>Введите ваш пароль</span>
-                        )}
-                        {submitted && values.password.length < 8 && (
-                            <span>Ваш пароль должен состоять больше 8 символов</span>
+                            <span>Write your password</span>
                         )}
 
                         <ButtonElem title="Sign up" type='submit' />

@@ -24,9 +24,9 @@ function LoginWindow() {
     // фунция по подтверждению данных
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (values.email && values.password) {
-            navigate('/')
-        }
+        // if (values.email && values.password) {
+        //     navigate('/')
+        // }
         setSubmitted(true);
     };
 
@@ -65,16 +65,19 @@ function LoginWindow() {
                         <InputElem type='email' placeholder='Email' name='email' value={values.email} onChange={handleInputChange} />
 
                         {submitted && !values.email && (
-                            <span>Введите вашу почту</span>
+                            <span>Write your email</span>
                         )}
 
 
                         <InputElem type='password' placeholder='Password' name="password" value={values.password} onChange={handleInputChange} />
 
                         {submitted && !values.password && (
-                            <span>Введите ваш пароль</span>
+                            <span>Write your password</span>
                         )}
 
+                        {submitted && values.email && values.password && (
+                            <p style={{margin: 0}}>We can't find your account</p>
+                        )}
                         <ButtonElem title="Sign up" type='submit'/>
                     </form>
                 </div>
