@@ -30,7 +30,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // для отображения мобильной версии плеера
-  const [showPlayer, setShowPlayer] = useState(false)
+  const [showPlayer, setShowPlayer] = useState(true)
 
   // для воспроизведения выбранной нами музыки
   const [choosenSong, setChoosenSong] = useState({})

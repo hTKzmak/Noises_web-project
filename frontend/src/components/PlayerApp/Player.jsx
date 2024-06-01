@@ -102,7 +102,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
                 </div>
                 <div className="settings">
 
-                    <a href={currentSong.url} download><Download /></a>
+                    <a href={currentSong} download><Download /></a>
 
                     <Playlist />
 
@@ -138,7 +138,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, currentSong, setCurrentSon
                     <Next className='btn_action' onClick={skipAhead} />
                 </div>
                 <div className="settings_mobile">
-                    <a href={currentSong.url} download><Download /></a>
+                    <a href={currentSong} download><Download /></a>
                     <Playlist />
                 </div>
 

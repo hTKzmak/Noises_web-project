@@ -17,6 +17,7 @@ function MusicItem({ key, id, title, performer, img }) {
     // функция на воспроизведение музыки
     function startPlay(musicId) {
         let data = songsdata.find(elem => elem.id === musicId)
+        // let data = `http://localhost:8080/stream/${id}`
 
         if (data.id === musicId) {
             setIsPlaying(false)

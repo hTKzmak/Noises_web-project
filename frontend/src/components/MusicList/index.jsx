@@ -19,7 +19,7 @@ function MusicList({ title, data, image }) {
             <div className={style.blocksList}>
                 {!data ?
                     songsdata.map(elem =>
-                        <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
+                        <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover}/>
                     )
 
                     :

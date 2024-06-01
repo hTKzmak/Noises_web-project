@@ -18,7 +18,7 @@ function PlayerApp() {
   // const [isPlaying, setIsPlaying] = useState(false);
 
   // текущая музыка, которая должна играться (отсюда мы получаем инфу о музыке: файл, название, исполнитель, и т.д.)
-  const [currentSong, setCurrentSong] = useState(choosenSong);
+  const [currentSong, setCurrentSong] = useState('http://localhost:8080/stream/4');
 
   // так как реакт не знает что именно проигрывать, то используем useref 
   const audioElem = useRef();
@@ -62,11 +62,15 @@ function PlayerApp() {
     audioElem.current.volume = volume
   }
 
+  console.log(currentSong)
+
   // let getMusicData = localStorage.getItem('currentSong')
 
   return (
     <div className="PlayerApp">
-      <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
+      <audio ref={audioElem} onTimeUpdate={onPlaying} volume={volume} >
+        <source src={currentSong} type="audio/mpeg" />
+      </audio>
       <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
     </div>
   );
