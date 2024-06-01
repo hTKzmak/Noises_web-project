@@ -16,8 +16,8 @@ func Stream(c *gin.Context) {
 	}
 	models.DB.Exec("UPDATE Music SET Popularity = Popularity + 1 WHERE id = $1", c.Param("id"))
 
-	// c.File(result)
+	c.File(result)
 
 	// Для получения данных в виде json
-	c.JSON(http.StatusOK, gin.H{"music_path": result})
+	// c.JSON(http.StatusOK, gin.H{"music_path": result})
 }

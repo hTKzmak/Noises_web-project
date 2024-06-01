@@ -19,6 +19,7 @@ function PlayerApp() {
 
   // текущая музыка, которая должна играться (отсюда мы получаем инфу о музыке: файл, название, исполнитель, и т.д.)
   const [currentSong, setCurrentSong] = useState('http://localhost:8080/stream/4');
+  // const [currentSong, setCurrentSong] = useState(choosenSong);
 
   // так как реакт не знает что именно проигрывать, то используем useref 
   const audioElem = useRef();
