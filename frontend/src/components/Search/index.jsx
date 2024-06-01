@@ -6,19 +6,29 @@ import { useState } from 'react';
 
 function Search() {
 
-    let [searchData, setSearchData] = useState([])
+    const [searchData, setSearchData] = useState([])
+
+    const [inputValue, setInputValue] = useState('')
 
     function searchFunc(value) {
-        let music = songsdata.filter(elem => elem.title.toLowerCase().includes(value.toLowerCase()))
-        if (music && value) {
-            setSearchData(music)
-        }
-        else if (music && !value) {
-            setSearchData([])
-        }
-        else {
-            setSearchData([])
-        }
+
+        setInputValue(value)
+
+        fetch(`http://localhost:8080/search?q=${value}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data && value) {
+                    setSearchData(data.music)
+                }
+                else if (data && !value) {
+                    setSearchData([])
+                    console.log(searchData)
+                }
+                else {
+                    setSearchData([])
+                    console.log(searchData)
+                }
+            })
     }
 
     return (
@@ -29,22 +39,31 @@ function Search() {
             </div>
             <div className="searchResult">
                 <div className={style.musicList}>
-                    <p className={style.searchTitle}>{searchData.length === 0 ? 'All music' : 'Search result'}</p>
+                    <p className={style.searchTitle}>{inputValue === '' ? 'All music' : 'Search result'}</p>
 
-                    {searchData.length === 0 ?
-
+                    {inputValue === '' &&
                         songsdata.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover}/>
-                        )
-
-                        :
-
-                        searchData.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover}/>
+                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
                         )
                     }
+
+                    {searchData ?
+
+                        searchData.map(elem =>
+                            <MusicItem key={elem.id} id={elem.id} title={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
+                        )
+                        :
+                        songsdata.map(elem =>
+                            <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
+                        )
+
+                    }
+
                 </div>
             </div>
+
+
+
         </div>
     )
 }
