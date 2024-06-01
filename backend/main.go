@@ -5,6 +5,7 @@ import (
 	"leet/middleware"
 	"leet/models"
 	"log"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -19,15 +20,27 @@ func main() {
 	models.SetDB(db)
 
 	r := gin.Default()
-	r.Use(cors.Default())
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
+	r.OPTIONS("/*path", func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization")
+		c.AbortWithStatus(204)
+	})
 
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
 
-	// Public route for search
 	r.GET("/search", handlers.Search) // Маршрут для поиска
 
-	// Protected routes with different status requirements
 	protected := r.Group("/")
 	protected.Use(middleware.AuthMiddleware(0))
 	protected.POST("/create_playlist", handlers.CreatePlaylist)

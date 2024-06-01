@@ -5,7 +5,8 @@ CREATE TABLE Music (
 	Music_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
     Release_Date DATE DEFAULT CURRENT_DATE,
     Popularity INT DEFAULT 0,
-	Music_Access bool DEFAUlT False,
+	-- Music_Access bool DEFAUlT False,
+	Music_Access bool DEFAUlT True,
 	User_id INT ,
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
 );
@@ -24,7 +25,9 @@ CREATE TABLE NoisesUser (
 	Status int DEFAULT 0
 );
 -- обычный user - 0 исполнитель - 1 админ - 2
-UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
+-- UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
+
+UPDATE NoisesUser SET Status = 2 WHERE User_email = 'example@example.com'; 
 
 select * from NoisesUser
 

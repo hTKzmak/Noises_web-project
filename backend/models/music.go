@@ -12,7 +12,8 @@ func SaveDataToDB(musicName, releaseDate, filePath1, filePath2 string, userID in
 }
 
 func GetPendingTracks() ([]Music, error) {
-	rows, err := DB.Query("SELECT id, Music_name, Music_path, Music_img_path, Release_Date, Popularity, Music_Access, User_id FROM Music WHERE Music_Access = false")
+	// rows, err := DB.Query("SELECT id, Music_name, Music_path, Music_img_path, Release_Date, Popularity, Music_Access, User_id FROM Music WHERE Music_Access = false")
+	rows, err := DB.Query("SELECT id, Music_name, Music_path, Music_img_path, Release_Date, Popularity, Music_Access, User_id FROM Music WHERE Music_Access = true")
 	if err != nil {
 		return nil, err
 	}

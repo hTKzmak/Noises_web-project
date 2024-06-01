@@ -37,8 +37,11 @@ func Upload(c *gin.Context) {
 		return
 	}
 
-	destination1 := "D:/Ptoger/golang/Noises2/Music"
-	destination2 := "D:/Ptoger/golang/Noises2/Image"
+	// destination1 := "D:/Ptoger/golang/Noises2/Music"
+	// destination2 := "D:/Ptoger/golang/Noises2/Image"
+
+	destination1 := "C:/Users/Slava/Desktop/Noises_web-project/backend/Music"
+	destination2 := "C:/Users/Slava/Desktop/Noises_web-project/backend/Image"
 
 	musicName := c.PostForm("musicName")
 	releaseDate := c.PostForm("releaseDate")
