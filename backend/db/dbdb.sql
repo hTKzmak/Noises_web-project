@@ -26,6 +26,7 @@ CREATE TABLE NoisesUser (
 );
 -- обычный user - 0 исполнитель - 1 админ - 2
 -- UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
+DELETE FROM Music where id = 5
 
 UPDATE NoisesUser SET Status = 2 WHERE User_email = 'example@example.com'; 
 
