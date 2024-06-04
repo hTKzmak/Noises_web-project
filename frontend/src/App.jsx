@@ -46,8 +46,6 @@ function App() {
   let JSONLatestMusicData = JSON.parse(sessionStorageData)
 
 
-
-
   // Вместо этих данных будем получать данные с бекенда и размещать их на определённых страницах 
   let albumsData = [
     { id: 1, title: 'Album 1', background: bg, href: '/music' },
@@ -94,7 +92,6 @@ function App() {
         <Menu />
         <div className="container">
           <Header />
-          <PlayerApp />
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/albums' element={<AGPList title="List of albums" showHeart={true} data={albumsData} genresStyle={false} />} />
@@ -117,6 +114,7 @@ function App() {
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />
+          <PlayerApp />
         </div>
       </div>
     </Context.Provider>

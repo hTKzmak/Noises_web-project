@@ -9,13 +9,12 @@ import { useState } from 'react'
 function LoginWindow() {
 
 
-    // работает, но есть но: даже если аккаунт есть, то можно вводить любое имя. Так не должно быть, надо брать имя существующего аккаунта
+    // работает, но есть но: Я поставил своё имя, а надо брать имя пользователя
 
 
     const navigate = useNavigate();
 
     const [values, setValues] = useState({
-        name: "",
         email: "",
         password: ""
     });
@@ -37,13 +36,12 @@ function LoginWindow() {
         setValid(true)
 
         // если все поля заполнены
-        if (values.name && values.email && values.password) {
+        if (values.email && values.password) {
 
             // выполняется запрос на бек для регистрации аккаунта
             fetch('http://localhost:8080/login', {
                 method: 'POST',
                 body: JSON.stringify({
-                    username: `${values.name}`,
                     email: `${values.email}`,
                     password: `${values.password}`
                 }),
@@ -69,7 +67,7 @@ function LoginWindow() {
                     // не отображаем сообщение
                     setLoginExist(true)
                     // храним данные в LS
-                    localStorage.setItem('userData', JSON.stringify({ name: values.name, img: 'https://images.unsplash.com/photo-1680026319202-fcb822e0ab91?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', token: json.token }))
+                    localStorage.setItem('userData', JSON.stringify({ name: 'MERUNIKu', img: 'https://images.unsplash.com/photo-1680026319202-fcb822e0ab91?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', token: json.token }))
                     // переходим на home page
                     window.location.href = '/'
                     // подтверждаем форму
@@ -119,13 +117,6 @@ function LoginWindow() {
                 </div>
                 <div className="authMain">
                     <form onSubmit={handleSubmit}>
-
-                        <InputElem type='text' placeholder='Name' name='name' value={values.name} onChange={handleInputChange} maxLength={20} />
-
-                        {valid && !values.name && (
-                            <span>Write your name</span>
-                        )}
-
 
                         <InputElem type='email' placeholder='Email' name='email' value={values.email} onChange={handleInputChange} />
 

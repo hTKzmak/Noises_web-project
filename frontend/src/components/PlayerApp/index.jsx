@@ -5,8 +5,6 @@ import { Context } from '../../context/Context.js';
 // импорт всей музыки
 import { songsdata } from './audios.js';
 
-// НАДО ДОДЕЛАТЬ ПЛЕЕР (МУЗЫКА РАБОТАЕТ, НО ПОЛЗУНКА НЕТ) И ПОЧИСТИТЬ КОД
-
 function PlayerApp() {
 
   // UseContext нужен для работы с плеером :P
@@ -56,9 +54,6 @@ function PlayerApp() {
     // замена значений
     setProgress(progressFromCt)
     setLength(lengthFromDuration)
-
-    console.log(progressFromCt, lengthFromDuration)
-    //   localStorage.setItem('choosenSong', JSON.stringify(newCurrentSong));
 
     // изменяем громкость музыки
     audioElem.current.volume = volume

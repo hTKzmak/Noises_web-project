@@ -7,17 +7,17 @@ import { ReactComponent as Playlist } from '../../../../assets/icons/playlist.sv
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
 
-import { songsdata } from '../../../PlayerApp/audios.js';
+function MusicItem({ id, title, performer, img }) {
 
-function MusicItem({ key, id, title, performer, img }) {
-
-    const { setShowPlayer, setIsPlaying, choosenSong, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
+    // нужно будет добавить latestMusic и seLatestMusic
+    const { setShowPlayer, setIsPlaying, setChoosenSong } = useContext(Context)
 
     // нужен для добавления любимой музыки
     let [addedFavor, setAddedFavor] = useState(false)
 
 
     // ПОЧИСТИТЬ ТУТ НАДО, ДОБАВИТЬ LATEST MUSIC И ДОБАВИТЬ ИНФУ О МУЗЫКЕ: НАЗВАНИЕ, ИСПОЛНИТЕЛЬ, И URL В ВИДЕ http://localhost:8080/stream/7 (02.02.2024)
+    // Для Favorite и latest можно сделать массив с id и фильтровать список всей музыки по массиву с id конкретного пользователя
 
     // функция на воспроизведение музыки
     // function startPlay(musicId) {
@@ -60,7 +60,7 @@ function MusicItem({ key, id, title, performer, img }) {
 
 
     return (
-        <div className={style.musicItem} id={key}>
+        <div className={style.musicItem} key={id} id={id}>
             <div className={style.musicMainInfo} onClick={() => startPlay(id)}>
                 <div className={style.musicImg} style={{ backgroundImage: `url(${img})` }}></div>
                 <div className={style.musicName}>
