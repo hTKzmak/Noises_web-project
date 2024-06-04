@@ -26,7 +26,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
         const offset = e.nativeEvent.offsetX;
 
         const divprogress = offset / width * 100;
-        
+
         // меняем текущее значение времени audioElem на выбранный нами период (чтобы не вылезала ошибка после перезагрузки, если решил перемотать музыку, не воиспроизводив её, то пишем "или 0"
         audioElem.current.currentTime = divprogress / 100 * length
     }
@@ -74,6 +74,39 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
         setShowPlayer(false)
     }
 
+    // фуникция для скачивания музыки
+    function downloadMusic(url) {
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/pdf',
+            },
+        })
+            .then((response) => response.blob())
+            .then((blob) => {
+                // Create blob link to download
+                const url = window.URL.createObjectURL(
+                    new Blob([blob]),
+                );
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute(
+                    'download',
+                    `${Date.now()}.mp3`,
+                );
+
+                // Append to html link element page
+                document.body.appendChild(link);
+
+                // Start download
+                link.click();
+
+                // Clean up and remove the link
+                link.parentNode.removeChild(link);
+            });
+    }
+
+
     return (
         <div className="player" style={{ display: showPlayer === true ? 'flex' : 'none' }}>
             <h1></h1>
@@ -103,7 +136,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
                 </div>
                 <div className="settings">
 
-                    <a href={choosenSong} download><Download /></a>
+                    <button onClick={() => downloadMusic(choosenSong)}><Download /></button>
 
                     <Playlist />
 
@@ -139,7 +172,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
                     <Next className='btn_action' onClick={skipAhead} />
                 </div>
                 <div className="settings_mobile">
-                    <a href={choosenSong} download><Download /></a>
+                    <button onClick={() => downloadMusic(choosenSong)}><Download /></button>
                     <Playlist />
                 </div>
 
