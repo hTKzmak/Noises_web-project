@@ -28,7 +28,7 @@
 
             border-radius: 15px;
         }
-        
+
         .musicImg:hover {
             width: 60px;
             height: 60px;
@@ -76,18 +76,20 @@
                 }
             }
         }
-
     }
 
-    &:hover{
-        background-color: #3B3B3B;
+    &:hover {
+        background-color: #3b3b3b;
     }
 
     .musicOtherInfo {
         display: flex;
-        align-items: center;
-        width: 50px;
         justify-content: center;
+        align-items: center;
+        
+        width: 100px;
+        gap: 15px;
+        
         cursor: pointer;
 
         .musicLength {

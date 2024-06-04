@@ -2,6 +2,8 @@ import style from './MusicItem.module.scss'
 
 import { ReactComponent as AddMusic } from '../../../../assets/icons/heart.svg'
 import { ReactComponent as AddedMusic } from '../../../../assets/icons/heart_full.svg'
+import { ReactComponent as Playlist } from '../../../../assets/icons/playlist.svg'
+
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
 
@@ -66,8 +68,11 @@ function MusicItem({ key, id, title, performer, img }) {
                     <p>{performer}</p>
                 </div>
             </div>
-            <div className={style.musicOtherInfo} onClick={() => addFavorMusic()}>
-                {!addedFavor ? <AddMusic /> : <AddedMusic />}
+
+
+            <div className={style.musicOtherInfo}>
+                <Playlist onClick={() => alert('( ͡° ͜ʖ ͡°)')}/>
+                {!addedFavor ? <AddMusic onClick={() => addFavorMusic()}/> : <AddedMusic onClick={() => addFavorMusic()}/>}
             </div>
         </div>
     )

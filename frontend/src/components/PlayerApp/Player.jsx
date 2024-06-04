@@ -65,9 +65,10 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
     }
 
     // если размер окна браузера меньше 1100, то громкость музыки будет на максимум (сделано это для мобильных устройств)
-    if (window.innerWidth <= 1100) {
-        setVolume(1)
-    }
+    // (его думаю убрать, так как кнопка отключения громкости есть в самом плеере)
+    // if (window.innerWidth <= 1100) {
+    //     setVolume(1)
+    // }
 
     const closePlayer = () => {
         setIsPlaying(false)
@@ -136,9 +137,9 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
                 </div>
                 <div className="settings">
 
-                    <button onClick={() => downloadMusic(choosenSong)}><Download /></button>
+                    <button className='closeBtn' onClick={() => closePlayer()}><Close /></button>
 
-                    <Playlist />
+                    <button onClick={() => downloadMusic(choosenSong)}><Download /></button>
 
                     <div id="music">
                         {volume === '0' ? (
@@ -173,7 +174,12 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
                 </div>
                 <div className="settings_mobile">
                     <button onClick={() => downloadMusic(choosenSong)}><Download /></button>
-                    <Playlist />
+
+                    <div id='volume'>
+                        <div id='volume'>
+                            {volume === 1 ? (<Volume className='btn_control' onClick={() => setVolume(0)} />) : (<VolumeMute className='btn_control' onClick={() => setVolume(1)} />)}
+                        </div>
+                    </div>
                 </div>
 
             </div>

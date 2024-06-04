@@ -47,6 +47,8 @@ function App() {
 
 
 
+
+  // Вместо этих данных будем получать данные с бекенда и размещать их на определённых страницах 
   let albumsData = [
     { id: 1, title: 'Album 1', background: bg, href: '/music' },
     { id: 2, title: 'Album 2', background: bg, href: '/music' },

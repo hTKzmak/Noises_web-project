@@ -22,7 +22,7 @@ function PlayerApp() {
   const audioElem = useRef();
 
   // для изменения громкости
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState(1);
 
   // для прогресса всей музыки
   const [progress, setProgress] = useState(0)
