@@ -15,6 +15,9 @@ function BlockItem({ id, title, background, withoutAnimation, href, showHeart, g
         setAddedFavor(!addedFavor)
     }
 
+    const storedObject = JSON.parse(localStorage.getItem('userData')) || [];
+    let userData = storedObject
+
     return (
         <div className={!genresStyle ? style.blockItem : style.blockGenre} id={id}>
             <Link to={href}>
@@ -22,7 +25,7 @@ function BlockItem({ id, title, background, withoutAnimation, href, showHeart, g
                 <p>{title}</p>
             </Link>
 
-            {showHeart === true &&
+            {(userData.length !== 0 && showHeart === true) &&
                 <div className={style.musicOtherInfo} onClick={() => addFavorMusic()}>
                     {!addedFavor ? <AddMusic /> : <AddedMusic />}
                 </div>

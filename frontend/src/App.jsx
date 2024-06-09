@@ -35,7 +35,7 @@ function App() {
   // для воспроизведения выбранной нами музыки
   const [choosenSong, setChoosenSong] = useState({})
 
-  // для воспроизведения выбранной нами музыки
+  // для отображения списка предыдущей музыки
   const [latestMusic, setLatestMusic] = useState([])
 
   // Создаём SS для хранений музыки, которые выбирал пользователь

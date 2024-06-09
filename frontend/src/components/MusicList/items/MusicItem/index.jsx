@@ -58,6 +58,8 @@ function MusicItem({ id, title, performer, img }) {
         setAddedFavor(!addedFavor)
     }
 
+    const storedObject = JSON.parse(localStorage.getItem('userData')) || [];
+    let userData = storedObject
 
     return (
         <div className={style.musicItem} key={id} id={id}>
@@ -69,11 +71,12 @@ function MusicItem({ id, title, performer, img }) {
                 </div>
             </div>
 
-
-            <div className={style.musicOtherInfo}>
-                <Playlist onClick={() => alert('( ͡° ͜ʖ ͡°)')}/>
-                {!addedFavor ? <AddMusic onClick={() => addFavorMusic()}/> : <AddedMusic onClick={() => addFavorMusic()}/>}
-            </div>
+            {userData.length !== 0 &&
+                <div className={style.musicOtherInfo}>
+                    <Playlist onClick={() => alert('( ͡° ͜ʖ ͡°)')} />
+                    {!addedFavor ? <AddMusic onClick={() => addFavorMusic()} /> : <AddedMusic onClick={() => addFavorMusic()} />}
+                </div>
+            }
         </div>
     )
 }

@@ -177,7 +177,12 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
 
                     <div id='volume'>
                         <div id='volume'>
-                            {volume === 1 ? (<Volume className='btn_control' onClick={() => setVolume(0)} />) : (<VolumeMute className='btn_control' onClick={() => setVolume(1)} />)}
+                            {/* {volume === 1 ? (<Volume className='btn_control' onClick={() => setVolume(0)} />) : (<VolumeMute className='btn_control' onClick={() => setVolume(1)} />)} */}
+                            {volume === '0' ? (
+                                <VolumeMute className='btn_control' onClick={() => setVolume('1')} />
+                            ) : (
+                                <Volume className='btn_control' onClick={() => setVolume('0')} />
+                            )}
                         </div>
                     </div>
                 </div>

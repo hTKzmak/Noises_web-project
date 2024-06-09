@@ -3,6 +3,7 @@ import { ReactComponent as Search } from './assets/search.svg'
 import { ReactComponent as Logo } from './assets/logo.svg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import UploadWindow from '../UploadWindow'
 
 function Header() {
 
@@ -10,6 +11,14 @@ function Header() {
     let JSONData = JSON.parse(localStorageData)
 
     let [showWindow, setShowWindow] = useState(false)
+
+    // для отображения окна для загрузки своей музыки 
+    let [showUpload, setShowUpload] = useState(false)
+
+    function showUploadFunc(){
+        setShowUpload(true)
+        setShowWindow(false)
+    }
 
 
     return (
@@ -43,9 +52,7 @@ function Header() {
                     {showWindow &&
                         <div className={style.window} onMouseLeave={() => setShowWindow(false)}>
                             <ul>
-                                <Link to={'/404'}>
-                                    <li onClick={() => setShowWindow(false)}>Upload music</li>
-                                </Link>
+                                <li onClick={() => showUploadFunc()}>Upload music</li>
                                 <Link to={'/playlists'}>
                                     <li onClick={() => setShowWindow(false)}>Playlists</li>
                                 </Link>
@@ -59,7 +66,9 @@ function Header() {
                         </div>
                     }
                 </div>
+
             )}
+            <UploadWindow showUpload={showUpload} setShowUpload={setShowUpload}/>
         </header>
     )
 }
