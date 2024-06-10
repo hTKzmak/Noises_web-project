@@ -22,11 +22,11 @@ CREATE TABLE NoisesUser (
 	User_password VARCHAR(255) NOT NULL,
 	User_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
 	Country VARCHAR(30) DEFAULT 'Не указана',
-	Status int DEFAULT 0
+	Status int DEFAULT 1
 );
 -- обычный user - 0 исполнитель - 1 админ - 2
 -- UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
-DELETE FROM Music where id = 5
+DELETE FROM Music where id = 23
 
 UPDATE NoisesUser SET Status = 2 WHERE User_email = 'example@example.com'; 
 
