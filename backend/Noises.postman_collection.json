@@ -329,266 +329,314 @@
 			]
 		},
 		{
-			"name": "register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"example_user\",\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "stream",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTY1OTkwOTZ9.p_5i2rQhRc8J4HFbrlhMk-PJJ3sIsw3pFclO5tvlIOM"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/stream/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"stream",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTY2Nzg5ODh9.dJacC98HAj8hmgEB3DGHU6XNxnFQzB1l4B7bPsEFBYc"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/delete?id=6",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"delete"
-					],
-					"query": [
+			"name": "ALL",
+			"item": [
+				{
+					"name": "All_GET",
+					"item": [
 						{
-							"key": "id",
-							"value": "6"
+							"name": "stream",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTY1OTkwOTZ9.p_5i2rQhRc8J4HFbrlhMk-PJJ3sIsw3pFclO5tvlIOM"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/stream/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"stream",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "playlist",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "search",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/search?q=я русский",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "я русский"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "User_tracks_false",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "User_tracks_true",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "User_RandomTrack",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "User_login",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ALL_POST",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"example_user\",\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example_password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_playlist",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"My Playlist\",\r\n  \"description\": \"My favorite songs\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/create_playlist",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"create_playlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add_music_to_playlist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/add_music_to_playlist",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"add_music_to_playlist"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ALL_DEL",
+					"item": [
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTY2Nzg5ODh9.dJacC98HAj8hmgEB3DGHU6XNxnFQzB1l4B7bPsEFBYc"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/delete?id=6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_playlist",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/playlist/1/music/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"playlist",
+										"1",
+										"music",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "delete_playlist",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
+			"name": "User_INFO",
+			"item": [
+				{
+					"name": "User_tracks_false Copy",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/playlist/1/music/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"playlist",
-						"1",
-						"music",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "upload",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTY2Nzg5ODh9.dJacC98HAj8hmgEB3DGHU6XNxnFQzB1l4B7bPsEFBYc"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "musicName",
-							"value": "perf",
-							"type": "text"
-						},
-						{
-							"key": "releaseDate",
-							"value": "2023-05-01",
-							"type": "text"
-						},
-						{
-							"key": "files",
-							"type": "file",
-							"src": "/D:/downloads/Michael_Beat_-_Kiss_Me_Goodbye_68758544.mp3"
-						},
-						{
-							"key": "files",
-							"type": "file",
-							"src": "/D:/downloads/загруженное.jpg"
-						}
-					]
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/upload",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"upload"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create_playlist",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"My Playlist\",\r\n  \"description\": \"My favorite songs\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+				{
+					"name": "User_tracks_true Copy",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/create_playlist",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"create_playlist"
-					]
+				{
+					"name": "User_RandomTrack Copy",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "User_login Copy",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "add_music_to_playlist",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/add_music_to_playlist",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"add_music_to_playlist"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "playlist",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "search",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/search?q=я русский",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"search"
-					],
-					"query": [
-						{
-							"key": "q",
-							"value": "я русский"
-						}
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }

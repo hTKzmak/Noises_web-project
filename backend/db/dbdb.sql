@@ -34,6 +34,7 @@ CREATE TABLE Playlists (
     Playlist_id SERIAL PRIMARY KEY,
     Playlist_name VARCHAR(255) NOT NULL,
     Playlist_description TEXT,
+	Image_path varchar(255),
     Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     User_id INT NOT NULL,
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
@@ -44,17 +45,16 @@ select * from Playlists
 DROP TABLE Playlists
 
 
-CREATE TABLE PlaylistMusic (
+CREATE TABLE PlaylistTracks (
     Playlist_id INT NOT NULL,
     Music_id INT NOT NULL,
     PRIMARY KEY (Playlist_id, Music_id),
     FOREIGN KEY (Playlist_id) REFERENCES Playlists(Playlist_id),
     FOREIGN KEY (Music_id) REFERENCES Music(id)
 );
-select * from PlaylistMusic
+select * from PlaylistTracks
 
-DROP TABLE PlaylistMusic
-
+DROP TABLE PlaylistTracks
 
 CREATE TABLE Favorites (
     id SERIAL PRIMARY KEY,

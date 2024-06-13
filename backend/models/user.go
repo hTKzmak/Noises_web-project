@@ -59,6 +59,23 @@ func GetUserIDByEmail(email string) (int, error) {
 	return userID, nil
 }
 
+func GetUserLoginByEmail(email string) (string, error) {
+	var login string
+	err := DB.QueryRow("SELECT User_name FROM NoisesUser WHERE User_email = $1", email).Scan(&login)
+	if err != nil {
+		return "", err
+	}
+	return login, nil
+}
+
+func GetUserByEmail(email string) (User, error) {
+	var user User
+	err := DB.QueryRow("SELECT User_id, User_login, User_email, User_password FROM NoisesUser WHERE User_email = $1", email).Scan(&user.ID, &user.Username, &user.Email, &user.Password)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
 func hashPassword(password string) string {
 	hash := sha256.New()
 	hash.Write([]byte(password))

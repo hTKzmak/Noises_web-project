@@ -31,7 +31,14 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "User registered successfully"})
+	// Генерация JWT токена для нового пользователя
+	token, err := utils.GenerateJWT(creds.Email)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "User registered successfully", "token": token})
 }
 
 func Login(c *gin.Context) {

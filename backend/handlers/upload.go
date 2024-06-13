@@ -1,84 +1,126 @@
 package handlers
 
 import (
+	// "fmt"
 	"fmt"
 	"leet/models"
 	"leet/utils"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
+
+	// "strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
-func Upload(c *gin.Context) {
-	form, err := c.MultipartForm()
+func UploadTrack(c *gin.Context) {
+	tokenString := c.GetHeader("Authorization")
+	if tokenString == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Missing authorization token"})
+		return
+	}
+
+	// Удаляем префикс 'Bearer ' из строки токена, если он есть
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+	if tokenString == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token format"})
+		return
+	}
+
+	// Проверка и парсинг JWT токена
+	claims, err := utils.ValidateJWT(tokenString)
 	if err != nil {
-		c.String(http.StatusBadRequest, fmt.Sprintf("Ошибка при получении файлов: %s", err.Error()))
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
-	claims, exists := c.Get("claims")
-	if !exists {
-		c.String(http.StatusUnauthorized, "Не удалось получить данные пользователя")
-		return
-	}
-
-	userClaims, ok := claims.(*utils.Claims)
-	if !ok {
-		c.String(http.StatusUnauthorized, "Не удалось получить данные пользователя")
-		return
-	}
-
-	userID, err := models.GetUserIDByEmail(userClaims.Email)
+	// Получение данных из формы
+	name := c.PostForm("name")
+	releaseDateStr := c.PostForm("release_date")
+	releaseDate, err := time.Parse("2006-01-02", releaseDateStr)
 	if err != nil {
-		c.String(http.StatusInternalServerError, fmt.Sprintf("Ошибка при получении ID пользователя: %s", err.Error()))
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid release date format"})
 		return
 	}
 
-	destination1 := "D:/Ptoger/golang/Noises2/Music"
-	destination2 := "D:/Ptoger/golang/Noises2/Image"
+	musicFile, err := c.FormFile("music")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Music file is required"})
+		return
+	}
+	// Указываем пути для сохранения файлов
+	// В пути нужно заменить \ на / если ругается
+	musicUploadPath := "D:/Ptoger/golang/noisesV0.1/backend/Music"
+	imageUploadPath := "D:/Ptoger/golang/noisesV0.1/backend/Image"
 
-	musicName := c.PostForm("musicName")
-	releaseDate := c.PostForm("releaseDate")
-
-	files := form.File["files"]
-	if len(files) != 2 {
-		c.String(http.StatusBadRequest, "Неверное количество файлов. Ожидалось 2 файла.")
+	// Папки сами создадутся
+	// Создаем папки, если они не существуют
+	if err := createDirIfNotExists(musicUploadPath); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create music directory"})
+		return
+	}
+	if err := createDirIfNotExists(imageUploadPath); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create image directory"})
 		return
 	}
 
-	var musicPath, imagePath string
-	for _, file := range files {
-		var destination string
-		if strings.HasSuffix(file.Filename, ".mp3") || strings.HasSuffix(file.Filename, ".wav") {
-			destination = destination1
-			musicPath = filepath.Join(destination1, file.Filename)
-		} else if strings.HasSuffix(file.Filename, ".jpg") || strings.HasSuffix(file.Filename, ".png") || strings.HasSuffix(file.Filename, ".gif") {
-			destination = destination2
-			imagePath = filepath.Join(destination2, file.Filename)
-		} else {
-			c.String(http.StatusBadRequest, fmt.Sprintf("Недопустимый формат файла: %s", file.Filename))
+	// Генерируем уникальное имя для музыкального файла
+	musicFileName := fmt.Sprintf("%s_%s", uuid.New().String(), filepath.Base(musicFile.Filename))
+	musicPath := filepath.Join(musicUploadPath, musicFileName)
+	if err := c.SaveUploadedFile(musicFile, musicPath); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Сохранение изображения, если оно предоставлено
+	imagePath := ""
+	imageFile, err := c.FormFile("image")
+	if err == nil {
+		imageFileName := fmt.Sprintf("%s_%s", uuid.New().String(), filepath.Base(imageFile.Filename))
+		imagePath = filepath.Join(imageUploadPath, imageFileName)
+		if err := c.SaveUploadedFile(imageFile, imagePath); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
+	}
 
-		err := utils.SaveFile(file, destination)
+	// Получение userID из claims
+	userID, err := models.GetUserIDByEmail(claims.Email)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "User not found"})
+		return
+	}
+
+	music := models.Music{
+		Name:        name,
+		Path:        musicPath,
+		ImagePath:   imagePath,
+		ReleaseDate: releaseDate,
+		Popularity:  0,
+		MusicAccess: true, // по умолчанию музыка доступна, поменяв на false трек уйдет на модерацию
+		UserID:      userID,
+	}
+
+	query := `INSERT INTO Music (Music_name, Music_path, Music_img_path, Release_Date, Popularity, Music_Access, User_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`
+	_, err = models.DB.Exec(query, music.Name, music.Path, music.ImagePath, music.ReleaseDate, music.Popularity, music.MusicAccess, music.UserID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Track uploaded successfully", "track": music})
+}
+
+func createDirIfNotExists(path string) error {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		err = os.MkdirAll(path, os.ModePerm)
 		if err != nil {
-			c.String(http.StatusInternalServerError, fmt.Sprintf("Ошибка при сохранении файла: %s", err.Error()))
-			return
+			return err
 		}
 	}
-
-	if releaseDate == "" {
-		releaseDate = time.Now().Format("2006-01-02")
-	}
-
-	err = models.SaveDataToDB(musicName, releaseDate, musicPath, imagePath, userID)
-	if err != nil {
-		c.String(http.StatusInternalServerError, fmt.Sprintf("Ошибка при сохранении данных в базу данных: %s", err.Error()))
-		return
-	}
-
-	c.String(http.StatusOK, "Файлы и данные успешно загружены")
+	return nil
 }
