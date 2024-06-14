@@ -3,7 +3,7 @@ import { ReactComponent as Search } from './assets/search.svg'
 import { ReactComponent as Logo } from './assets/logo.svg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import UploadWindow from '../UploadWindow'
+import UploadWindow from '../ModalWindow/UploadWindow'
 
 function Header() {
 

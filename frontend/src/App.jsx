@@ -94,10 +94,10 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/albums' element={<AGPList title="List of albums" showHeart={true} data={albumsData} genresStyle={false} />} />
-            <Route path='/performers' element={<AGPList title="List of performers" showHeart={true} data={performersData} genresStyle={false} />} />
-            <Route path='/genres' element={<AGPList title="List of genres" showHeart={false} data={genresData} genresStyle={true} />} />
-            <Route path='/playlists' element={<AGPList title="List of your playlists" showHeart={false} data={playlistsData} genresStyle={false} />} />
+            <Route path='/albums' element={<AGPList title="List of albums" showHeart={true} data={albumsData} genresStyle={false} showCreateBtn={false}/>} />
+            <Route path='/performers' element={<AGPList title="List of performers" showHeart={true} data={performersData} genresStyle={false} showCreateBtn={false}/>} />
+            <Route path='/genres' element={<AGPList title="List of genres" showHeart={false} showDelete={false} data={genresData} genresStyle={true} showCreateBtn={false}/>} />
+            <Route path='/playlists' element={<AGPList title="List of your playlists" showHeart={false} showDelete={true} data={playlistsData} genresStyle={false} showCreateBtn={true}/>} />
 
             <Route path='/music' element={<MusicPage title="Some music" image={'https://images.unsplash.com/photo-1634705146926-b8fbca28f431?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} />} />
 

@@ -24,11 +24,12 @@ body {
         letter-spacing: 3px;
     }
 
-    #warning{
+    #warning {
         color: #ca2020;
     }
 
-    button, input {
+    button,
+    input {
         font-family: "Comfortaa", sans-serif;
     }
 
@@ -55,18 +56,60 @@ body {
         }
     }
 
-    .title{
+    .title {
         display: flex;
         gap: 50px;
 
-        &>h1{
+        & > h1 {
             @media screen and (max-width: 1100px) {
                 font-size: 25px;
             }
         }
-        
+
         @media screen and (max-width: 1100px) {
             gap: 20px;
         }
+    }
+
+    .AGP-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .expand-icon {
+        height: 32px;
+        width: 32px;
+        position: relative;
+        cursor: pointer;
+    }
+    .expand-icon::before,
+    .expand-icon::after {
+        content: " ";
+        width: 32px;
+        height: 4px;
+        background-color: #d9d9d9;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transition: all 0.15s cubic-bezier(0.42, 0, 0.58, 1);
+        opacity: 1;
+        border-radius: 2px;
+    }
+    .expand-icon::before {
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+    .expand-icon::after {
+        transform: translate(-50%, -50%);
+    }
+
+    .expand-icon.expanded::before {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    .expand-icon.expanded::after {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 0;
     }
 }

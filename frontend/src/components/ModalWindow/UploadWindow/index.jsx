@@ -1,6 +1,6 @@
 import style from './UploadWindow.module.scss'
-import ButtonElem from '../UI/ButtonElem'
-import InputElem from '../UI/InputElem'
+import ButtonElem from '../../UI/ButtonElem'
+import InputElem from '../../UI/InputElem'
 import { useState } from 'react';
 
 function UploadWindow({ showUpload, setShowUpload }) {

@@ -5,14 +5,21 @@ import { useState } from 'react'
 
 import { ReactComponent as AddMusic } from '../../../../assets/icons/heart.svg'
 import { ReactComponent as AddedMusic } from '../../../../assets/icons/heart_full.svg'
+import { ReactComponent as Trash } from '../../../../assets/icons/trash.svg'
 
-function BlockItem({ id, title, background, withoutAnimation, href, showHeart, genresStyle }) {
+function BlockItem({ id, title, background, withoutAnimation, href, showHeart, showDelete, genresStyle }) {
 
     // нужен для добавления любимой музыки
     let [addedFavor, setAddedFavor] = useState(false)
 
+
+    // чтобы добавить музыку или что-либо ещё в любимые, мы должны передать id
     function addFavorMusic() {
         setAddedFavor(!addedFavor)
+    }
+
+    function deletePlaylist(){
+        alert('o(TヘTo)')
     }
 
     const storedObject = JSON.parse(localStorage.getItem('userData')) || [];
@@ -25,9 +32,14 @@ function BlockItem({ id, title, background, withoutAnimation, href, showHeart, g
                 <p>{title}</p>
             </Link>
 
-            {(userData.length !== 0 && showHeart === true) &&
-                <div className={style.musicOtherInfo} onClick={() => addFavorMusic()}>
-                    {!addedFavor ? <AddMusic /> : <AddedMusic />}
+            {(userData.length !== 0) &&
+                <div className={style.musicOtherInfo}>
+                    {showHeart === true &&
+                        (!addedFavor ? <AddMusic onClick={() => addFavorMusic()} /> : <AddedMusic onClick={() => addFavorMusic()}/>)
+                    }
+                    {showDelete === true &&
+                        <Trash onClick={() => deletePlaylist()}/>
+                    }
                 </div>
             }
         </div>

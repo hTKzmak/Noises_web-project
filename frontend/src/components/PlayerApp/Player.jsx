@@ -93,7 +93,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
                 link.href = url;
                 link.setAttribute(
                     'download',
-                    `${Date.now()}.mp3`,
+                    `${choosenSong.title}.mp3`,
                 );
 
                 // Append to html link element page
@@ -139,7 +139,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
 
                     <button className='closeBtn' onClick={() => closePlayer()}><Close /></button>
 
-                    <button onClick={() => downloadMusic(choosenSong)}><Download /></button>
+                    <button onClick={() => downloadMusic(choosenSong.url)}><Download /></button>
 
                     <div id="music">
                         {volume === '0' ? (

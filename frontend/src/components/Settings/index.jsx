@@ -17,10 +17,10 @@ function Settings() {
             <nav>
                 <ul>
                     <li>
-                        <Link to={'/'}>Customize profile</Link>
+                        <Link to={'/customize_profile'}>Customize profile</Link>
                     </li>
                     <li>
-                        <Link to={'/'}>Change password</Link>
+                        <Link to={'/change_password'}>Change password</Link>
                     </li>
                     <li>
                         <a id="warning" href='/' onClick={() => localStorage.clear()}>Log out</a>

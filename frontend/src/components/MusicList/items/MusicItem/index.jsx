@@ -1,61 +1,60 @@
 import style from './MusicItem.module.scss'
 
+import { useDispatch } from "react-redux"
+
 import { ReactComponent as AddMusic } from '../../../../assets/icons/heart.svg'
 import { ReactComponent as AddedMusic } from '../../../../assets/icons/heart_full.svg'
 import { ReactComponent as Playlist } from '../../../../assets/icons/playlist.svg'
 
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
+import { addFavorAction, addInPlaylistAction } from '../../../../store/musicReducer'
 
 function MusicItem({ id, title, performer, img }) {
 
     // нужно будет добавить latestMusic и seLatestMusic
-    const { setShowPlayer, setIsPlaying, setChoosenSong } = useContext(Context)
+    const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
 
     // нужен для добавления любимой музыки
-    let [addedFavor, setAddedFavor] = useState(false)
+    let [addedFavor, setAddedFavor] = useState(false);
 
-
-    // ПОЧИСТИТЬ ТУТ НАДО, ДОБАВИТЬ LATEST MUSIC И ДОБАВИТЬ ИНФУ О МУЗЫКЕ: НАЗВАНИЕ, ИСПОЛНИТЕЛЬ, И URL В ВИДЕ http://localhost:8080/stream/7 (02.02.2024)
-    // Для Favorite и latest можно сделать массив с id и фильтровать список всей музыки по массиву с id конкретного пользователя
-
-    // функция на воспроизведение музыки
-    // function startPlay(musicId) {
-    //     let data = musicId
-    //     let BASE_URL = 'http://localhost:8080/stream/'
-    //     // let data = songsdata.find(elem => elem.id === musicId)
-    //     // // let data = `http://localhost:8080/stream/${id}`
-
-    //     // if (data.id === musicId) {
-    //         setIsPlaying(false)
-    //         setShowPlayer(true)
-    //     // }
-
-    //     // if (!latestMusic.find(elem => elem.id === musicId)) {
-    //     //     setLatestMusic(prevState => [...prevState, data]);
-    //     // }
-    //     // console.log(latestMusic)
-
-    //     // setChoosenSong(`http://localhost:8080/stream/${data}`)
-
-    //     let res = BASE_URL + data
-    //     setChoosenSong(res)
-    // }
+    const dispatch = useDispatch()
 
     function startPlay(musicId) {
+        // передаём данные о музыке в setChoosenSong
         fetch(`http://localhost:8080/stream/${musicId}`)
             .then(res => res)
             .then(data => {
                 setIsPlaying(false)
                 setShowPlayer(true)
 
-                setChoosenSong(data.url)
-                console.log(data)
+                let musicInfo = {
+                    id: id,
+                    title: title,
+                    performer: performer,
+                    // в первом беке cover это изображение, в новом название может измениться 
+                    cover: img,
+                    url: data.url,
+                }
+
+                // setChoosenSong(data.url)
+                // console.log(data)
+                setChoosenSong(musicInfo)
+                console.log(musicInfo)
+
+                // добавление id музыки в ss для latest music (будет фильтроваться по списку всей музыки и по id)
+                if (!latestMusic.find(elem => elem.id === musicId)) {
+                    setLatestMusic(prevState => [...prevState, musicInfo]);
+                    console.log(latestMusic)
+                }
             })
+
     }
 
+    // добавление музыки в любимые
     function addFavorMusic() {
         setAddedFavor(!addedFavor)
+        dispatch(addFavorAction(id))
     }
 
     const storedObject = JSON.parse(localStorage.getItem('userData')) || [];
@@ -73,7 +72,7 @@ function MusicItem({ id, title, performer, img }) {
 
             {userData.length !== 0 &&
                 <div className={style.musicOtherInfo}>
-                    <Playlist onClick={() => alert('( ͡° ͜ʖ ͡°)')} />
+                    <Playlist onClick={() => dispatch(addInPlaylistAction(id))} />
                     {!addedFavor ? <AddMusic onClick={() => addFavorMusic()} /> : <AddedMusic onClick={() => addFavorMusic()} />}
                 </div>
             }

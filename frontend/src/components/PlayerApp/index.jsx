@@ -61,7 +61,7 @@ function PlayerApp() {
 
   return (
     <div className="PlayerApp">
-      <audio src={choosenSong} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
+      <audio src={choosenSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
 
       <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} choosenSong={choosenSong} setChoosenSong={setChoosenSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer}
 
