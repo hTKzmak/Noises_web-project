@@ -24,6 +24,7 @@ import SettingsPage from './pages/SettingsPage';
 
 
 import bg from './assets/images/undefined.png'
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   // для воспроизведения плеера (если true, то музыка играет. Если false, то не играет)
@@ -93,24 +94,48 @@ function App() {
         <div className="container">
           <Header />
           <Routes>
+
+            {/* публичные страницы */}
             <Route path='/' element={<HomePage />} />
-            <Route path='/albums' element={<AGPList title="List of albums" showHeart={true} data={albumsData} genresStyle={false} showCreateBtn={false}/>} />
-            <Route path='/performers' element={<AGPList title="List of performers" showHeart={true} data={performersData} genresStyle={false} showCreateBtn={false}/>} />
-            <Route path='/genres' element={<AGPList title="List of genres" showHeart={false} showDelete={false} data={genresData} genresStyle={true} showCreateBtn={false}/>} />
-            <Route path='/playlists' element={<AGPList title="List of your playlists" showHeart={false} showDelete={true} data={playlistsData} genresStyle={false} showCreateBtn={true}/>} />
+            <Route path='/albums' element={<AGPList title="List of albums" showHeart={true} data={albumsData} genresStyle={false} showCreateBtn={false} />} />
+            <Route path='/performers' element={<AGPList title="List of performers" showHeart={true} data={performersData} genresStyle={false} showCreateBtn={false} />} />
+            <Route path='/genres' element={<AGPList title="List of genres" showHeart={false} showDelete={false} data={genresData} genresStyle={true} showCreateBtn={false} />} />
 
             <Route path='/music' element={<MusicPage title="Some music" image={'https://images.unsplash.com/photo-1634705146926-b8fbca28f431?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} />} />
 
-            <Route path='/favorite_music' element={<MusicPage title="Favorite music" image={FavoriteBGImage} />} />
-            <Route path='/favorite_albums' element={<AGPList title="Favorite albums" showHeart={false} data={albumsData} genresStyle={false} />} />
-            <Route path='/favorite_performers' element={<AGPList title="Favorite performers" showHeart={false} data={performersData} genresStyle={false} />} />
-            <Route path='/latest_music' element={<MusicPage title="Latest music" data={JSONLatestMusicData} image={LatestBGImage} />} />
 
+            {/* приватные страницы */}
+            <Route element={<PrivateRoute />}>
+              <Route path='/playlists' element={<AGPList title="List of your playlists" showHeart={false} showDelete={true} data={playlistsData} genresStyle={false} showCreateBtn={true} />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path='/favorite_music' element={<MusicPage title="Favorite music" image={FavoriteBGImage} />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path='/favorite_albums' element={<AGPList title="Favorite albums" showHeart={false} data={albumsData} genresStyle={false} />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path='/favorite_performers' element={<AGPList title="Favorite performers" showHeart={false} data={performersData} genresStyle={false} />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path='/latest_music' element={<MusicPage title="Latest music" data={JSONLatestMusicData} image={LatestBGImage} />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path='/settings' element={<SettingsPage />} />
+            </Route>
+
+
+
+            {/* публичные страницы */}
             <Route path='/registration' element={<RegistrationPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/search' element={<SearchPage />} />
 
-            <Route path='/settings' element={<SettingsPage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />

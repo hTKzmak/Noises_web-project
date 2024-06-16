@@ -10,9 +10,8 @@ import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
 import { addFavorAction, addInPlaylistAction } from '../../../../store/musicReducer'
 
-function MusicItem({ id, title, performer, img }) {
+function MusicItem({ id, title, performer, img, favorite }) {
 
-    // нужно будет добавить latestMusic и seLatestMusic
     const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
 
     // нужен для добавления любимой музыки
@@ -32,6 +31,7 @@ function MusicItem({ id, title, performer, img }) {
                     id: id,
                     title: title,
                     performer: performer,
+                    favorite: addedFavor,
                     // в первом беке cover это изображение, в новом название может измениться 
                     cover: img,
                     url: data.url,

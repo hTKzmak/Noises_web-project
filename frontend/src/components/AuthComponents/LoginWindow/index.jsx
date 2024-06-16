@@ -101,7 +101,7 @@ function LoginWindow() {
     return (
         <div className={style.authPage}>
             <div className={style.authWindow}>
-                <button onClick={() => navigate(-1)} className={style.backLink}>
+                <button onClick={() => navigate('/')} className={style.backLink}>
                     <Arrow />
                 </button>
                 <div className={style.authHeader}>

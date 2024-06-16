@@ -10,9 +10,13 @@ function Search() {
 
     const [inputValue, setInputValue] = useState('')
 
+
+    // получение данных музыки для поиска
     function searchFunc(value) {
 
         setInputValue(value)
+
+        // надо тут реализовать сохранение значения сердец
 
         fetch(`http://localhost:8080/search?q=${value}`)
             .then(res => res.json())
@@ -29,6 +33,7 @@ function Search() {
                     console.log(searchData)
                 }
             })
+
     }
 
     return (
@@ -50,6 +55,7 @@ function Search() {
                     {searchData ?
 
                         searchData.map(elem =>
+                            // <MusicItem key={elem.id} id={elem.id} title={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
                             <MusicItem key={elem.id} id={elem.id} title={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
                         )
                         :

@@ -2,7 +2,7 @@ CREATE TABLE Music (
     id SERIAL PRIMARY KEY,
     Music_name VARCHAR(255) NOT NULL,
     Music_path VARCHAR(255) ,
-	Music_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
+	Music_img_path VARCHAR(255) DEFAULT 'C:\Users\Slava\Desktop\Noises_web-project\backend\Image\default.png',
     Release_Date DATE DEFAULT CURRENT_DATE,
     Popularity INT DEFAULT 0,
 	-- Music_Access bool DEFAUlT False,
