@@ -62,28 +62,48 @@ function LoginWindow() {
 
                 // если получили данные, то...
                 .then(json => {
-                    // выводим сообщение: Object { token: "сам токен (• ω •)" }
-                    console.log(json)
-                    // не отображаем сообщение
-                    setLoginExist(true)
-                    // храним данные в LS
-                    localStorage.setItem('userData', JSON.stringify({ name: 'MERUNIKu', img: 'https://images.unsplash.com/photo-1680026319202-fcb822e0ab91?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', token: json.token }))
-                    // переходим на home page
-                    window.location.href = '/'
-                    // подтверждаем форму
-                    setSubmitted(true);
-                })
+                    console.log(json);
+                    setLoginExist(true);
 
-                // если не получили данные, то...
-                .catch(error => {
-                    // отображаем сообщение
-                    setLoginExist(false)
-                    // выводим ошибку
-                    console.error('Ошибка при регистрации:', error)
+                    // Включаем второй fetch в блок then первого fetch
+                    fetch('http://localhost:8080/user-info', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${json.token}`
+                        },
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                setLoginExist(false);
+                            }
+                        })
+                        .then(userData => {
+                            localStorage.setItem('userData', JSON.stringify({ name: `${userData.username}`, img: 'https://images.unsplash.com/photo-1680026319202-fcb822e0ab91?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', token: `${json.token}` }));
+                            // Другие операции, которые вы хотите выполнить после получения данных о пользователе
+
+                            // переходим на home page
+                            window.location.href = '/'
+                            // подтверждаем форму
+                            setSubmitted(true);
+
+                        })
+                        .catch(error => {
+                            console.error('Ошибка при получении данных о пользователе:', error);
+                        });
                 })
+                .catch(error => {
+                    setLoginExist(false);
+                    console.error('Ошибка во время входа в аккаунт:', error);
+                });
+
         }
 
     };
+
+
+
 
     // хз
     const handleInputChange = (event) => {

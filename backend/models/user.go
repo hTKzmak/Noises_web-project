@@ -14,6 +14,15 @@ type User struct {
 	Password string `json:"-"`
 }
 
+type NoisesUser struct {
+	ID        int    `json:"id"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	ImagePath string `json:"image_path"`
+	Country   string `json:"country"`
+	Status    int    `json:"status"`
+}
+
 func CreateUser(username, email, password string) error {
 	var exists bool
 	err := DB.QueryRow("SELECT EXISTS(SELECT 1 FROM NoisesUser WHERE User_email = $1)", email).Scan(&exists)
@@ -59,8 +68,38 @@ func GetUserIDByEmail(email string) (int, error) {
 	return userID, nil
 }
 
+func GetUserLoginByEmail(email string) (string, error) {
+	var login string
+	err := DB.QueryRow("SELECT User_name FROM NoisesUser WHERE User_email = $1", email).Scan(&login)
+	if err != nil {
+		return "", err
+	}
+	return login, nil
+}
+
+func GetUserByEmail(email string) (User, error) {
+	var user User
+	err := DB.QueryRow("SELECT User_id, User_login, User_email, User_password FROM NoisesUser WHERE User_email = $1", email).Scan(&user.ID, &user.Username, &user.Email, &user.Password)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
 func hashPassword(password string) string {
 	hash := sha256.New()
 	hash.Write([]byte(password))
 	return hex.EncodeToString(hash.Sum(nil))
+}
+
+func GetUserByEmail2(email string) (NoisesUser, error) {
+	var user NoisesUser
+	query := `SELECT User_id, User_name, User_email, User_img_path, Country, Status FROM NoisesUser WHERE User_email = $1`
+	err := DB.QueryRow(query, email).Scan(&user.ID, &user.Username, &user.Email, &user.ImagePath, &user.Country, &user.Status)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return user, nil
+		}
+		return user, err
+	}
+	return user, nil
 }

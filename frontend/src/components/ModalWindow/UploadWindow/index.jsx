@@ -26,34 +26,39 @@ function UploadWindow({ showUpload, setShowUpload }) {
 
         setResMessage(response.status)
         console.log(response)
+        console.log(formData)
     }
 
 
     // ф-ия для закрытия окна
-    function closeUpload(){
+    function closeUpload() {
         setShowUpload(false)
         setResMessage('')
     }
 
     // мы получаем данные/значения из input с помощью атрибута name и тега form
-
+    // 2024-06-06
     return (
         <div className={style.modalWindow_bg} style={{ display: !showUpload ? 'none' : 'flex' }}>
             <form className={style.modalWindow} onSubmit={handleSubmit} encType="multipart/form-data">
                 <span>Upload your music</span>
 
                 <div className={style.fileInfo}>
-                    <label htmlFor="musicName">
-                        <InputElem type={'text'} name={'musicName'} placeholder={'Music name'} maxLength={40} />
+                    <label htmlFor="name">
+                        <InputElem type={'text'} name={'name'} placeholder={'Music name'} maxLength={40} />
                     </label>
                     <div className={style.other}>
-                        <label htmlFor="file1">
-                            File:
-                            <InputElem type={'file'} name={'files'} accept={".mp3"} />
+                        <label htmlFor="release_date">
+                            Release date:
+                            <InputElem type={'date'} name={'release_date'} placeholder={'Release date'} maxLength={40} />
                         </label>
-                        <label htmlFor="file2">
+                        <label htmlFor="music">
+                            File:
+                            <InputElem type={'file'} name={'music'} accept={".mp3"} />
+                        </label>
+                        <label htmlFor="image">
                             Image:
-                            <InputElem type={'file'} name={'files'} accept={".png, .jpg, .gif"} />
+                            <InputElem type={'file'} name={'image'} accept={".png, .jpg, .gif"} />
                         </label>
                     </div>
                 </div>

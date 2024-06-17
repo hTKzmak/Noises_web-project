@@ -1,37 +1,20 @@
 package models
 
-// import (
-// 	"time"
-// )
+import (
+	"fmt"
+	"io"
+	"mime/multipart"
+	"os"
+	"path/filepath"
 
-// type Playlist struct {
-// 	ID          int       `json:"id"`
-// 	Name        string    `json:"name"`
-// 	Description string    `json:"description"`
-// 	CreatedAt   time.Time `json:"created_at"`
-// 	UserID      int       `json:"user_id"`
-// 	MusicList   []Music   `json:"musiclist"`
-// }
+	"github.com/google/uuid"
+)
 
-type PlaylistMusic struct {
-	PlaylistID int `json:"playlist_id"`
-	MusicID    int `json:"music_id"`
-}
 
-// type Music struct {
-// 	ID          int       `json:"id"`
-// 	Name        string    `json:"name"`
-// 	Path        string    `json:"path"`
-// 	ImagePath   string    `json:"image_path"`
-// 	ReleaseDate time.Time `json:"release_date"`
-// 	Popularity  int       `json:"popularity"`
-// 	MusicAccess bool      `json:"music_access"`
-// }
-
-func CreatePlaylist(name, description string, userID int) (int, error) {
+func CreatePlaylist(name, description, imagePath string, userID int) (int, error) {
+	query := `INSERT INTO Playlists (Playlist_name, Playlist_description, Image_path, User_id) VALUES ($1, $2, $3, $4) RETURNING Playlist_id`
 	var playlistID int
-	err := DB.QueryRow("INSERT INTO Playlists (Playlist_name, Playlist_description, User_id) VALUES ($1, $2, $3) RETURNING Playlist_id",
-		name, description, userID).Scan(&playlistID)
+	err := DB.QueryRow(query, name, description, imagePath, userID).Scan(&playlistID)
 	if err != nil {
 		return 0, err
 	}
@@ -39,12 +22,45 @@ func CreatePlaylist(name, description string, userID int) (int, error) {
 }
 
 func AddMusicToPlaylist(playlistID, musicID int) error {
-	_, err := DB.Exec("INSERT INTO PlaylistMusic (Playlist_id, Music_id) VALUES ($1, $2)", playlistID, musicID)
+	query := `INSERT INTO PlaylistTracks (Playlist_id, Music_id) VALUES ($1, $2)`
+	_, err := DB.Exec(query, playlistID, musicID)
 	return err
 }
 
-func GetPlaylistsByUser(userID int) ([]Playlist, error) {
-	rows, err := DB.Query("SELECT Playlist_id, Playlist_name, Playlist_description, Created_at FROM Playlists WHERE User_id = $1", userID)
+
+func createDirIfNotExists(path string) error {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return os.MkdirAll(path, os.ModePerm)
+	}
+	return nil
+}
+
+func SaveUploadedFile(file multipart.File, uploadDir, fileName string) (string, error) {
+
+	uuidFileName := fmt.Sprintf("%s%s", uuid.New().String(), filepath.Ext(fileName))
+	fullPath := filepath.Join(uploadDir, uuidFileName)
+
+
+	if err := createDirIfNotExists(uploadDir); err != nil {
+		return "", err
+	}
+
+	newFile, err := os.Create(fullPath)
+	if err != nil {
+		return "", err
+	}
+	defer newFile.Close()
+
+	if _, err := io.Copy(newFile, file); err != nil {
+		return "", err
+	}
+
+	return fullPath, nil
+}
+
+func GetPlaylistsByUserID(userID int) ([]Playlist, error) {
+	query := `SELECT Playlist_id, Playlist_name, Playlist_description, Image_path, Created_at FROM Playlists WHERE User_id = $1`
+	rows, err := DB.Query(query, userID)
 	if err != nil {
 		return nil, err
 	}
@@ -53,11 +69,7 @@ func GetPlaylistsByUser(userID int) ([]Playlist, error) {
 	var playlists []Playlist
 	for rows.Next() {
 		var p Playlist
-		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.CreatedAt); err != nil {
-			return nil, err
-		}
-		p.MusicList, err = GetMusicByPlaylistID(p.ID)
-		if err != nil {
+		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.ImagePath, &p.CreatedAt); err != nil {
 			return nil, err
 		}
 		playlists = append(playlists, p)
@@ -65,30 +77,85 @@ func GetPlaylistsByUser(userID int) ([]Playlist, error) {
 	return playlists, nil
 }
 
-func GetMusicByPlaylistID(playlistID int) ([]Music, error) {
-	rows, err := DB.Query(`
-		SELECT m.id, m.Music_name, m.Music_path, m.Music_img_path, m.Release_Date, m.Popularity, m.Music_Access
-		FROM Music m
-		INNER JOIN PlaylistMusic pm ON m.id = pm.Music_id
-		WHERE pm.Playlist_id = $1`, playlistID)
+func GetPlaylistByID(playlistID int) (Playlist, error) {
+	query := `SELECT Playlist_id, Playlist_name, Playlist_description, Image_path, Created_at, User_id FROM Playlists WHERE Playlist_id = $1`
+	var p Playlist
+	err := DB.QueryRow(query, playlistID).Scan(&p.ID, &p.Name, &p.Description, &p.ImagePath, &p.CreatedAt, &p.UserID)
+	if err != nil {
+		return p, err
+	}
+	return p, nil
+}
+
+func GetTracksByPlaylistID(playlistID int) ([]Music, error) {
+	query := `
+		SELECT m.id, m.Music_name, m.Music_path, m.Music_img_path, m.Release_Date, m.Popularity, m.Music_Access, m.User_id 
+		FROM Music m 
+		JOIN PlaylistTracks pt ON m.id = pt.music_id 
+		WHERE pt.playlist_id = $1`
+	rows, err := DB.Query(query, playlistID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	var musicList []Music
+	var tracks []Music
 	for rows.Next() {
 		var m Music
-		if err := rows.Scan(&m.ID, &m.Name, &m.Path, &m.ImagePath, &m.ReleaseDate, &m.Popularity, &m.MusicAccess); err != nil {
+		if err := rows.Scan(&m.ID, &m.Name, &m.Path, &m.ImagePath, &m.ReleaseDate, &m.Popularity, &m.MusicAccess, &m.UserID); err != nil {
 			return nil, err
 		}
-		musicList = append(musicList, m)
+		tracks = append(tracks, m)
 	}
-	return musicList, nil
+	return tracks, nil
 }
 
-func DeleteMusicFromPlaylist(playlistID int, musicID int) error {
-	query := "DELETE FROM PlaylistMusic WHERE Playlist_id = $1 AND Music_id = $2"
+func RemoveMusicFromPlaylist(playlistID, musicID int) error {
+	query := `DELETE FROM PlaylistTracks WHERE playlist_id = $1 AND music_id = $2`
 	_, err := DB.Exec(query, playlistID, musicID)
 	return err
+}
+
+func DeletePlaylist(playlistID int) error {
+	tx, err := DB.Begin()
+	if err != nil {
+		return err
+	}
+
+	_, err = tx.Exec(`DELETE FROM PlaylistTracks WHERE playlist_id = $1`, playlistID)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	_, err = tx.Exec(`DELETE FROM Playlists WHERE Playlist_id = $1`, playlistID)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	return tx.Commit()
+}
+
+
+func GetPlaylistsForStatusTwoUsers() ([]Playlist, error) {
+	query := `
+		SELECT p.Playlist_id, p.Playlist_name, p.Playlist_description, p.Image_path, p.Created_at, p.User_id
+		FROM Playlists p
+		JOIN NoisesUser u ON p.User_id = u.User_id
+		WHERE u.Status = 2`
+	rows, err := DB.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var playlists []Playlist
+	for rows.Next() {
+		var p Playlist
+		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.ImagePath, &p.CreatedAt, &p.UserID); err != nil {
+			return nil, err
+		}
+		playlists = append(playlists, p)
+	}
+	return playlists, nil
 }

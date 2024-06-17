@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 // "database/sql"
 
@@ -25,12 +27,12 @@ type Performer struct {
 }
 
 type Playlist struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	Description string    `json:"description"`
+	ID          int       `json:"playlist_id"`
+	Name        string    `json:"playlist_name"`
+	Description string    `json:"playlist_description"`
+	ImagePath   string    `json:"image_path"`
 	CreatedAt   time.Time `json:"created_at"`
 	UserID      int       `json:"user_id"`
-	MusicList   []Music   `json:"musiclist"`
 }
 
 func Search(query string) (map[string]interface{}, error) {
@@ -56,6 +58,13 @@ func Search(query string) (map[string]interface{}, error) {
 		return nil, err
 	}
 	results["playlist"] = playlists
+
+	// Search Albums
+	albums, err := searchAlbums(query)
+	if err != nil {
+		return nil, err
+	}
+	results["album"] = albums
 
 	return results, nil
 }
@@ -97,7 +106,7 @@ func searchPerformers(query string) ([]Performer, error) {
 }
 
 func searchPlaylists(query string) ([]Playlist, error) {
-	rows, err := DB.Query("SELECT Playlist_id, Playlist_name, Playlist_description, Created_at, User_id FROM Playlists WHERE Playlist_name ILIKE $1", "%"+query+"%")
+	rows, err := DB.Query("SELECT Playlist_id, Playlist_name, Playlist_description, Image_path, Created_at, User_id FROM Playlists WHERE Playlist_name ILIKE $1", "%"+query+"%")
 	if err != nil {
 		return nil, err
 	}
@@ -106,14 +115,28 @@ func searchPlaylists(query string) ([]Playlist, error) {
 	var playlists []Playlist
 	for rows.Next() {
 		var p Playlist
-		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.CreatedAt, &p.UserID); err != nil {
-			return nil, err
-		}
-		p.MusicList, err = GetMusicByPlaylistID(p.ID)
-		if err != nil {
+		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.ImagePath, &p.CreatedAt, &p.UserID); err != nil {
 			return nil, err
 		}
 		playlists = append(playlists, p)
 	}
 	return playlists, nil
+}
+
+func searchAlbums(query string) ([]Album, error) {
+	rows, err := DB.Query("SELECT Album_id, Album_name, Album_description, Image_path, Created_at, User_id FROM Albums WHERE Album_name ILIKE $1", "%"+query+"%")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var albums []Album
+	for rows.Next() {
+		var a Album
+		if err := rows.Scan(&a.ID, &a.Name, &a.Description, &a.ImagePath, &a.CreatedAt, &a.UserID); err != nil {
+			return nil, err
+		}
+		albums = append(albums, a)
+	}
+	return albums, nil
 }

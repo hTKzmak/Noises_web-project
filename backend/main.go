@@ -43,9 +43,24 @@ func main() {
 
 	protected := r.Group("/")
 	protected.Use(middleware.AuthMiddleware(0))
-	protected.POST("/create_playlist", handlers.CreatePlaylist)
-	protected.POST("/add_music_to_playlist", handlers.AddMusicToPlaylist)
-	protected.GET("/playlists", handlers.GetPlaylistsByUser)
+	protected.POST("/create_playlist", handlers.CreatePlaylistHandler)
+	protected.POST("/add_music_to_playlist", handlers.AddMusicToPlaylistHandlers)
+	protected.GET("/playlists", handlers.GetPlaylistsByUserHandler)
+	protected.GET("/playlist/:id", handlers.GetPlaylistByIDHandler)
+	protected.GET("/playlist/:id/tracks", handlers.GetTracksByPlaylistIDHandler)
+	protected.DELETE("/remove_music", handlers.RemoveMusicFromPlaylistHandler)
+	protected.DELETE("/playlist/:id", handlers.DeletePlaylistHandler)
+	protected.GET("/user-info", handlers.GetUserInfo)
+
+	album := r.Group(("/"))
+	album.Use(middleware.AuthMiddleware(1))
+	album.POST("/create-album", handlers.CreateAlbumHandler)
+	album.POST("/add-music-to-album", handlers.AddMusicToAlbumHandler)
+	album.GET("/albums", handlers.GetAlbumsByUserHandler)
+	album.GET("/album/:id", handlers.GetAlbumByIDHandler)
+	album.GET("/album/:id/tracks", handlers.GetTracksByAlbumIDHandler)
+	album.DELETE("/remove-music-from-album", handlers.RemoveMusicFromAlbumHandler)
+	album.DELETE("/album/:id", handlers.DeleteAlbumHandler)
 
 	moderationGroup := r.Group("/")
 	moderationGroup.Use(middleware.AuthMiddleware(2)) // Только модераторы могут выполнять модерацию
@@ -61,14 +76,19 @@ func main() {
 	deleteGroup := r.Group("/")
 	deleteGroup.Use(middleware.AuthMiddleware(1))
 	deleteGroup.DELETE("/delete", handlers.DeleteHandler)
-	deleteGroup.DELETE("/playlist/:playlistID/music/:musicID", handlers.DeleteMusicFromPlaylist)
+	// deleteGroup.DELETE("/playlist/:playlistID/music/:musicID", handlers.DeleteMusicFromPlaylist)
 
 	uploadGroup := r.Group("/")
 	uploadGroup.Use(middleware.AuthMiddleware(1))
-	uploadGroup.POST("/upload", handlers.Upload)
+	uploadGroup.POST("/upload", handlers.UploadTrack)
 
+	r.GET("/user-login", handlers.GetUserLogin)
+	r.GET("/random-track/:user_id", handlers.GetRandomUserTrack)
+	r.GET("/private-tracks/:user_id", handlers.GetPrivateUserTracksFalse)
+	r.GET("/tracks/:user_id", handlers.GetUserTracksTrue)
 	r.GET("/stream/:id", handlers.Stream)
 	r.GET("/image/:category/:id", handlers.GetImage)
+	r.GET("/playlists-status-two", handlers.GetPlaylistsForStatusTwoUsersHandler)
 
 	r.Run(":8080")
 }

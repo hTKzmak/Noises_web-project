@@ -2,11 +2,10 @@ CREATE TABLE Music (
     id SERIAL PRIMARY KEY,
     Music_name VARCHAR(255) NOT NULL,
     Music_path VARCHAR(255) ,
-	Music_img_path VARCHAR(255) DEFAULT 'C:\Users\Slava\Desktop\Noises_web-project\backend\Image\default.png',
+	Music_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
     Release_Date DATE DEFAULT CURRENT_DATE,
     Popularity INT DEFAULT 0,
-	-- Music_Access bool DEFAUlT False,
-	Music_Access bool DEFAUlT True,
+	Music_Access bool DEFAUlT False,
 	User_id INT ,
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
 );
@@ -22,13 +21,11 @@ CREATE TABLE NoisesUser (
 	User_password VARCHAR(255) NOT NULL,
 	User_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
 	Country VARCHAR(30) DEFAULT 'Не указана',
+	-- Status int DEFAULT 0
 	Status int DEFAULT 1
 );
 -- обычный user - 0 исполнитель - 1 админ - 2
--- UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
-DELETE FROM Music where id = 23
-
-UPDATE NoisesUser SET Status = 2 WHERE User_email = 'example@example.com'; 
+UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
 
 select * from NoisesUser
 
@@ -38,6 +35,7 @@ CREATE TABLE Playlists (
     Playlist_id SERIAL PRIMARY KEY,
     Playlist_name VARCHAR(255) NOT NULL,
     Playlist_description TEXT,
+	Image_path varchar(255),
     Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     User_id INT NOT NULL,
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
@@ -48,17 +46,16 @@ select * from Playlists
 DROP TABLE Playlists
 
 
-CREATE TABLE PlaylistMusic (
+CREATE TABLE PlaylistTracks (
     Playlist_id INT NOT NULL,
     Music_id INT NOT NULL,
     PRIMARY KEY (Playlist_id, Music_id),
     FOREIGN KEY (Playlist_id) REFERENCES Playlists(Playlist_id),
     FOREIGN KEY (Music_id) REFERENCES Music(id)
 );
-select * from PlaylistMusic
+select * from PlaylistTracks
 
-DROP TABLE PlaylistMusic
-
+DROP TABLE PlaylistTracks
 
 CREATE TABLE Favorites (
     id SERIAL PRIMARY KEY,
@@ -69,3 +66,29 @@ CREATE TABLE Favorites (
 select * from Favorites
 
 DROP TABLE Favorites
+
+CREATE TABLE Albums (
+    Album_id SERIAL PRIMARY KEY,
+    Album_name VARCHAR(255) NOT NULL,
+    Album_description TEXT,
+    Image_path VARCHAR(255),
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    User_id INT NOT NULL,
+    FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
+);
+
+select * from Albums
+
+DROP TABLE Albums
+
+CREATE TABLE AlbumTracks (
+    Album_id INT NOT NULL,
+    Music_id INT NOT NULL,
+    PRIMARY KEY (Album_id, Music_id),
+    FOREIGN KEY (Album_id) REFERENCES Albums(Album_id),
+    FOREIGN KEY (Music_id) REFERENCES Music(id)
+);
+
+select * from AlbumTracks
+
+DROP TABLE AlbumTracks

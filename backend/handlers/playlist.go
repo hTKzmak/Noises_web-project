@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"leet/models"
 	"net/http"
 	"strconv"
@@ -8,20 +9,44 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type PlaylistRequest struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
+func CreatePlaylistHandler(c *gin.Context) {
+	name := c.PostForm("name")
+	description := c.PostForm("description")
 
-func CreatePlaylist(c *gin.Context) {
-	var req PlaylistRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+	if name == "" || description == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Name and description are required"})
 		return
 	}
 
-	userID := c.MustGet("userID").(int)
-	playlistID, err := models.CreatePlaylist(req.Name, req.Description, userID)
+	file, err := c.FormFile("image")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Image file is required"})
+		return
+	}
+
+	openedFile, err := file.Open()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to open image file"})
+		return
+	}
+	defer openedFile.Close()
+
+	// imagePath, err := models.SaveUploadedFile(openedFile, "D:/Ptoger/golang/noisesV0.1/backend/Image", file.Filename)
+	// imagePath, err := models.SaveUploadedFile(openedFile, "C:/Users/Slava/Desktop/noisesV0.1/backend/Image", file.Filename)
+	imagePath, err := models.SaveUploadedFile(openedFile, "C:/Users/Slava/Desktop/Noises_web-project/backend/Image", file.Filename)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save image"})
+		return
+	}
+
+	userID, exists := c.Get("userID")
+	if !exists {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get user ID from token"})
+		return
+	}
+
+	// Создание плейлиста
+	playlistID, err := models.CreatePlaylist(name, description, imagePath, userID.(int))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create playlist"})
 		return
@@ -29,14 +54,13 @@ func CreatePlaylist(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Playlist created successfully", "playlist_id": playlistID})
 }
-
-func AddMusicToPlaylist(c *gin.Context) {
+func AddMusicToPlaylistHandlers(c *gin.Context) {
 	var req struct {
 		PlaylistID int `json:"playlist_id"`
 		MusicID    int `json:"music_id"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request data"})
 		return
 	}
 
@@ -49,10 +73,15 @@ func AddMusicToPlaylist(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Music added to playlist successfully"})
 }
 
-func GetPlaylistsByUser(c *gin.Context) {
-	userID := c.MustGet("userID").(int)
+func GetPlaylistsByUserHandler(c *gin.Context) {
+	// Получение userID из контекста
+	userID, exists := c.Get("userID")
+	if !exists {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get user ID from token"})
+		return
+	}
 
-	playlists, err := models.GetPlaylistsByUser(userID)
+	playlists, err := models.GetPlaylistsByUserID(userID.(int))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get playlists"})
 		return
@@ -60,29 +89,83 @@ func GetPlaylistsByUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"playlists": playlists})
 }
-func DeleteMusicFromPlaylist(c *gin.Context) {
-	// Получаем playlistID и musicID из параметров URL
-	playlistIDParam := c.Param("playlistID")
-	musicIDParam := c.Param("musicID")
 
+func GetPlaylistByIDHandler(c *gin.Context) {
+	playlistIDParam := c.Param("id")
 	playlistID, err := strconv.Atoi(playlistIDParam)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid playlist ID"})
 		return
 	}
 
-	musicID, err := strconv.Atoi(musicIDParam)
+	playlist, err := models.GetPlaylistByID(playlistID)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid music ID"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get playlist"})
 		return
 	}
 
-	// Вызываем функцию удаления музыки из плейлиста по ID
-	err = models.DeleteMusicFromPlaylist(playlistID, musicID)
+	c.JSON(http.StatusOK, gin.H{"playlist": playlist})
+}
+
+func GetTracksByPlaylistIDHandler(c *gin.Context) {
+	playlistIDParam := c.Param("id")
+	playlistID, err := strconv.Atoi(playlistIDParam)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete music from playlist"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid playlist ID"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Music deleted from playlist successfully"})
+	tracks, err := models.GetTracksByPlaylistID(playlistID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to get tracks: %v", err)})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"tracks": tracks})
+}
+
+func RemoveMusicFromPlaylistHandler(c *gin.Context) {
+	var req struct {
+		PlaylistID int `json:"playlist_id"`
+		MusicID    int `json:"music_id"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	err := models.RemoveMusicFromPlaylist(req.PlaylistID, req.MusicID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to remove music from playlist"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Music removed from playlist successfully"})
+}
+
+func DeletePlaylistHandler(c *gin.Context) {
+	playlistIDParam := c.Param("id")
+	playlistID, err := strconv.Atoi(playlistIDParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid playlist ID"})
+		return
+	}
+
+	err = models.DeletePlaylist(playlistID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete playlist"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Playlist deleted successfully"})
+}
+
+func GetPlaylistsForStatusTwoUsersHandler(c *gin.Context) {
+	playlists, err := models.GetPlaylistsForStatusTwoUsers()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get playlists"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"playlists": playlists})
 }
