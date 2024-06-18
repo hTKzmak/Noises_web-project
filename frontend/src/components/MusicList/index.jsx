@@ -1,12 +1,46 @@
 import style from './MusicList.module.scss'
 import MusicItem from './items/MusicItem'
-import { songsdata } from '../PlayerApp/audios.js';
 import PreviousButton from '../UI/PreviousButton/index.jsx';
 
-function MusicList({ title, data, image }) {
+import { useDispatch, useSelector } from "react-redux"
+import { useLocation, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { fetchFavoriteMusic } from '../../asyncActions/musicData.jsx';
+import { favoriteMusicAction, latestMusicAction, userMusicAction } from '../../store/MusicDataReducer.jsx';
 
-    // background-image: radial-gradient(circle, rgba(0, 0, 0, 0.4) 100%, rgba(232, 232, 232, 0) 100%),
-    // url("https://images.unsplash.com/photo-1701066506707-d81b13ad3a93?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+function MusicList({ title, data, image, type }) {
+
+    // получаем значение page_name (название страницы) из стора
+    const { page_name } = useSelector(store => store.musicData)
+    
+    // получаем значение music_list (список музыки) из стора
+    const { music_list } = useSelector(store => store.musicData)
+    
+    // для useEffect
+    const dispatch = useDispatch()
+    const location = useLocation()
+    const { id } = useParams()
+
+    // для получения данных о последних прослушанных треков
+    let sessionStorageData = sessionStorage.getItem('latestMusic')
+    let JSONLatestMusicData = JSON.parse(sessionStorageData)
+
+
+
+    // с его помощью будут отображаться только определённые данные на определённых страницах 
+    useEffect(() => {
+        if (type === 'favorite') {
+            // тут нужно заменить на fetchFavoriteMusic, так как там проиходит получение данных о любимых треках
+            dispatch(favoriteMusicAction(data))
+        }
+        else if (type === 'latest') {
+            dispatch(latestMusicAction(JSONLatestMusicData))
+        }
+        else if (type === 'user') {
+            dispatch(userMusicAction(data))
+        }
+    }, [location.pathname, dispatch, id, type])
+
 
     return (
         <div>
@@ -14,15 +48,24 @@ function MusicList({ title, data, image }) {
                 <div className={style.btn}>
                     <PreviousButton />
                 </div>
-                {title}
+                {page_name}
             </div>
             <div className={style.blocksList}>
-                {!data ?
+                {/* {!data ?
                     ''
 
                     :
 
                     data.map(elem =>
+                        <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
+                    )
+                } */}
+                {!music_list ?
+                    ''
+
+                    :
+
+                    music_list.map(elem =>
                         <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
                     )
                 }

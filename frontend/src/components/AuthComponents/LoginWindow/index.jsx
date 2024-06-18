@@ -80,7 +80,7 @@ function LoginWindow() {
                             }
                         })
                         .then(userData => {
-                            localStorage.setItem('userData', JSON.stringify({ name: `${userData.username}`, img: 'https://images.unsplash.com/photo-1680026319202-fcb822e0ab91?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', token: `${json.token}` }));
+                            localStorage.setItem('userData', JSON.stringify({ id: userData.id,  name: userData.username, img: 'https://images.unsplash.com/photo-1680026319202-fcb822e0ab91?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', token: json.token }));
                             // Другие операции, которые вы хотите выполнить после получения данных о пользователе
 
                             // переходим на home page

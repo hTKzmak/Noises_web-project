@@ -10,6 +10,8 @@ CREATE TABLE Music (
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
 );
 
+DELETE FROM Music where id = 4
+	
 select * from Music
 
 DROP TABLE Music

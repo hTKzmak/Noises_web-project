@@ -1,9 +1,9 @@
 import MusicList from "../components/MusicList"
 
-function MusicPage({title, data, image}){
+function MusicPage({title, data, image, type}){
     return(
         <main>
-            <MusicList title={title} data={data} image={image}/>
+            <MusicList title={title} data={data} image={image} type={type}/>
         </main>
     )
 }

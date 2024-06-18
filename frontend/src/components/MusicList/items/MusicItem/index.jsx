@@ -1,23 +1,21 @@
 import style from './MusicItem.module.scss'
 
-import { useDispatch } from "react-redux"
-
 import { ReactComponent as AddMusic } from '../../../../assets/icons/heart.svg'
 import { ReactComponent as AddedMusic } from '../../../../assets/icons/heart_full.svg'
 import { ReactComponent as Playlist } from '../../../../assets/icons/playlist.svg'
 
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
-import { addFavorAction, addInPlaylistAction } from '../../../../store/musicReducer'
 
-function MusicItem({ id, title, performer, img, favorite }) {
+function MusicItem({ id, title, performer, img }) {
 
     const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
 
     // нужен для добавления любимой музыки
     let [addedFavor, setAddedFavor] = useState(false);
 
-    const dispatch = useDispatch()
+    const storedObject = JSON.parse(localStorage.getItem('userData')) || [];
+    let userData = storedObject
 
     function startPlay(musicId) {
         // передаём данные о музыке в setChoosenSong
@@ -31,7 +29,6 @@ function MusicItem({ id, title, performer, img, favorite }) {
                     id: id,
                     title: title,
                     performer: performer,
-                    favorite: addedFavor,
                     // в первом беке cover это изображение, в новом название может измениться 
                     cover: img,
                     url: data.url,
@@ -52,13 +49,32 @@ function MusicItem({ id, title, performer, img, favorite }) {
     }
 
     // добавление музыки в любимые
-    function addFavorMusic() {
+    function addFavorMusic(musicId) {
         setAddedFavor(!addedFavor)
-        dispatch(addFavorAction(id))
+
+        fetch(`http://localhost:8080/favorites/${musicId}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${userData.token}`
+            },
+        })
+            .then(res => res.json())
+            .then(json => console.log(json))
     }
 
-    const storedObject = JSON.parse(localStorage.getItem('userData')) || [];
-    let userData = storedObject
+    // удаление музыки из любимых
+    function deleteFavorMusic(musicId) {
+        setAddedFavor(!addedFavor)
+
+        fetch(`http://localhost:8080/favorites/${musicId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${userData.token}`
+            },
+        })
+            .then(res => res.json())
+            .then(json => console.log(json))
+    }
 
     return (
         <div className={style.musicItem} key={id} id={id}>
@@ -72,8 +88,8 @@ function MusicItem({ id, title, performer, img, favorite }) {
 
             {userData.length !== 0 &&
                 <div className={style.musicOtherInfo}>
-                    <Playlist onClick={() => dispatch(addInPlaylistAction(id))} />
-                    {!addedFavor ? <AddMusic onClick={() => addFavorMusic()} /> : <AddedMusic onClick={() => addFavorMusic()} />}
+                    <Playlist onClick={() => alert('lol')} />
+                    {!addedFavor ? <AddMusic onClick={() => addFavorMusic(id)} /> : <AddedMusic onClick={() => deleteFavorMusic(id)} />}
                 </div>
             }
         </div>

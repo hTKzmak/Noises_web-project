@@ -35,23 +35,23 @@ function MainBlock() {
         randomBackground()
     })
 
+
     // функция для воспроизведения музыки из основного блока. Функция будет воспроизводить рандомную музыку.
     function startPlay() {
-        setIsPlaying(false)
-        setShowPlayer(true)
-    
-        // рандомайзер воспроизведения музыки
-        const randomSong = songsdata[Math.floor(Math.random() * songsdata.length)];
-        setChoosenSong(randomSong);
-    
-        // добавление выбранной музыки в массив latest music
-        if (!latestMusic.find(elem => elem.id === randomSong.id)) {
-            setLatestMusic(prevState => [...prevState, randomSong]);
-            console.log(latestMusic)
-        }
-    
-        // но почему-то когда появляется первая песня, то она пока не добавляется, а появляется пустой массив
+        // setIsPlaying(false)
+        // setShowPlayer(true)
 
+        // // рандомайзер воспроизведения музыки
+        // const randomSong = songsdata[Math.floor(Math.random() * songsdata.length)];
+        // setChoosenSong(randomSong);
+
+        // // добавление выбранной музыки в массив latest music
+        // if (!latestMusic.find(elem => elem.id === randomSong.id)) {
+        //     setLatestMusic(prevState => [...prevState, randomSong]);
+        //     console.log(latestMusic)
+        // }
+
+        alert('(Ò﹏Ó)')
     }
 
     return (

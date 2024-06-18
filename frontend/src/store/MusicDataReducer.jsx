@@ -1,39 +1,50 @@
 // список всей музыки, которая есть в беке
-const defaultState = [];
+const defaultState = {
+    page_name: '',
+    page_image: '',
+    musicmusic_listist: []
+};
+
+// const latestBG = '../assets/images/Latest.png'
+// const favoriteBG = '../assets/images/Favorite.png'
+
+const FAVORITE_MUSIC = 'FAVORITE_MUSIC'
+const LATEST_MUSIC = 'LATEST_MUSIC'
+const USERS_MUSIC = 'USERS_MUSIC'
 
 
-// надо будет делать запрос на получение всей музыки
-
-// function searchFunc(value) {
-//     setInputValue(value)
-//     fetch(`http://localhost:8080/search?q=${value}`)
-//         .then(res => res.json())
-//         .then(data => {
-//             if (data && value) {
-//                 setSearchData(data.music)
-//             }
-//             else if (data && !value) {
-//                 setSearchData([])
-//                 console.log(searchData)
-//             }
-//             else {
-//                 setSearchData([])
-//                 console.log(searchData)
-//             }
-//         })
-// }
-
-let TEST = 'TEST'
-
+// здесь будут отображаться только те данные, у которых написан type в app.jsx
 export const musicDataReducer = (state = defaultState, action) => {
     switch (action.type) {
-
-        case TEST:
-            alert(action.payload)
+        case FAVORITE_MUSIC:
+            return {
+                // page_name: 'Favorite music :P', musicData: action.payload.map(elem => {
+                //     // console.log(elem)
+                //     return elem
+                // })
+                page_name: 'Favorite music', music_list: []
+            }
+        case LATEST_MUSIC:
+            return {
+                // так мы передаём данные из значения функции в musicList (37)
+                page_name: 'Latest music', music_list: action.payload.map(elem => {
+                    return elem
+                })
+            }
+        case USERS_MUSIC:
+            return {
+                // page_name: 'Favorite music :P', musicData: action.payload.map(elem => {
+                //     // console.log(elem)
+                //     return elem
+                // })
+                page_name: 'User music', music_list: []
+            }
 
         default:
             return state
     }
 }
 
-export const testAction = (payload) => ({ type: TEST, payload })
+export const favoriteMusicAction = (payload) => ({ type: FAVORITE_MUSIC, payload })
+export const latestMusicAction = (payload) => ({ type: LATEST_MUSIC, payload })
+export const userMusicAction = (payload) => ({ type: USERS_MUSIC, payload })
