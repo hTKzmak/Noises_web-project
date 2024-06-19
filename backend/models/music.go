@@ -94,3 +94,34 @@ func DeleteTrack(id, userID, userStatus int) (Music, error) {
 // 	addr := smtpHost + ":" + smtpPort
 // 	return smtp.SendMail(addr, auth, from, []string{to}, msg)
 // }
+
+
+
+func GetRandomTrack() (Music, error) {
+	var track Music
+	query := `SELECT id, Music_name, Music_path, Music_img_path, Release_Date, Popularity, Music_Access, User_id FROM Music ORDER BY RANDOM() LIMIT 1`
+	err := DB.QueryRow(query).Scan(&track.ID, &track.Name, &track.Path, &track.ImagePath, &track.ReleaseDate, &track.Popularity, &track.MusicAccess, &track.UserID)
+	if err != nil {
+		return track, err
+	}
+	return track, nil
+}
+
+// Получение всех треков
+func GetAllTracks() ([]Music, error) {
+	rows, err := DB.Query(`SELECT id, Music_name, Music_path, Music_img_path, Release_Date, Popularity, Music_Access, User_id FROM Music`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var tracks []Music
+	for rows.Next() {
+		var track Music
+		if err := rows.Scan(&track.ID, &track.Name, &track.Path, &track.ImagePath, &track.ReleaseDate, &track.Popularity, &track.MusicAccess, &track.UserID); err != nil {
+			return nil, err
+		}
+		tracks = append(tracks, track)
+	}
+	return tracks, nil
+}

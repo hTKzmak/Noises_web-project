@@ -59,3 +59,32 @@ func GetUserInfo(c *gin.Context) {
 
 	c.JSON(http.StatusOK, user)
 }
+
+func GetRandomTrack(c *gin.Context) {
+	track, err := models.GetRandomTrack()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get random track"})
+		return
+	}
+	c.JSON(http.StatusOK, track)
+}
+
+// Получение всех треков
+func GetAllTracks(c *gin.Context) {
+	tracks, err := models.GetAllTracks()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get all tracks"})
+		return
+	}
+	c.JSON(http.StatusOK, tracks)
+}
+
+// Получение случайного исполнителя
+func GetRandomPerformer(c *gin.Context) {
+	performer, err := models.GetRandomPerformer()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get random performer"})
+		return
+	}
+	c.JSON(http.StatusOK, performer)
+}

@@ -2,7 +2,7 @@ CREATE TABLE Music (
     id SERIAL PRIMARY KEY,
     Music_name VARCHAR(255) NOT NULL,
     Music_path VARCHAR(255) ,
-	Music_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
+	Music_img_path VARCHAR(255) DEFAULT 'backend\Image\default.png',
     Release_Date DATE DEFAULT CURRENT_DATE,
     Popularity INT DEFAULT 0,
 	Music_Access bool DEFAUlT False,
@@ -21,7 +21,7 @@ CREATE TABLE NoisesUser (
 	User_name VARCHAR(45) NOT NULL,
 	User_email VARCHAR(320) NOT NULL UNIQUE,
 	User_password VARCHAR(255) NOT NULL,
-	User_img_path VARCHAR(255) DEFAULT 'Тут меняй путь до дефолтной картинки',
+	User_img_path VARCHAR(255) DEFAULT 'backend\Image\user\noises_user.png',
 	Country VARCHAR(30) DEFAULT 'Не указана',
 	-- Status int DEFAULT 0
 	Status int DEFAULT 1
@@ -32,6 +32,8 @@ UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com';
 select * from NoisesUser
 
 DROP TABLE NoisesUser
+
+DELETE FROM NoisesUser WHERE user_id = 7
 
 CREATE TABLE Playlists (
     Playlist_id SERIAL PRIMARY KEY,

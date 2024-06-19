@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "1c8c4243-3eae-4f5c-850e-add8a893feaa",
+		"_postman_id": "13842b77-c41d-4b08-b830-7bc63eb5a1f7",
 		"name": "Noises",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "35322797"
+		"_exporter_id": "30118804"
 	},
 	"item": [
 		{
@@ -260,11 +260,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI"
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/favorites/3",
+							"raw": "http://localhost:8080/favorites/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -272,7 +272,7 @@
 							"port": "8080",
 							"path": [
 								"favorites",
-								"3"
+								""
 							]
 						}
 					},
@@ -289,11 +289,11 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI"
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHBlcmYuY29tIiwiZXhwIjoxNzE2NjgxNDIzfQ.bdlQJFc6qfhd5UGTcP8p78gB5I-CDApzn4TQuTBnLsE"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/favorites/3",
+							"raw": "http://localhost:8080/favorites/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -301,7 +301,7 @@
 							"port": "8080",
 							"path": [
 								"favorites",
-								"3"
+								"5"
 							]
 						}
 					},
@@ -311,13 +311,7 @@
 					"name": "get_favorite",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/favorites",
 							"protocol": "http",
@@ -351,7 +345,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8080/stream/3",
+									"raw": "http://localhost:8080/stream/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -359,7 +353,7 @@
 									"port": "8080",
 									"path": [
 										"stream",
-										"3"
+										"1"
 									]
 								}
 							},
@@ -369,24 +363,7 @@
 							"name": "playlist",
 							"request": {
 								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8080/playlists",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"playlists"
-									]
-								}
+								"header": []
 							},
 							"response": []
 						},
@@ -420,10 +397,7 @@
 							"name": "Playlist_tracks",
 							"request": {
 								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": ""
-								}
+								"header": []
 							},
 							"response": []
 						},
@@ -433,7 +407,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/search?q=reflection",
+									"raw": "http://localhost:8080/search?q=perf",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -445,7 +419,7 @@
 									"query": [
 										{
 											"key": "q",
-											"value": "reflection"
+											"value": "perf"
 										}
 									]
 								}
@@ -459,12 +433,12 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTc4MDU1NjV9.OYlWwpQ0siflt88YEI7bHz1PCzlRzFmqIvpauFkBTGY",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8080/private-tracks/2",
+									"raw": "http://localhost:8080/private-tracks/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -472,7 +446,7 @@
 									"port": "8080",
 									"path": [
 										"private-tracks",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -484,7 +458,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/tracks/2",
+									"raw": "http://localhost:8080/tracks/4",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -492,7 +466,7 @@
 									"port": "8080",
 									"path": [
 										"tracks",
-										"2"
+										"4"
 									]
 								}
 							},
@@ -504,7 +478,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/random-track/2",
+									"raw": "http://localhost:8080/random-track/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -512,7 +486,7 @@
 									"port": "8080",
 									"path": [
 										"random-track",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -522,24 +496,7 @@
 							"name": "User_login",
 							"request": {
 								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8080/user-login",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"user-login"
-									]
-								}
+								"header": []
 							},
 							"response": []
 						},
@@ -575,7 +532,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlcmZAcGVyZi5jb20iLCJleHAiOjE3MTg2NTk4NTd9.DdXHGXUSIKNC0SXZDlNfDNpqnIY66Y2di480J4Vtntc",
 										"type": "text"
 									}
 								],
@@ -588,6 +545,41 @@
 									"port": "8080",
 									"path": [
 										"user-info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "random-track all",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "all-tracks",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "random-performer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/random-performer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"random-performer"
 									]
 								}
 							},
@@ -633,28 +625,17 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJleHAiOjE3MTg3MjI1NjN9.vwuntUdi5kvbQsTJBpMs9ZZXU0F4vU41j7OIfl8PmmI"
+										"value": "Bearer"
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "name",
-											"value": "Test",
-											"type": "text"
-										},
-										{
-											"key": "description",
-											"value": "Test :P",
-											"type": "text"
-										},
-										{
-											"key": "image",
-											"type": "file",
-											"src": "/C:/Users/Slava/Pictures/Обои/37.jpg"
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"My Playlist\",\r\n  \"description\": \"My favorite songs\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "http://localhost:8080/create_playlist",
@@ -858,10 +839,6 @@
 			]
 		},
 		{
-			"name": "User_INFO",
-			"item": []
-		},
-		{
 			"name": "album",
 			"item": [
 				{
@@ -957,10 +934,7 @@
 					"name": "albums",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
+						"header": []
 					},
 					"response": []
 				},
@@ -968,10 +942,7 @@
 					"name": "album_id",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
+						"header": []
 					},
 					"response": []
 				},
@@ -1018,10 +989,7 @@
 					"name": "remove_album",
 					"request": {
 						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
+						"header": []
 					},
 					"response": []
 				}

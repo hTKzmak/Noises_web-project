@@ -89,6 +89,9 @@ func main() {
 	r.GET("/stream/:id", handlers.Stream)
 	r.GET("/image/:category/:id", handlers.GetImage)
 	r.GET("/playlists-status-two", handlers.GetPlaylistsForStatusTwoUsersHandler)
+	r.GET("/random-track", handlers.GetRandomTrack)
+	r.GET("/all-tracks", handlers.GetAllTracks)
+	r.GET("/random-performer", handlers.GetRandomPerformer)
 
 	r.Run(":8080")
 }

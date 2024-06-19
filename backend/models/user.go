@@ -103,3 +103,13 @@ func GetUserByEmail2(email string) (NoisesUser, error) {
 	}
 	return user, nil
 }
+
+func GetRandomPerformer() (NoisesUser, error) {
+	var performer NoisesUser
+	query := `SELECT User_id, User_name, User_email, User_img_path, Country, Status FROM NoisesUser ORDER BY RANDOM() LIMIT 1`
+	err := DB.QueryRow(query).Scan(&performer.ID, &performer.Username, &performer.Email, &performer.ImagePath, &performer.Country, &performer.Status)
+	if err != nil {
+		return performer, err
+	}
+	return performer, nil
+}

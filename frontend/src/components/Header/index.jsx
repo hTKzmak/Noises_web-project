@@ -51,6 +51,7 @@ function Header() {
 
                     {showWindow &&
                         <div className={style.window} onMouseLeave={() => setShowWindow(false)}>
+                            <span>{JSONData.name}</span>
                             <ul>
                                 <li onClick={() => showUploadFunc()}>Upload music</li>
                                 <Link to={'/playlists'}>
