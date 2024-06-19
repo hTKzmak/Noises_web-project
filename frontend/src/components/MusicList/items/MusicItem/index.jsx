@@ -88,7 +88,7 @@ function MusicItem({ id, title, performer, img }) {
 
             {userData.length !== 0 &&
                 <div className={style.musicOtherInfo}>
-                    <Playlist onClick={() => alert('lol')} />
+                    <Playlist onClick={() => alert('(つ°ヮ°)つ')} />
                     {!addedFavor ? <AddMusic onClick={() => addFavorMusic(id)} /> : <AddedMusic onClick={() => deleteFavorMusic(id)} />}
                 </div>
             }

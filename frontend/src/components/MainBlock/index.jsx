@@ -2,7 +2,6 @@ import { useContext, useState } from 'react'
 import style from './MainBlock.module.scss'
 import { ReactComponent as Randomizer } from './images/randomizer.svg'
 import { Context } from '../../context/Context'
-import { songsdata } from '../PlayerApp/audios.js';
 
 function MainBlock() {
     // изначальное значение заднего фона (если в SS будет значение, то используем его значение чтобы после перехода неа другие страницы задний фон оставался таким же)
@@ -38,20 +37,45 @@ function MainBlock() {
 
     // функция для воспроизведения музыки из основного блока. Функция будет воспроизводить рандомную музыку.
     function startPlay() {
-        // setIsPlaying(false)
-        // setShowPlayer(true)
+        setIsPlaying(false)
+        setShowPlayer(true)
 
-        // // рандомайзер воспроизведения музыки
-        // const randomSong = songsdata[Math.floor(Math.random() * songsdata.length)];
-        // setChoosenSong(randomSong);
+        // рандомайзер воспроизведения музыки
+        fetch(`http://localhost:8080/random-track`, {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then(json => {
+                console.log('(Ò﹏Ó)')
 
-        // // добавление выбранной музыки в массив latest music
-        // if (!latestMusic.find(elem => elem.id === randomSong.id)) {
-        //     setLatestMusic(prevState => [...prevState, randomSong]);
-        //     console.log(latestMusic)
-        // }
 
-        alert('(Ò﹏Ó)')
+                let musicInfo = {
+                    id: json.id,
+                    title: json.name,
+                    url: ''
+                    // performer: json.performer,
+                }
+
+
+                // передаём данные о музыке в setChoosenSong
+                fetch(`http://localhost:8080/stream/${musicInfo.id}`)
+                    .then(res => res)
+                    .then(data => {
+                        setIsPlaying(false)
+                        setShowPlayer(true)
+
+                        musicInfo.url = data.url
+
+                        setChoosenSong(musicInfo)
+                        console.log(musicInfo)
+
+                        // добавление id музыки в ss для latest music (будет фильтроваться по списку всей музыки и по id)
+                        if (!latestMusic.find(elem => elem.id === musicInfo.id)) {
+                            setLatestMusic(prevState => [...prevState, musicInfo]);
+                            console.log(latestMusic)
+                        }
+                    })
+            })
     }
 
     return (
