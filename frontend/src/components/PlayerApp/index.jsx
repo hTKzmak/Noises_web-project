@@ -2,16 +2,13 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import Player from './Player.jsx';
 import { Context } from '../../context/Context.js';
 
-// импорт всей музыки
-import { songsdata } from './audios.js';
-
 function PlayerApp() {
 
   // UseContext нужен для работы с плеером :P
-  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong, setChoosenSong } = useContext(Context)
+  const { showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong } = useContext(Context)
 
   // обозначаем данные songsdata в songs (то есть, берём все песни из songsdata и добавляем его в songs)
-  const [songs, setSongs] = useState(songsdata);
+  // const [songs, setSongs] = useState(songsdata);
 
   // текущая музыка, которая должна играться (отсюда мы получаем инфу о музыке: файл, название, исполнитель, и т.д.)
   // const [currentSong, setCurrentSong] = useState(choosenSong);
@@ -63,7 +60,7 @@ function PlayerApp() {
     <div className="PlayerApp">
       <audio src={choosenSong.url} ref={audioElem} onTimeUpdate={onPlaying} volume={volume} />
 
-      <Player songs={songs} setSongs={setSongs} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} choosenSong={choosenSong} setChoosenSong={setChoosenSong} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer}
+      <Player isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} volume={volume} setVolume={setVolume} showPlayer={showPlayer} setShowPlayer={setShowPlayer}
 
         progress={progress}
         setProgress={setProgress}

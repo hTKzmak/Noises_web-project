@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "13842b77-c41d-4b08-b830-7bc63eb5a1f7",
-		"name": "Noises",
+		"_postman_id": "91ee6813-b395-4e0e-8c07-2491717ea841",
+		"name": "Noises Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30118804"
+		"_exporter_id": "23592199"
 	},
 	"item": [
 		{
@@ -363,7 +363,10 @@
 							"name": "playlist",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -397,7 +400,10 @@
 							"name": "Playlist_tracks",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -496,7 +502,10 @@
 							"name": "User_login",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -554,7 +563,18 @@
 							"name": "random-track all",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/random-track",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"random-track"
+									]
+								}
 							},
 							"response": []
 						},
@@ -562,7 +582,18 @@
 							"name": "all-tracks",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/all-tracks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"all-tracks"
+									]
+								}
 							},
 							"response": []
 						},
@@ -934,7 +965,10 @@
 					"name": "albums",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -942,7 +976,10 @@
 					"name": "album_id",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -989,7 +1026,10 @@
 					"name": "remove_album",
 					"request": {
 						"method": "DELETE",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				}

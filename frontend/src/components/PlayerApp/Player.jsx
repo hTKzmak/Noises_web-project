@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import './Player.scss'
 import { ReactComponent as Volume } from './assets/Volume.svg'
 import { ReactComponent as VolumeMute } from './assets/VolumeMute.svg'
@@ -7,11 +7,13 @@ import { ReactComponent as Play } from './assets/Play.svg'
 import { ReactComponent as Pause } from './assets/Pause.svg'
 import { ReactComponent as Next } from './assets/Next.svg'
 import { ReactComponent as Previous } from './assets/Previous.svg'
-import { ReactComponent as Playlist } from './assets/Playlist.svg'
 
 import { ReactComponent as Close } from './assets/Close.svg'
+import { Context } from '../../context/Context';
 
-function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSong, songs, volume, setVolume, showPlayer, setShowPlayer, progress, length }) {
+function Player({ audioElem, isPlaying, setIsPlaying, volume, setVolume, showPlayer, setShowPlayer, progress, length }) {
+
+    const { songs, choosenSong, setChoosenSong, } = useContext(Context)
 
     const clickRef = useRef();
 
@@ -31,45 +33,81 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
         audioElem.current.currentTime = divprogress / 100 * length
     }
 
-    // ф-ия по воспроизведению предыдущей музыки (надо переделать под бек)
+    // ф-ия по воспроизведению предыдущей музыки (переделан под бек)
     const skipBack = () => {
 
-        // мы создаём переменную index для того, чтобы найти index песни по названию из songs (audios.js)
-        const index = songs.findIndex(x => x.title === choosenSong.title);
+        // мы создаём переменную index для того, чтобы найти index песни по названию из songs
+        const index = songs.findIndex(x => x.id === choosenSong.id);
 
+        // если музыка первая по списку, то назад она не будет переходить
         if (index === 0) {
-            // setChoosenSong(songs[songs.length - 1])
-            setChoosenSong(songs[0])
-        }
-        else {
-            setChoosenSong(songs[index - 1])
-            setIsPlaying(false)
+            let musicInfo = {
+                id: songs[0].id,
+                title: songs[0].name,
+                performer: songs[0].performer,
+                // в первом беке cover это изображение, в новом название может измениться 
+                cover: songs[0].img,
+                url: `http://localhost:8080/stream/${songs[0].id}`,
+            }
+
+            setChoosenSong(musicInfo)
         }
 
+        // если музыка не первая по списку, то переходим назад
+        else {
+            let musicInfo = {
+                id: songs[index - 1].id,
+                title: songs[index - 1].name,
+                performer: songs[index - 1].performer,
+                // в первом беке cover это изображение, в новом название может измениться 
+                cover: songs[index - 1].img,
+                url: `http://localhost:8080/stream/${songs[index - 1].id}`,
+            }
+
+            setChoosenSong(musicInfo)
+        }
+
+        setIsPlaying(false)
     }
 
-    // ф-ия по воспроизведению следующей музыки (надо переделать под бек)
+
+    // ф-ия по воспроизведению следующей музыки (переделан под бек)
     const skipAhead = () => {
 
-        // мы создаём переменную index для того, чтобы найти index песни по названию из songs (audios.js)
-        const index = songs.findIndex(x => x.title === choosenSong.title);
+        // мы создаём переменную index для того, чтобы найти index песни по названию из songs
+        const index = songs.findIndex(x => x.id === choosenSong.id);
 
+        // если музыка последняя по списку, то дальше она не будет переходить
         if (index === songs.length - 1) {
-            setChoosenSong(songs[songs.length - 1])
+            let musicInfo = {
+                id: songs[songs.length - 1].id,
+                title: songs[songs.length - 1].name,
+                performer: songs[songs.length - 1].performer,
+                // в первом беке cover это изображение, в новом название может измениться 
+                cover: songs[songs.length - 1].img,
+                url: `http://localhost:8080/stream/${songs[songs.length - 1].id}`,
+            }
+
+            setChoosenSong(musicInfo)
         }
+        // если музыка не последняя по списку, то дальше переходим
         else {
-            setChoosenSong(songs[index + 1])
-            setIsPlaying(false)
+            let musicInfo = {
+                id: songs[index + 1].id,
+                title: songs[index + 1].name,
+                performer: songs[index + 1].performer,
+                // в первом беке cover это изображение, в новом название может измениться 
+                cover: songs[index + 1].img,
+                url: `http://localhost:8080/stream/${songs[index + 1].id}`,
+            }
+
+            setChoosenSong(musicInfo)
         }
 
+        setIsPlaying(false)
     }
 
-    // если размер окна браузера меньше 1100, то громкость музыки будет на максимум (сделано это для мобильных устройств)
-    // (его думаю убрать, так как кнопка отключения громкости есть в самом плеере)
-    // if (window.innerWidth <= 1100) {
-    //     setVolume(1)
-    // }
-
+    // закрытие плеера
     const closePlayer = () => {
         setIsPlaying(false)
         setShowPlayer(false)
@@ -110,7 +148,6 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
 
     return (
         <div className="player" style={{ display: showPlayer === true ? 'flex' : 'none' }}>
-            <h1></h1>
             <div className="player_container">
                 <div className="controls">
                     <Previous className='btn_action' onClick={skipBack} />
@@ -177,7 +214,6 @@ function Player({ audioElem, isPlaying, setIsPlaying, choosenSong, setChoosenSon
 
                     <div id='volume'>
                         <div id='volume'>
-                            {/* {volume === 1 ? (<Volume className='btn_control' onClick={() => setVolume(0)} />) : (<VolumeMute className='btn_control' onClick={() => setVolume(1)} />)} */}
                             {volume === '0' ? (
                                 <VolumeMute className='btn_control' onClick={() => setVolume('1')} />
                             ) : (
