@@ -4,7 +4,7 @@ import PreviousButton from '../UI/PreviousButton/index.jsx';
 
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useParams } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { favoriteMusicAction, latestMusicAction, userMusicAction } from '../../store/MusicDataReducer.jsx';
 import { Context } from '../../context/Context.js';
 
@@ -26,6 +26,10 @@ function MusicList({ data, image, type }) {
     // для получения данных о последних прослушанных треков
     let sessionStorageData = sessionStorage.getItem('latestMusic')
     let JSONLatestMusicData = JSON.parse(sessionStorageData)
+
+    // получаем данные о пользователе
+    let localStorageData = localStorage.getItem('userData')
+    let JSONData = JSON.parse(localStorageData) || []
 
 
 
@@ -56,12 +60,22 @@ function MusicList({ data, image, type }) {
             console.log(JSONLatestMusicData)
         }
         else if (type === 'user') {
-            dispatch(userMusicAction(data))
-            setSongs(data)
-            if (data === undefined || !location.pathname) {
-                setSongs(allSongs)
-            }
-            console.log(data)
+
+            fetch(`http://localhost:8080/tracks/${JSONData.id}`)
+                .then(res => res.json())
+                .then(data => {
+
+                    if(data.tracks){
+                        dispatch(userMusicAction(data.tracks))
+                        setSongs(data.tracks)
+                        console.log(data.tracks)
+                    }
+                    else{
+                        dispatch(userMusicAction([]))
+                    }
+
+                })
+
         }
     }, [location.pathname, dispatch, id, type])
 
@@ -81,7 +95,7 @@ function MusicList({ data, image, type }) {
                     :
 
                     music_list.map(elem =>
-                        <MusicItem key={elem.id} id={elem.id} name={elem.name} performer={elem.performer} img={elem.img} />
+                        <MusicItem key={elem.id} id={elem.id} name={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
                     )
                 }
             </div>

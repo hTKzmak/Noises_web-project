@@ -2,7 +2,7 @@ CREATE TABLE Music (
     id SERIAL PRIMARY KEY,
     Music_name VARCHAR(255) NOT NULL,
     Music_path VARCHAR(255) ,
-	Music_img_path VARCHAR(255) DEFAULT 'backend\Image\default.png',
+	Music_img_path VARCHAR(255) DEFAULT 'C:/Users/Slava/Desktop/Noises_web-project/backend/Image/default.png',
     Release_Date DATE DEFAULT CURRENT_DATE,
     Popularity INT DEFAULT 0,
 	Music_Access bool DEFAUlT False,
@@ -10,7 +10,7 @@ CREATE TABLE Music (
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
 );
 
-DELETE FROM Music where id = 4
+DELETE FROM Music where id = 3
 	
 select * from Music
 
@@ -21,7 +21,7 @@ CREATE TABLE NoisesUser (
 	User_name VARCHAR(45) NOT NULL,
 	User_email VARCHAR(320) NOT NULL UNIQUE,
 	User_password VARCHAR(255) NOT NULL,
-	User_img_path VARCHAR(255) DEFAULT 'backend\Image\user\noises_user.png',
+	User_img_path VARCHAR(255) DEFAULT 'C:/Users/Slava/Desktop/Noises_web-project/backend/Image/user/noises_user.png',
 	Country VARCHAR(30) DEFAULT 'Не указана',
 	-- Status int DEFAULT 0
 	Status int DEFAULT 1
@@ -69,6 +69,8 @@ CREATE TABLE Favorites (
 );
 select * from Favorites
 
+DELETE FROM Favorites where id = 5
+	
 DROP TABLE Favorites
 
 CREATE TABLE Albums (

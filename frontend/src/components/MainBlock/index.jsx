@@ -12,7 +12,7 @@ function MainBlock() {
     let JSONData = JSON.parse(localStorageData)
 
 
-    const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
+    const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic, allSongs } = useContext(Context)
 
 
     // функция по изменению заднего фона
@@ -37,46 +37,50 @@ function MainBlock() {
 
     // функция для воспроизведения музыки из основного блока. Функция будет воспроизводить рандомную музыку.
     function startPlay() {
-        setIsPlaying(false)
-        setShowPlayer(true)
 
-        // рандомайзер воспроизведения музыки
-        fetch(`http://localhost:8080/random-track`, {
-            method: 'GET'
-        })
-            .then(res => res.json())
-            .then(json => {
-                console.log('(Ò﹏Ó)')
+        // если в бд есть музыка, то эта функция будет работать, если треков нет, то она не будет рабочей
+        if (allSongs.length > 0) {
+            setIsPlaying(false)
+            setShowPlayer(true)
 
-
-                let musicInfo = {
-                    id: json.id,
-                    name: json.name,
-                    img: `http://localhost:8080/image/music/${json.id}`,
-                    url: ''
-                    // performer: json.performer,
-                }
-
-
-                // передаём данные о музыке в setChoosenSong
-                fetch(`http://localhost:8080/stream/${musicInfo.id}`)
-                    .then(res => res)
-                    .then(data => {
-                        setIsPlaying(false)
-                        setShowPlayer(true)
-
-                        musicInfo.url = data.url
-
-                        setChoosenSong(musicInfo)
-                        console.log(musicInfo)
-
-                        // добавление id музыки в ss для latest music (будет фильтроваться по списку всей музыки и по id)
-                        if (!latestMusic.find(elem => elem.id === musicInfo.id)) {
-                            setLatestMusic(prevState => [...prevState, musicInfo]);
-                            console.log(latestMusic)
-                        }
-                    })
+            // рандомайзер воспроизведения музыки
+            fetch(`http://localhost:8080/random-track`, {
+                method: 'GET'
             })
+                .then(res => res.json())
+                .then(json => {
+                    console.log('(Ò﹏Ó)')
+
+
+                    let musicInfo = {
+                        id: json.id,
+                        name: json.name,
+                        img: `http://localhost:8080/image/music/${json.id}`,
+                        url: ''
+                        // performer: json.performer,
+                    }
+
+
+                    // передаём данные о музыке в setChoosenSong
+                    fetch(`http://localhost:8080/stream/${musicInfo.id}`)
+                        .then(res => res)
+                        .then(data => {
+                            setIsPlaying(false)
+                            setShowPlayer(true)
+
+                            musicInfo.url = data.url
+
+                            setChoosenSong(musicInfo)
+                            console.log(musicInfo)
+
+                            // добавление id музыки в ss для latest music (будет фильтроваться по списку всей музыки и по id)
+                            if (!latestMusic.find(elem => elem.id === musicInfo.id)) {
+                                setLatestMusic(prevState => [...prevState, musicInfo]);
+                                console.log(latestMusic)
+                            }
+                        })
+                })
+        }
     }
 
     return (

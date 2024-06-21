@@ -41,18 +41,23 @@ function App() {
 
   // все треки, которые есть у нас, но список будет изменяться в зависимости от полученных данных
   const [songs, setSongs] = useState([])
-
+  
+  // все треки, которые есть у нас, но список не будет изменяться
   const [allSongs, setAllSongs] = useState([])
 
   // Создаём SS для хранений музыки, которые выбирал пользователь
   sessionStorage.setItem('latestMusic', JSON.stringify(latestMusic));
+
+  // получаем данные о пользователе
+  let localStorageData = localStorage.getItem('userData')
+  let JSONData = JSON.parse(localStorageData) || []
 
   // получаем все треки
   useEffect(() => {
     fetch('http://localhost:8080/all-tracks')
       .then(res => res.json())
       .then(data => {
-        setAllSongs(data)
+        setAllSongs(data || [])
         setSongs(data)
       })
   }, [])
@@ -138,6 +143,10 @@ function App() {
 
             <Route element={<PrivateRoute />}>
               <Route path='/settings' element={<SettingsPage />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path='/your_music' element={<MusicPage type={'user'} image={JSONData.img} />} />
             </Route>
 
 

@@ -2,11 +2,8 @@
 const defaultState = {
     page_name: '',
     page_image: '',
-    musicmusic_listist: []
+    music_list: []
 };
-
-// const latestBG = '../assets/images/Latest.png'
-// const favoriteBG = '../assets/images/Favorite.png'
 
 const FAVORITE_MUSIC = 'FAVORITE_MUSIC'
 const LATEST_MUSIC = 'LATEST_MUSIC'
@@ -33,11 +30,9 @@ export const musicDataReducer = (state = defaultState, action) => {
             }
         case USERS_MUSIC:
             return {
-                // page_name: 'Favorite music :P', musicData: action.payload.map(elem => {
-                //     // console.log(elem)
-                //     return elem
-                // })
-                page_name: 'User music', music_list: []
+                page_name: 'Your music', music_list: action.payload.map(elem => {
+                    return elem
+                })
             }
 
         default:

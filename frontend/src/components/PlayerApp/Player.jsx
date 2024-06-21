@@ -135,7 +135,7 @@ function Player({ audioElem, isPlaying, setIsPlaying, volume, setVolume, showPla
                 link.href = url;
                 link.setAttribute(
                     'download',
-                    `${choosenSong.title}.mp3`,
+                    `${choosenSong.name}.mp3`,
                 );
 
                 // Append to html link element page
