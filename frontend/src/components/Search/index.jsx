@@ -1,12 +1,12 @@
 import style from './Search.module.scss'
 import MusicItem from '../MusicList/items/MusicItem'
 import PreviousButton from '../UI/PreviousButton'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../context/Context';
 
 function Search() {
 
-    const { songs, setSongs } = useContext(Context)
+    const { setSongs, allSongs } = useContext(Context)
 
     const [searchData, setSearchData] = useState([])
 
@@ -20,20 +20,20 @@ function Search() {
         fetch(`http://localhost:8080/search?q=${value}`)
             .then(res => res.json())
             .then(data => {
-                if(value){
+                if (value) {
                     if (data && data.music && data.music.length > 0) {
                         setSearchData(data.music)
                         setSongs(data.music)
                     }
                     else {
                         setSearchData([])
-                        returnAllMusic() 
+                        setSongs(allSongs)
                         console.log(searchData)
                     }
                 }
                 else {
                     setSearchData([])
-                    returnAllMusic() 
+                    setSongs(allSongs)
                     console.log(searchData)
                 }
             })
@@ -41,11 +41,11 @@ function Search() {
     }
 
     // получаем все треки
-    function returnAllMusic() {
+    useEffect(() => {
         fetch('http://localhost:8080/all-tracks')
             .then(res => res.json())
             .then(data => setSongs(data))
-    }
+    }, [])
 
     return (
         <div>
@@ -58,19 +58,19 @@ function Search() {
                     <p className={style.searchTitle}>{inputValue === '' ? 'All music' : 'Search result'}</p>
 
                     {inputValue === '' &&
-                        songs.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
+                        allSongs.map(elem =>
+                            <MusicItem key={elem.id} id={elem.id} name={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
                         )
                     }
 
                     {searchData ?
 
                         searchData.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
+                            <MusicItem key={elem.id} id={elem.id} name={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
                         )
                         :
-                        songs.map(elem =>
-                            <MusicItem key={elem.id} id={elem.id} title={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
+                        allSongs.map(elem =>
+                            <MusicItem key={elem.id} id={elem.id} name={elem.name} performer={elem.performer} img={`http://localhost:8080/image/music/${elem.id}`} />
                         )
 
                     }

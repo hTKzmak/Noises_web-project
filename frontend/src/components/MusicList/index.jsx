@@ -4,18 +4,20 @@ import PreviousButton from '../UI/PreviousButton/index.jsx';
 
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { fetchFavoriteMusic } from '../../asyncActions/musicData.jsx';
+import { useContext, useEffect } from 'react';
 import { favoriteMusicAction, latestMusicAction, userMusicAction } from '../../store/MusicDataReducer.jsx';
+import { Context } from '../../context/Context.js';
 
-function MusicList({ title, data, image, type }) {
+function MusicList({ data, image, type }) {
+
+    const { setSongs, allSongs } = useContext(Context)
 
     // получаем значение page_name (название страницы) из стора
     const { page_name } = useSelector(store => store.musicData)
-    
+
     // получаем значение music_list (список музыки) из стора
     const { music_list } = useSelector(store => store.musicData)
-    
+
     // для useEffect
     const dispatch = useDispatch()
     const location = useLocation()
@@ -32,12 +34,34 @@ function MusicList({ title, data, image, type }) {
         if (type === 'favorite') {
             // тут нужно заменить на fetchFavoriteMusic, так как там проиходит получение данных о любимых треках
             dispatch(favoriteMusicAction(data))
+            setSongs(data)
+            if (data === undefined || !location.pathname) {
+                setSongs(allSongs)
+            }
+            console.log(data)
         }
         else if (type === 'latest') {
             dispatch(latestMusicAction(JSONLatestMusicData))
+            if (location.pathname === '/latest_music') {
+                if (!JSONLatestMusicData || JSONLatestMusicData.length === 0) {
+                    setSongs(allSongs)
+                }
+                else {
+                    setSongs(JSONLatestMusicData)
+                }
+            }
+            else {
+                setSongs(allSongs)
+            }
+            console.log(JSONLatestMusicData)
         }
         else if (type === 'user') {
             dispatch(userMusicAction(data))
+            setSongs(data)
+            if (data === undefined || !location.pathname) {
+                setSongs(allSongs)
+            }
+            console.log(data)
         }
     }, [location.pathname, dispatch, id, type])
 
@@ -51,22 +75,13 @@ function MusicList({ title, data, image, type }) {
                 {page_name}
             </div>
             <div className={style.blocksList}>
-                {/* {!data ?
-                    ''
-
-                    :
-
-                    data.map(elem =>
-                        <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
-                    )
-                } */}
                 {!music_list ?
                     ''
 
                     :
 
                     music_list.map(elem =>
-                        <MusicItem key={elem.id} id={elem.id} title={elem.title} performer={elem.performer} img={elem.cover} />
+                        <MusicItem key={elem.id} id={elem.id} name={elem.name} performer={elem.performer} img={elem.img} />
                     )
                 }
             </div>

@@ -7,7 +7,7 @@ import { ReactComponent as Playlist } from '../../../../assets/icons/playlist.sv
 import { useContext, useState } from 'react'
 import { Context } from '../../../../context/Context'
 
-function MusicItem({ id, title, performer, img }) {
+function MusicItem({ id, name, performer, img }) {
 
     const { setShowPlayer, setIsPlaying, setChoosenSong, latestMusic, setLatestMusic } = useContext(Context)
 
@@ -27,17 +27,14 @@ function MusicItem({ id, title, performer, img }) {
 
                 let musicInfo = {
                     id: id,
-                    title: title,
+                    name: name,
                     performer: performer,
                     // в первом беке cover это изображение, в новом название может измениться 
-                    cover: img,
+                    img: img,
                     url: data.url,
                 }
 
-                // setChoosenSong(data.url)
-                // console.log(data)
                 setChoosenSong(musicInfo)
-                console.log(musicInfo)
 
                 // добавление id музыки в ss для latest music (будет фильтроваться по списку всей музыки и по id)
                 if (!latestMusic.find(elem => elem.id === musicId)) {
@@ -81,7 +78,7 @@ function MusicItem({ id, title, performer, img }) {
             <div className={style.musicMainInfo} onClick={() => startPlay(id)}>
                 <div className={style.musicImg} style={{ backgroundImage: `url(${img})` }}></div>
                 <div className={style.musicName}>
-                    <h3>{title}</h3>
+                    <h3>{name}</h3>
                     <p>{performer}</p>
                 </div>
             </div>

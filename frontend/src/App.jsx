@@ -39,8 +39,10 @@ function App() {
   // для отображения списка предыдущей музыки
   const [latestMusic, setLatestMusic] = useState([])
 
-  // все треки, которые есть у нас
+  // все треки, которые есть у нас, но список будет изменяться в зависимости от полученных данных
   const [songs, setSongs] = useState([])
+
+  const [allSongs, setAllSongs] = useState([])
 
   // Создаём SS для хранений музыки, которые выбирал пользователь
   sessionStorage.setItem('latestMusic', JSON.stringify(latestMusic));
@@ -49,7 +51,10 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:8080/all-tracks')
       .then(res => res.json())
-      .then(data => setSongs(data))
+      .then(data => {
+        setAllSongs(data)
+        setSongs(data)
+      })
   }, [])
 
 
@@ -94,7 +99,7 @@ function App() {
 
   // всю эту кашу надо сократить. Надо использовать один компонент для показа исполнителей, альбомов, жанров и плейлистов. 
   return (
-    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong, setChoosenSong, latestMusic, setLatestMusic, songs, setSongs }}>
+    <Context.Provider value={{ showPlayer, setShowPlayer, isPlaying, setIsPlaying, choosenSong, setChoosenSong, latestMusic, setLatestMusic, songs, setSongs, allSongs }}>
       <div className="App">
         <Menu />
         <div className="container">

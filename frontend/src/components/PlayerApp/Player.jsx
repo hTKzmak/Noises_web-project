@@ -43,28 +43,30 @@ function Player({ audioElem, isPlaying, setIsPlaying, volume, setVolume, showPla
         if (index === 0) {
             let musicInfo = {
                 id: songs[0].id,
-                title: songs[0].name,
+                name: songs[0].name,
                 performer: songs[0].performer,
                 // в первом беке cover это изображение, в новом название может измениться 
-                cover: songs[0].img,
+                img: songs[0].img,
                 url: `http://localhost:8080/stream/${songs[0].id}`,
             }
 
             setChoosenSong(musicInfo)
+            console.log(songs)
         }
 
         // если музыка не первая по списку, то переходим назад
         else {
             let musicInfo = {
                 id: songs[index - 1].id,
-                title: songs[index - 1].name,
+                name: songs[index - 1].name,
                 performer: songs[index - 1].performer,
                 // в первом беке cover это изображение, в новом название может измениться 
-                cover: songs[index - 1].img,
+                img: songs[index - 1].img,
                 url: `http://localhost:8080/stream/${songs[index - 1].id}`,
             }
 
             setChoosenSong(musicInfo)
+            console.log(songs)
         }
 
         setIsPlaying(false)
@@ -81,27 +83,29 @@ function Player({ audioElem, isPlaying, setIsPlaying, volume, setVolume, showPla
         if (index === songs.length - 1) {
             let musicInfo = {
                 id: songs[songs.length - 1].id,
-                title: songs[songs.length - 1].name,
+                name: songs[songs.length - 1].name,
                 performer: songs[songs.length - 1].performer,
                 // в первом беке cover это изображение, в новом название может измениться 
-                cover: songs[songs.length - 1].img,
+                img: songs[songs.length - 1].img,
                 url: `http://localhost:8080/stream/${songs[songs.length - 1].id}`,
             }
 
             setChoosenSong(musicInfo)
+            console.log(songs)
         }
         // если музыка не последняя по списку, то дальше переходим
         else {
             let musicInfo = {
                 id: songs[index + 1].id,
-                title: songs[index + 1].name,
+                name: songs[index + 1].name,
                 performer: songs[index + 1].performer,
                 // в первом беке cover это изображение, в новом название может измениться 
-                cover: songs[index + 1].img,
+                img: songs[index + 1].img,
                 url: `http://localhost:8080/stream/${songs[index + 1].id}`,
             }
 
             setChoosenSong(musicInfo)
+            console.log(songs)
         }
 
         setIsPlaying(false)
@@ -160,10 +164,10 @@ function Player({ audioElem, isPlaying, setIsPlaying, volume, setVolume, showPla
                 </div>
                 <div className="navigation">
                     <div className="title">
-                        <h3>{choosenSong.title}</h3>
+                        <h3>{choosenSong.name}</h3>
                         <p>{choosenSong.performer}</p>
                         <div className="title-info">
-                            <h3>{choosenSong.title}</h3>
+                            <h3>{choosenSong.name}</h3>
                             <p>{choosenSong.performer}</p>
                         </div>
                         <button className='closeBtn' onClick={() => closePlayer()}><Close /></button>

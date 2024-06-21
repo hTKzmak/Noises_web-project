@@ -51,7 +51,8 @@ function MainBlock() {
 
                 let musicInfo = {
                     id: json.id,
-                    title: json.name,
+                    name: json.name,
+                    img: `http://localhost:8080/image/music/${json.id}`,
                     url: ''
                     // performer: json.performer,
                 }
