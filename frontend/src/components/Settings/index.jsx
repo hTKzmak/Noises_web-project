@@ -17,10 +17,10 @@ function Settings() {
             <nav>
                 <ul>
                     <li>
-                        <Link to={'/customize_profile'}>Customize profile</Link>
+                        <a href='https://github.com/hTKzmak/Noises_web-project'>Product info</a>
                     </li>
                     <li>
-                        <Link to={'/change_password'}>Change password</Link>
+                        <Link to={'/how_to_use'}>Tutorial</Link>
                     </li>
                     <li>
                         <a id="warning" href='/' onClick={() => localStorage.clear()}>Log out</a>

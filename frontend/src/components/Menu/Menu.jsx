@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom'
 import style from './Menu.module.scss'
 import { ReactComponent as Logo } from '../../assets/logo/Noises_logo.svg'
 import { ReactComponent as Home } from './media/icons/home.svg'
-import { ReactComponent as Albums } from './media/icons/albums.svg'
-import { ReactComponent as Performers } from './media/icons/performers.svg'
+import { ReactComponent as Popular } from '../../assets/icons/popular.svg'
 import { ReactComponent as Genres } from './media/icons/genres.svg'
 
 function Menu() {
@@ -21,14 +20,11 @@ function Menu() {
                         <Link to={'/'}>
                             <li>Home</li>
                         </Link>
-                        <Link to={'/albums'}>
-                            <li>Albums</li>
+                        <Link to={'/popular'}>
+                            <li>Popular music</li>
                         </Link>
-                        <Link to={'/performers'}>
-                            <li>Performers</li>
-                        </Link>
-                        <Link to={'/genres'}>
-                            <li>Genre</li>
+                        <Link to={'/your_music'}>
+                            <li>Your music</li>
                         </Link>
                     </ul>
                 </div>
@@ -38,13 +34,10 @@ function Menu() {
                 <Link to={'/'}>
                     <Home />
                 </Link>
-                <Link to={'/albums'}>
-                    <Albums />
+                <Link to={'/popular'}>
+                    <Popular />
                 </Link>
-                <Link to={'/performers'}>
-                    <Performers />
-                </Link>
-                <Link to={'/genres'}>
+                <Link to={'/your_music'}>
                     <Genres />
                 </Link>
             </div>

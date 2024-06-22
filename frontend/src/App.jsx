@@ -117,6 +117,8 @@ function App() {
             <Route path='/performers' element={<AGPList title="List of performers" showHeart={true} data={performersData} genresStyle={false} showCreateBtn={false} />} />
             <Route path='/genres' element={<AGPList title="List of genres" showHeart={false} showDelete={false} data={genresData} genresStyle={true} showCreateBtn={false} />} />
 
+            <Route path='/popular' element={<MusicPage type={'popular'} image={'https://images.unsplash.com/photo-1668450433152-e56d7e8fe4ee?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} />} />
+            
             <Route path='/music' element={<MusicPage type={'user'} image={'https://images.unsplash.com/photo-1634705146926-b8fbca28f431?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} />} />
 
 

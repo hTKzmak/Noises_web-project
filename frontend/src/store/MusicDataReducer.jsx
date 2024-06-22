@@ -1,13 +1,13 @@
 // список всей музыки, которая есть в беке
 const defaultState = {
     page_name: '',
-    page_image: '',
     music_list: []
 };
 
 const FAVORITE_MUSIC = 'FAVORITE_MUSIC'
 const LATEST_MUSIC = 'LATEST_MUSIC'
 const USERS_MUSIC = 'USERS_MUSIC'
+const POPULAR_MUSIC = 'POPULAR_MUSIC'
 
 
 // здесь будут отображаться только те данные, у которых написан type в app.jsx
@@ -34,6 +34,12 @@ export const musicDataReducer = (state = defaultState, action) => {
                     return elem
                 })
             }
+        case POPULAR_MUSIC:
+            return {
+                page_name: 'Popular music', music_list: action.payload.map(elem => {
+                    return elem
+                })
+            }
 
         default:
             return state
@@ -43,3 +49,4 @@ export const musicDataReducer = (state = defaultState, action) => {
 export const favoriteMusicAction = (payload) => ({ type: FAVORITE_MUSIC, payload })
 export const latestMusicAction = (payload) => ({ type: LATEST_MUSIC, payload })
 export const userMusicAction = (payload) => ({ type: USERS_MUSIC, payload })
+export const popularMusicAction = (payload) => ({ type: POPULAR_MUSIC, payload })

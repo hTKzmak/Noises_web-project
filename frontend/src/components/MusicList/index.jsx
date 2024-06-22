@@ -4,8 +4,8 @@ import PreviousButton from '../UI/PreviousButton/index.jsx';
 
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useParams } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { favoriteMusicAction, latestMusicAction, userMusicAction } from '../../store/MusicDataReducer.jsx';
+import { useContext, useEffect } from 'react';
+import { favoriteMusicAction, latestMusicAction, popularMusicAction, userMusicAction } from '../../store/MusicDataReducer.jsx';
 import { Context } from '../../context/Context.js';
 
 function MusicList({ data, image, type }) {
@@ -65,17 +65,26 @@ function MusicList({ data, image, type }) {
                 .then(res => res.json())
                 .then(data => {
 
-                    if(data.tracks){
+                    if (data.tracks) {
                         dispatch(userMusicAction(data.tracks))
                         setSongs(data.tracks)
                         console.log(data.tracks)
                     }
-                    else{
+                    else {
                         dispatch(userMusicAction([]))
                     }
 
                 })
 
+        }
+        else if (type === 'popular') {
+            fetch('http://localhost:8080/all-tracks')
+                .then(res => res.json())
+                .then(data => {
+                    let new_data = data.sort((a, b) => b.popularity - a.popularity)
+                    dispatch(popularMusicAction(new_data))
+                    setSongs(new_data)
+                })
         }
     }, [location.pathname, dispatch, id, type])
 
