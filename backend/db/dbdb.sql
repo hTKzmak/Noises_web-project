@@ -10,7 +10,10 @@ CREATE TABLE Music (
     FOREIGN KEY (User_id) REFERENCES NoisesUser(User_id)
 );
 
-DELETE FROM Music where id = 3
+DELETE FROM Music where user_id = 3
+
+ALTER TABLE Music
+ALTER COLUMN Music_img_path SET DEFAULT 'C:/Users/Slava/Desktop/Noises_web-project/backend/Image/default.png';
 	
 select * from Music
 
@@ -26,6 +29,10 @@ CREATE TABLE NoisesUser (
 	-- Status int DEFAULT 0
 	Status int DEFAULT 1
 );
+
+ALTER TABLE NoisesUser
+ALTER COLUMN User_img_path SET DEFAULT 'C:/Users/Slava/Desktop/Noises_web-project/backend/Image/user/noises_user.png';
+
 -- обычный user - 0 исполнитель - 1 админ - 2
 UPDATE NoisesUser SET Status = 2 WHERE User_email = 'admin@perf.com'; 
 
@@ -33,7 +40,7 @@ select * from NoisesUser
 
 DROP TABLE NoisesUser
 
-DELETE FROM NoisesUser WHERE user_id = 7
+DELETE FROM NoisesUser WHERE user_id = 4
 
 CREATE TABLE Playlists (
     Playlist_id SERIAL PRIMARY KEY,

@@ -8,6 +8,7 @@ const FAVORITE_MUSIC = 'FAVORITE_MUSIC'
 const LATEST_MUSIC = 'LATEST_MUSIC'
 const USERS_MUSIC = 'USERS_MUSIC'
 const POPULAR_MUSIC = 'POPULAR_MUSIC'
+const NEW_MUSIC = 'NEW_MUSIC'
 
 
 // здесь будут отображаться только те данные, у которых написан type в app.jsx
@@ -40,7 +41,12 @@ export const musicDataReducer = (state = defaultState, action) => {
                     return elem
                 })
             }
-
+        case NEW_MUSIC:
+            return {
+                page_name: 'New music', music_list: action.payload.map(elem => {
+                    return elem
+                })
+            }
         default:
             return state
     }
@@ -50,3 +56,4 @@ export const favoriteMusicAction = (payload) => ({ type: FAVORITE_MUSIC, payload
 export const latestMusicAction = (payload) => ({ type: LATEST_MUSIC, payload })
 export const userMusicAction = (payload) => ({ type: USERS_MUSIC, payload })
 export const popularMusicAction = (payload) => ({ type: POPULAR_MUSIC, payload })
+export const newMusicAction = (payload) => ({ type: NEW_MUSIC, payload })

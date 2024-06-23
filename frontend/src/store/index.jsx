@@ -4,7 +4,7 @@ import { musicReducer } from "./musicReducer";
 import { musicDataReducer } from "./MusicDataReducer";
 
 const rootreducer = combineReducers({
-    music: musicReducer,
+    // music: musicReducer,
     musicData: musicDataReducer,
 })
 

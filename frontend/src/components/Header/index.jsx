@@ -54,12 +54,6 @@ function Header() {
                             <span>{JSONData.name}</span>
                             <ul>
                                 <li onClick={() => showUploadFunc()}>Upload music</li>
-                                <Link to={'/your_music'}>
-                                    <li onClick={() => setShowWindow(false)}>Your music</li>
-                                </Link>
-                                <Link to={'/playlists'}>
-                                    <li onClick={() => setShowWindow(false)}>Playlists</li>
-                                </Link>
                                 <Link to={'/settings'}>
                                     <li onClick={() => setShowWindow(false)}>Settings</li>
                                 </Link>

@@ -23,8 +23,8 @@ function Menu() {
                         <Link to={'/popular'}>
                             <li>Popular music</li>
                         </Link>
-                        <Link to={'/your_music'}>
-                            <li>Your music</li>
+                        <Link to={'/new'}>
+                            <li>New music</li>
                         </Link>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@ function Menu() {
                 <Link to={'/popular'}>
                     <Popular />
                 </Link>
-                <Link to={'/your_music'}>
+                <Link to={'/new'}>
                     <Genres />
                 </Link>
             </div>

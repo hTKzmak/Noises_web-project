@@ -23,7 +23,7 @@ function RegisterWindow() {
     const [valid, setValid] = useState(false);
 
     // для отображения ошибки в виде текста о созданном аккаунте
-    const [regExist, setRegExist] = useState(null) 
+    const [regExist, setRegExist] = useState(null)
 
     // фунция по подтверждению данных
     const handleSubmit = (e) => {
@@ -57,19 +57,38 @@ function RegisterWindow() {
                         throw new Error('Данный аккаунт был создан')
                     }
                 })
-
                 // если получили данные, то...
                 .then(json => {
-                    // выводим сообщение: Object { message: "User registered successfully" }
-                    console.log(json)
-                    // не отображаем сообщение
+                    console.log(json);
                     setRegExist(false)
-                    // храним данные в LS
-                    localStorage.setItem('userData', JSON.stringify({ id: values.id, name: values.name, img: values.image_path, token: json.token }))
-                    // переходим на home page
-                    window.location.href = '/'
-                    // подтверждаем форму
-                    setSubmitted(true);
+
+                    // Включаем второй fetch в блок then первого fetch
+                    fetch('http://localhost:8080/user-info', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${json.token}`
+                        },
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                setRegExist(false);
+                            }
+                        })
+                        .then(userData => {
+                            localStorage.setItem('userData', JSON.stringify({ id: userData.id, name: userData.username, img: userData.image_path, token: json.token }));
+                            // Другие операции, которые вы хотите выполнить после получения данных о пользователе
+                            console.log(userData)
+                            // переходим на home page
+                            window.location.href = '/'
+                            // подтверждаем форму
+                            setSubmitted(true);
+
+                        })
+                        .catch(error => {
+                            console.error('Ошибка при получении данных о пользователе:', error);
+                        });
                 })
 
                 // если не получили данные, то...

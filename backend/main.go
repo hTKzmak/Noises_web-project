@@ -60,7 +60,8 @@ func main() {
 	album.GET("/album/:id", handlers.GetAlbumByIDHandler)
 	album.GET("/album/:id/tracks", handlers.GetTracksByAlbumIDHandler)
 	album.DELETE("/remove-music-from-album", handlers.RemoveMusicFromAlbumHandler)
-	album.DELETE("/album/:id", handlers.DeleteAlbumHandler)
+	// album.DELETE("/album/:id", handlers.DeleteAlbumHandler)
+	album.DELETE("/album-delete/:id", handlers.DeleteAlbumHandler)
 
 	moderationGroup := r.Group("/")
 	moderationGroup.Use(middleware.AuthMiddleware(2)) // Только модераторы могут выполнять модерацию
