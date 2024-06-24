@@ -34,7 +34,7 @@ function Settings() {
             {!showWindow ? null :
                 <div className={style.modalWindow_bg}>
                     <div className={style.modalWindow}>
-                        <h1>Are you shure what you want to delete your account?</h1>
+                        <h1>Are you sure what you want to delete your account?</h1>
                         <p>If you delete, you will never restore your account</p>
 
                         <div className={style.modalWindow_btn}>
