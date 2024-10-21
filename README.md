@@ -9,4 +9,4 @@
 </div>
 
 <br>
-<i align="center">This project will be deleted, because I will recreate new Noises</i>
+<p align="center"><i>This project will be deleted, because I will recreate new Noises</i></p>
