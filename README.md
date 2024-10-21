@@ -7,3 +7,5 @@
 <div id="info" align="center">
   <img src="./assets/main.png"/>
 </div>
+
+<p>This project will be deleted, because I will recreate new Noises</p>
